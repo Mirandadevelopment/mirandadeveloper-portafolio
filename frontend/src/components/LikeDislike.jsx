@@ -70,7 +70,7 @@ export default function LikeDislike({ id, initialLikes = 0, initialDislikes = 0,
     setError('')
 
     try {
-      const response = await fetch(`${supabase.url}/rest/v1/rpc/increment_portfolio_vote`, {
+      const response = await fetch(`${supabase.url}/rest/v1/rpc/change_portfolio_vote`, {
         method: 'POST',
         headers: {
           apikey: supabase.anonKey,
