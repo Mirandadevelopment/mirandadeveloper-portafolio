@@ -7,6 +7,10 @@ export const site = {
   availability: 'Presencial & Remoto (BR / EUA / Canadá)',
   profileName: 'MirandaDeveloper',
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
+  supabase: {
+    url: 'https://zvtcyjucjdlbviqrjnwx.supabase.co',
+    anonKey: 'sb_publishable_BAR0saBEocMbykt6Y0jwiw_RczCdxRS',
+  },
   social: {
     github: 'https://github.com/Mirandadevelopment',
     linkedin: 'https://www.linkedin.com/in/allan-miranda-374b1a214/',
