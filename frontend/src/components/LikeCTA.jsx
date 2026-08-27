@@ -20,7 +20,7 @@ export default function LikeCTA() {
 
         <div className="mt-8 flex flex-col items-center gap-6">
           <div className="glass neon-border rounded-2xl px-8 py-6">
-            <LikeDislike id="global" size="lg" />
+            <LikeDislike id="portfolio" size="lg" />
           </div>
 
           <Magnetic>
