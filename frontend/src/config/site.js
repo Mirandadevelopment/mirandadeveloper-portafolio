@@ -8,7 +8,7 @@ export const site = {
   profileName: 'MirandaDeveloper',
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
   supabase: {
-    url: 'https://zvtcyjucjdlbviqrjnwx.supabase.co',
+    url: 'https://zvtcjyujcdlbviqrjnwx.supabase.co',
     anonKey: 'sb_publishable_BAR0saBEocMbykt6Y0jwiw_RczCdxRS',
   },
   social: {
