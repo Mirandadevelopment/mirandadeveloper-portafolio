@@ -9,7 +9,7 @@ export const site = {
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
   social: {
     github: 'https://github.com/Mirandadevelopment',
-    linkedin: 'https://www.linkedin.com/in/allan-miranda',
+    linkedin: 'https://www.linkedin.com/in/allan-miranda-374b1a214/',
     discord: 'https://discord.com/users/',
   },
 }

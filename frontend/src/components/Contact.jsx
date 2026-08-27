@@ -59,23 +59,12 @@ export default function Contact() {
     return `mailto:${site.email}?${params.toString()}`
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setStatus('sending')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (!res.ok) throw new Error('Falha no envio')
-      setStatus('success')
-      setMailto('')
-      setForm({ name: '', email: '', subject: '', message: '' })
-    } catch {
-      setMailto(buildMailto())
-      setStatus('error')
-    }
+    const mailtoUrl = buildMailto()
+    setMailto(mailtoUrl)
+    setStatus('success')
+    window.location.href = mailtoUrl
   }
 
   return (
@@ -218,22 +207,17 @@ export default function Contact() {
 
               <div aria-live="polite">
                 {status === 'success' && (
-                  <p className="mt-4 rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
-                    Obrigado! Sua mensagem foi registrada. Retornarei em breve.
-                  </p>
-                )}
-                {status === 'error' && (
-                  <p className="mt-4 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
-                    Não foi possível enviar pela API. Use o botão abaixo para abrir seu e-mail com a mensagem pronta:
-                  </p>
-                )}
-                {status === 'error' && mailto && (
-                  <a
-                    href={mailto}
-                    className="mt-3 inline-block rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 px-5 py-2.5 text-sm font-semibold text-neon-cyan transition-all duration-200 hover:bg-neon-cyan/20"
-                  >
-                    Enviar por e-mail
-                  </a>
+                  <div className="mt-4 rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
+                    Seu aplicativo de e-mail foi aberto com a mensagem pronta. Se necessário, use o botão abaixo.
+                    {mailto && (
+                      <a
+                        href={mailto}
+                        className="mt-3 inline-block rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 px-5 py-2.5 font-semibold text-neon-cyan transition-all duration-200 hover:bg-neon-cyan/20"
+                      >
+                        Abrir e-mail novamente
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </form>
