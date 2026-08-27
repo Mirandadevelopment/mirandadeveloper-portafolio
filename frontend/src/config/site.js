@@ -10,6 +10,6 @@ export const site = {
   social: {
     github: 'https://github.com/Mirandadevelopment',
     linkedin: 'https://www.linkedin.com/in/allan-miranda-374b1a214/',
-    discord: 'https://discord.com/users/',
+    discord: 'https://discord.com/users/1147594313828671580',
   },
 }
