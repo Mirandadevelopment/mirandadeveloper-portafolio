@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-950: #05050f;
+  --color-night-900: #0a0a18;
+  --color-night-800: #111124;
+  --color-night-700: #1a1a33;
+  --color-neon-cyan: #00d4ff;
+  --color-neon-purple: #a855f7;
+  --color-neon-blue: #3b82f6;
+  --font-display: "Orbitron", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #05050f;
+  color: #e2e8f0;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+:focus-visible {
+  outline: 2px solid #00d4ff;
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(168, 85, 247, 0.4);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a18;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4ff, #a855f7);
+  border-radius: 8px;
+}
+
+@utility glass {
+  background: rgba(17, 17, 36, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+@utility text-gradient {
+  background: linear-gradient(90deg, #00d4ff, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility neon-border {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.6), rgba(168, 85, 247, 0.6));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@utility glow-cyan {
+  box-shadow: 0 0 22px rgba(0, 212, 255, 0.35);
+}
+
+@utility glow-purple {
+  box-shadow: 0 0 22px rgba(168, 85, 247, 0.35);
+}
+
+@utility grid-overlay {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #00d4ff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.9);
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(168, 85, 247, 0.8);
+  transition: width 0.18s ease, height 0.18s ease, opacity 0.18s ease;
+}
+.cursor-ring.cursor-hover {
+  width: 58px;
+  height: 58px;
+  background: rgba(168, 85, 247, 0.08);
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+.typing-caret::after {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin-left: 4px;
+  background: #00d4ff;
+  vertical-align: text-bottom;
+  animation: caret-blink 0.8s step-end infinite;
+}
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.profile-stage {
+  width: 190px;
+  height: 190px;
+  pointer-events: none;
+}
+.profile-avatar-wrap {
+  position: absolute;
+  inset: 23px;
+  z-index: 2;
+  padding: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #00d4ff, #a855f7 65%, #3b82f6);
+  box-shadow: 0 0 28px rgba(0, 212, 255, 0.35), 0 0 64px rgba(168, 85, 247, 0.2);
+  animation: profile-float 5s ease-in-out infinite;
+}
+.profile-avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  border: 3px solid #05050f;
+  background: #111124;
+}
+.profile-halo {
+  position: absolute;
+  inset: 7px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.16), transparent 66%);
+  filter: blur(7px);
+  animation: profile-pulse 3.2s ease-in-out infinite;
+}
+.profile-orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 9999px;
+}
+.profile-orbit::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #00d4ff;
+  box-shadow: 0 0 14px #00d4ff;
+}
+.profile-orbit-one {
+  transform: rotate(24deg) scaleX(0.72);
+  animation: profile-orbit 9s linear infinite;
+}
+.profile-orbit-two {
+  transform: rotate(-54deg) scaleX(0.72);
+  border-color: rgba(168, 85, 247, 0.35);
+  animation: profile-orbit 12s linear infinite reverse;
+}
+.profile-label {
+  position: absolute;
+  right: 50%;
+  bottom: -23px;
+  z-index: 3;
+  transform: translateX(50%);
+  white-space: nowrap;
+  color: rgba(125, 211, 252, 0.8);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+@keyframes profile-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes profile-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.94); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@keyframes profile-orbit {
+  from { transform: rotate(24deg) scaleX(0.72); }
+  to { transform: rotate(384deg) scaleX(0.72); }
+}
+
+.bg-aurora {
+  background:
+    radial-gradient(ellipse 60% 45% at 20% 0%, rgba(0, 212, 255, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 85% 15%, rgba(168, 85, 247, 0.14), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(59, 130, 246, 0.1), transparent 60%);
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
+}
+
+@utility text-glow {
+  text-shadow:
+    0 0 18px rgba(0, 212, 255, 0.45),
+    0 0 55px rgba(168, 85, 247, 0.3);
+}
+
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.glitch::before {
+  color: rgba(0, 212, 255, 0.7);
+  z-index: 0;
+  opacity: 0;
+  animation: glitch-a 4.2s infinite steps(1);
+}
+.glitch::after {
+  color: rgba(168, 85, 247, 0.7);
+  z-index: 0;
+  opacity: 0;
+  animation: glitch-b 3.7s infinite steps(1);
+}
+.glitch > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes glitch-a {
+  0%, 84%, 100% { opacity: 0; clip-path: inset(0); transform: translate(0); }
+  85% { opacity: 1; clip-path: inset(8% 0 62% 0); transform: translate(-3px, -2px); }
+  87% { opacity: 1; clip-path: inset(58% 0 12% 0); transform: translate(3px, 2px); }
+  89% { opacity: 1; clip-path: inset(30% 0 48% 0); transform: translate(-2px, 1px); }
+  91% { opacity: 0; }
+}
+
+@keyframes glitch-b {
+  0%, 78%, 100% { opacity: 0; clip-path: inset(0); transform: translate(0); }
+  79% { opacity: 1; clip-path: inset(62% 0 8% 0); transform: translate(3px, 1px); }
+  81% { opacity: 1; clip-path: inset(12% 0 58% 0); transform: translate(-3px, -1px); }
+  83% { opacity: 1; clip-path: inset(45% 0 30% 0); transform: translate(2px, -2px); }
+  85% { opacity: 0; }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes float-x {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
+}
+.float-x {
+  animation: float-x 5s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .profile-stage {
+    transform: translateX(-50%) scale(0.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .typing-caret::after {
+    display: none;
+  }
+  [data-tilt] {
+    transform: none !important;
+  }
+}

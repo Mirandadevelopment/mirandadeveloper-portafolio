@@ -1,0 +1,17 @@
+{
+  "name": "Allan Miranda — Full Stack & FiveM Specialist",
+  "short_name": "Allan Miranda",
+  "description": "Portfólio de Allan Miranda — Desenvolvedor Full Stack e Especialista no ecossistema FiveM.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#05050f",
+  "theme_color": "#05050f",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

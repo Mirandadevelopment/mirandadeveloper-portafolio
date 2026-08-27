@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currículo — Allan Miranda</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #05050f;
+      color: #e2e8f0;
+      padding: 40px 16px;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #0a0a18;
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      border-radius: 14px;
+      padding: 44px;
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.12);
+    }
+    h1 { font-size: 30px; color: #fff; letter-spacing: 1px; }
+    .role { color: #00d4ff; font-weight: 600; margin-top: 4px; }
+    .contact { color: #94a3b8; font-size: 14px; margin-top: 8px; }
+    h2 {
+      font-size: 15px; text-transform: uppercase; letter-spacing: 3px;
+      color: #a855f7; margin: 28px 0 12px;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.3); padding-bottom: 6px;
+    }
+    p, li { color: #cbd5e1; font-size: 14px; line-height: 1.65; }
+    ul { padding-left: 18px; }
+    .item { margin-bottom: 12px; }
+    .item-title { font-weight: 600; color: #fff; }
+    .item-meta { color: #00d4ff; font-size: 13px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tag {
+      font-size: 12px; padding: 3px 10px; border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.3); color: #7dd3fc;
+    }
+    .print-btn {
+      position: fixed; top: 16px; right: 16px;
+      background: linear-gradient(90deg, #00d4ff, #a855f7);
+      color: #05050f; border: none; padding: 10px 18px;
+      border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 14px;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; border: none; background: #fff; border-radius: 0; }
+      .print-btn { display: none; }
+      h1, .item-title { color: #000; }
+      p, li { color: #1f2937; }
+      .role, .item-meta { color: #0e7490; }
+      .contact { color: #374151; }
+      h2 { color: #7c3aed; border-color: #ddd; }
+      .tag { border-color: #cbd5e1; color: #1e40af; }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+
+  <div class="page">
+    <h1>ALLAN MIRANDA</h1>
+    <div class="role">Desenvolvedor Full Stack &middot; Especialista FiveM (Lua/JS)</div>
+    <div class="contact">
+      Rio de Janeiro, Brasil &middot; Aberto a presencial e remoto (BR / EUA / Canad&aacute;)<br />
+      GitHub &middot; LinkedIn &middot; Discord
+    </div>
+
+    <h2>Resumo</h2>
+    <p>
+      Desenvolvedor Full Stack e especialista no ecossistema FiveM, focado em scripts avan&ccedil;ados em Lua/JS,
+      otimiza&ccedil;&atilde;o de consumo (ms/tick), automa&ccedil;&atilde;o para Discord e sistemas de gest&atilde;o.
+      Ex-paraquedista (PQD) do Ex&eacute;rcito Brasileiro, aplicando disciplina, lideran&ccedil;a e foco sob press&atilde;o
+      no desenvolvimento de software de alto desempenho.
+    </p>
+
+    <h2>Forma&ccedil;&atilde;o</h2>
+    <div class="item">
+      <div class="item-title">An&aacute;lise e Desenvolvimento de Sistemas (ADS)</div>
+      <div class="item-meta">Unicesumar &mdash; Graduando</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Ex&eacute;rcito Brasileiro &mdash; Paraquedista (PQD)</div>
+      <div class="item-meta">Disciplina, opera&ccedil;&otilde;es sob press&atilde;o e lideran&ccedil;a de equipe</div>
+    </div>
+
+    <h2>Habilidades T&eacute;cnicas</h2>
+    <ul>
+      <li>Linguagens &amp; Core: Lua, JavaScript, Node.js, TypeScript, Python, HTML5/CSS3, SQL</li>
+      <li>FiveM: vRP, Creative, otimiza&ccedil;&atilde;o ms/tick, invent&aacute;rio, whitelist, integra&ccedil;&atilde;o web-game, anti-cheat, gest&atilde;o de bases (RJ v6, Capital SP)</li>
+      <li>Automa&ccedil;&atilde;o &amp; Bots: discord.js / node-discord-burrito, APIs, tickets, verifica&ccedil;&atilde;o autom&aacute;tica, dashboards</li>
+      <li>Infraestrutura: servidores dedicados, SQL Server/MySQL, VirtualBox, Windows Server, hospedagem remota</li>
+    </ul>
+
+    <h2>Projetos em Destaque</h2>
+    <div class="item">
+      <div class="item-title">Apex Nexus V3</div>
+      <div class="item-meta">Bot Discord de alta performance</div>
+      <p>Bot com sistema de tickets, whitelist automatizada e dashboard de gerenciamento.</p>
+    </div>
+    <div class="item">
+      <div class="item-title">Frameworks &amp; Scripts FiveM</div>
+      <div class="item-meta">Otimiza&ccedil;&atilde;o de servidores</div>
+      <p>Sistemas customizados e otimiza&ccedil;&atilde;o de consumo para comunidades de grande porte.</p>
+    </div>
+    <div class="item">
+      <div class="item-title">Mu Mobile Server (Lab)</div>
+      <div class="item-meta">Ambiente local de testes</div>
+      <p>Infraestrutura complexa com SQL Server, gerenciamento de rede e virtualiza&ccedil;&atilde;o.</p>
+    </div>
+
+    <h2>Diferenciais</h2>
+    <div class="tags">
+      <span class="tag">Resolu&ccedil;&atilde;o r&aacute;pida de problemas</span>
+      <span class="tag">Otimiza&ccedil;&atilde;o extrema de performance</span>
+      <span class="tag">Parcerias t&eacute;cnicas premium</span>
+      <span class="tag">Disciplina &amp; lideran&ccedil;a</span>
+    </div>
+  </div>
+</body>
+</html>

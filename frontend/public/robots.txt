@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mirandadevelopment.github.io/portfolio/sitemap.xml
