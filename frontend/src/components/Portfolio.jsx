@@ -153,8 +153,7 @@ export default function Portfolio() {
             <article
               key={p.id}
               data-reveal-child
-              data-tilt
-              className="glass neon-border group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/50"
+              className="portfolio-card glass neon-border group relative flex flex-col overflow-hidden rounded-2xl"
             >
               <a
                 href={p.repo || site.social.github}
@@ -164,7 +163,7 @@ export default function Portfolio() {
                 className="flex flex-1 flex-col focus-visible:outline-none"
               >
                 <div
-                  className={`flex h-40 items-center justify-center bg-gradient-to-br ${p.gradient} text-white transition-transform duration-500 group-hover:scale-105`}
+                  className={`portfolio-card-art flex h-40 items-center justify-center bg-gradient-to-br ${p.gradient} text-white`}
                 >
                   {p.icon}
                 </div>
