@@ -26,7 +26,7 @@ export default function CustomCursor() {
     }
 
     const onOver = (e) => {
-      const t = e.target.closest('a, button, [data-tilt], input, textarea, select')
+      const t = e.target.closest('a, button, input, textarea, select')
       ring.classList.toggle('cursor-hover', Boolean(t))
     }
 

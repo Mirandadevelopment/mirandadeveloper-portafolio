@@ -90,7 +90,6 @@ export default function About() {
             <div
               key={p.title}
               data-reveal-child
-              data-tilt
               className="glass neon-border group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:glow-purple"
             >
               <div className="transition-transform duration-300 group-hover:scale-110">{p.icon}</div>

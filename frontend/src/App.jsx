@@ -5,7 +5,6 @@ import { prefersReducedMotion } from './hooks/useInView.js'
 
 import CustomCursor from './components/CustomCursor.jsx'
 import ParticleBackground from './components/ParticleBackground.jsx'
-import TiltLayer from './components/TiltLayer.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
 import BackToTop from './components/BackToTop.jsx'
 import ClickBurst from './components/ClickBurst.jsx'
@@ -137,7 +136,6 @@ export default function App() {
       <div className="scanlines" aria-hidden="true" />
       <CustomCursor />
       <ParticleBackground />
-      <TiltLayer />
       <Navbar />
       <main id="conteudo" className="relative z-10">
         <Hero />

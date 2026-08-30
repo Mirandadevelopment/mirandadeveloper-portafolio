@@ -35,7 +35,6 @@ export default function Differentials() {
             <div
               key={d.title}
               data-reveal-child
-              data-tilt
               className={`glass neon-border group rounded-2xl border-transparent p-8 text-center transition-all duration-300 hover:-translate-y-1.5 ${d.border}`}
             >
               <div className={`font-display text-5xl font-extrabold ${d.accent} opacity-90`}>

@@ -78,7 +78,6 @@ export default function SystemSection() {
               <div
                 key={p.title}
                 data-reveal-child
-                data-tilt
                 className="glass neon-border group flex items-start gap-5 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40"
               >
                 <span className="font-mono mt-1 text-neon-cyan">

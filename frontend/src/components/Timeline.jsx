@@ -55,7 +55,7 @@ export default function Timeline() {
                 className={`absolute top-1 -left-8 h-4 w-4 rounded-full sm:-left-12 ${m.dot}`}
                 aria-hidden="true"
               />
-              <div data-reveal-child data-tilt className="glass neon-border group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+              <div data-reveal-child className="glass neon-border group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
                 <span className="font-mono text-xs text-slate-500">
                   {String(i + 1).padStart(2, '0')} / {m.tag}
                 </span>

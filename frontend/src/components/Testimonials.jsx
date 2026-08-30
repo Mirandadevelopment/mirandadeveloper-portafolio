@@ -43,7 +43,6 @@ export default function Testimonials() {
             <figure
               key={t.role}
               data-reveal-child
-              data-tilt
               className="glass neon-border group flex flex-col rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/40"
             >
               <svg

@@ -88,8 +88,6 @@ export default function Hero() {
     >
       <div className="bg-aurora absolute inset-0 -z-10" />
       <div className="profile-stage absolute top-24 left-1/2 z-0 -translate-x-1/2 md:top-28" aria-label={`Foto de perfil de ${site.profileName}`}>
-        <div className="profile-orbit profile-orbit-one" aria-hidden="true" />
-        <div className="profile-orbit profile-orbit-two" aria-hidden="true" />
         <div className="profile-halo" aria-hidden="true" />
         <div className="profile-avatar-wrap">
           <img
@@ -105,8 +103,8 @@ export default function Hero() {
         <span className="profile-label">@{site.profileName}</span>
       </div>
       <div className="grid-overlay absolute inset-0 -z-10" />
-      <div className="absolute top-1/4 left-10 h-64 w-64 -z-10 rounded-full bg-neon-cyan/15 blur-3xl" />
-      <div className="absolute right-10 bottom-1/4 h-64 w-64 -z-10 rounded-full bg-neon-purple/15 blur-3xl" />
+      <div className="absolute top-1/4 left-10 h-64 w-64 -z-10 bg-neon-cyan/10 blur-3xl" />
+      <div className="absolute right-10 bottom-1/4 h-64 w-64 -z-10 bg-neon-purple/10 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-44 text-center md:pt-48">
         <div className="flex flex-wrap items-center justify-center gap-3">
@@ -116,7 +114,7 @@ export default function Hero() {
           </span>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
             <span className="h-2 w-2 rounded-full bg-neon-purple glow-purple" />
-            PQD #82061 · Ex-Paraquedista
+            Eterno PQD · Curso concluído em 12/02/2012
           </span>
         </div>
 
@@ -137,8 +135,8 @@ export default function Hero() {
         </p>
 
         <p className="mx-auto mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
-          Ex-paraquedista do Exército Brasileiro. Disciplina militar, foco sob pressão e liderança aplicados
-          à engenharia de software de alto desempenho.
+          Ex-militar e Eterno PQD do Exército Brasileiro. Curso de Paraquedista concluído em 12/02/2012,
+          com disciplina, foco sob pressão e liderança aplicados à engenharia de software de alto desempenho.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

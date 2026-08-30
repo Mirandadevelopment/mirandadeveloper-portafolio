@@ -73,7 +73,6 @@ function SkillCard({ group }) {
     <div
       ref={ref}
       data-reveal-child
-      data-tilt
       className="glass neon-border group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/40"
     >
       <h3 className="font-display flex items-center gap-2 text-base font-bold text-white">

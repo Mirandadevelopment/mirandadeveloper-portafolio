@@ -168,7 +168,6 @@ section[id] {
   border-radius: 9999px;
   background: linear-gradient(135deg, #00d4ff, #a855f7 65%, #3b82f6);
   box-shadow: 0 0 28px rgba(0, 212, 255, 0.35), 0 0 64px rgba(168, 85, 247, 0.2);
-  animation: profile-float 5s ease-in-out infinite;
 }
 .profile-avatar {
   display: block;
@@ -185,33 +184,6 @@ section[id] {
   border-radius: 9999px;
   background: radial-gradient(circle, rgba(0, 212, 255, 0.16), transparent 66%);
   filter: blur(7px);
-  animation: profile-pulse 3.2s ease-in-out infinite;
-}
-.profile-orbit {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  border-radius: 9999px;
-}
-.profile-orbit::after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: #00d4ff;
-  box-shadow: 0 0 14px #00d4ff;
-}
-.profile-orbit-one {
-  transform: rotate(24deg) scaleX(0.72);
-  animation: profile-orbit 9s linear infinite;
-}
-.profile-orbit-two {
-  transform: rotate(-54deg) scaleX(0.72);
-  border-color: rgba(168, 85, 247, 0.35);
-  animation: profile-orbit 12s linear infinite reverse;
 }
 .profile-label {
   position: absolute;
@@ -225,18 +197,6 @@ section[id] {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-}
-@keyframes profile-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-@keyframes profile-pulse {
-  0%, 100% { opacity: 0.55; transform: scale(0.94); }
-  50% { opacity: 1; transform: scale(1.06); }
-}
-@keyframes profile-orbit {
-  from { transform: rotate(24deg) scaleX(0.72); }
-  to { transform: rotate(384deg) scaleX(0.72); }
 }
 
 .bg-aurora {
@@ -339,9 +299,6 @@ section[id] {
   }
   .typing-caret::after {
     display: none;
-  }
-  [data-tilt] {
-    transform: none !important;
   }
 }
 
