@@ -44,24 +44,50 @@ const socials = [
 const inputClass =
   'w-full rounded-lg border border-neon-cyan/20 bg-night-800/60 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition-all duration-200 focus:border-neon-cyan/70 focus:shadow-[0_0_18px_rgba(0,212,255,0.2)]'
 
+const safeTrim = (value = '') => value.replace(/\s+/g, ' ').trim()
+
 export default function Contact() {
   const [status, setStatus] = useState('idle')
   const [mailto, setMailto] = useState('')
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', website: '' })
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const buildMailto = () => {
+  const buildMailto = (payload) => {
     const params = new URLSearchParams({
-      subject: `[Portfolio] ${form.subject}`,
-      body: `Nome: ${form.name}\nE-mail: ${form.email}\n\n${form.message}`,
+      subject: `[Portfolio] ${payload.subject}`,
+      body: `Nome: ${payload.name}\nE-mail: ${payload.email}\n\n${payload.message}`,
     })
     return `mailto:${site.email}?${params.toString()}`
   }
 
+  const validate = (payload) => {
+    if (payload.website) return 'error'
+    if (payload.name.length < 2 || payload.name.length > 80) return 'error'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) return 'error'
+    if (payload.subject.length < 4 || payload.subject.length > 120) return 'error'
+    if (payload.message.length < 10 || payload.message.length > 1200) return 'error'
+    return 'ok'
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    const mailtoUrl = buildMailto()
+    setStatus('sending')
+
+    const payload = {
+      name: safeTrim(form.name),
+      email: safeTrim(form.email.toLowerCase()),
+      subject: safeTrim(form.subject),
+      message: safeTrim(form.message),
+      website: safeTrim(form.website),
+    }
+
+    if (validate(payload) !== 'ok') {
+      setStatus('error')
+      return
+    }
+
+    const mailtoUrl = buildMailto(payload)
     setMailto(mailtoUrl)
     setStatus('success')
     window.location.href = mailtoUrl
@@ -73,10 +99,10 @@ export default function Contact() {
         <div className="mb-14 text-center" data-reveal>
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-purple uppercase">Contato</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Vamos <span className="text-gradient">conversar?</span>
+            Vamos <span className="text-gradient">construir uma solução?</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Tem um projeto, uma vaga ou precisa otimizar sua base? Chama no formulário ou pelas redes abaixo.
+            Aberto para oportunidades em operação, logística e desenvolvimento de sistemas.
           </p>
         </div>
 
@@ -90,7 +116,7 @@ export default function Contact() {
                     <a
                       href={s.href}
                       target={s.href.startsWith('http') ? '_blank' : undefined}
-                      rel={s.href.startsWith('http') ? 'noreferrer' : undefined}
+                      rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="group flex items-center gap-4 rounded-xl border border-transparent px-4 py-3 transition-all duration-200 hover:border-neon-cyan/30 hover:bg-night-800/60 focus-visible:border-neon-cyan/50 focus-visible:outline-none"
                     >
                       <span className="text-slate-400 transition-all duration-200 group-hover:text-neon-cyan group-hover:glow-cyan">
@@ -108,6 +134,8 @@ export default function Contact() {
               <div className="mt-8 border-t border-night-700 pt-6">
                 <div className="font-mono text-xs text-slate-500">localização</div>
                 <div className="mt-1 text-sm font-medium text-slate-200">{site.location}</div>
+                <div className="mt-3 font-mono text-xs text-slate-500">telefones</div>
+                <div className="mt-1 text-sm font-medium text-slate-200">{site.phone.join(' · ')}</div>
                 <div className="mt-3 font-mono text-xs text-slate-500">disponibilidade</div>
                 <div className="mt-1 text-sm font-medium text-emerald-400">{site.availability}</div>
               </div>
@@ -115,7 +143,7 @@ export default function Contact() {
           </div>
 
           <div className="lg:col-span-3" data-reveal-right>
-            <form onSubmit={handleSubmit} className="glass neon-border rounded-2xl p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="glass neon-border rounded-2xl p-6 sm:p-8" noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="mb-1.5 block text-xs font-semibold tracking-wider text-slate-400 uppercase">
@@ -126,6 +154,7 @@ export default function Contact() {
                     name="name"
                     required
                     autoComplete="name"
+                    maxLength={80}
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Seu nome"
@@ -142,6 +171,7 @@ export default function Contact() {
                     type="email"
                     required
                     autoComplete="email"
+                    maxLength={120}
                     value={form.email}
                     onChange={handleChange}
                     placeholder="voce@email.com"
@@ -157,9 +187,10 @@ export default function Contact() {
                   id="subject"
                   name="subject"
                   required
+                  maxLength={120}
                   value={form.subject}
                   onChange={handleChange}
-                  placeholder="Ex.: Otimização de base FiveM"
+                  placeholder="Ex.: Otimização de operação e estoque"
                   className={inputClass}
                 />
               </div>
@@ -172,9 +203,10 @@ export default function Contact() {
                   name="message"
                   required
                   rows={5}
+                  maxLength={1200}
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Conte sua ideia ou necessidade..."
+                  placeholder="Conte sua necessidade, objetivo e prazo..."
                   className={`${inputClass} resize-none`}
                 />
               </div>
@@ -186,7 +218,7 @@ export default function Contact() {
                   name="website"
                   tabIndex="-1"
                   autoComplete="off"
-                  value={form.website || ''}
+                  value={form.website}
                   onChange={handleChange}
                 />
               </div>
@@ -197,11 +229,11 @@ export default function Contact() {
                 className="group mt-6 w-full overflow-hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-6 py-3.5 font-semibold text-night-950 transition-all duration-200 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-neon-cyan disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === 'sending'
-                  ? 'Enviando...'
+                  ? 'Validando...'
                   : status === 'success'
-                    ? 'Mensagem enviada!'
+                    ? 'Mensagem pronta no e-mail!'
                     : status === 'error'
-                      ? 'Erro no envio — tente de novo'
+                      ? 'Dados inválidos — revise e tente de novo'
                       : 'Enviar mensagem'}
               </button>
 
@@ -217,6 +249,11 @@ export default function Contact() {
                         Abrir e-mail novamente
                       </a>
                     )}
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="mt-4 rounded-lg border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-300">
+                    Verifique nome, e-mail, assunto e mensagem. Evite caracteres inválidos e campos vazios.
                   </div>
                 )}
               </div>

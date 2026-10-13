@@ -29,6 +29,8 @@ export default function App() {
   useEffect(() => {
     if (prefersReducedMotion()) return undefined
 
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
         gsap.fromTo(
@@ -117,6 +119,18 @@ export default function App() {
           },
         )
       })
+
+      if (!isMobile) {
+        gsap.utils.toArray('[data-floaty]').forEach((el, i) => {
+          gsap.to(el, {
+            y: i % 2 === 0 ? -8 : 8,
+            duration: 2.4 + (i % 3) * 0.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+          })
+        })
+      }
     })
 
     return () => ctx.revert()

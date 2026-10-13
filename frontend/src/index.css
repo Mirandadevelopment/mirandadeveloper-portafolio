@@ -381,3 +381,47 @@ section[id] {
 }
 
 
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.text-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+
+  .scanlines {
+    opacity: 0.35;
+  }
+
+  .profile-stage {
+    top: 6.2rem;
+    transform: translateX(-50%) scale(0.74);
+  }
+
+  .marquee-track {
+    animation-duration: 22s;
+  }
+
+  .glass {
+    backdrop-filter: blur(10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-stage {
+    transform: translateX(-50%) scale(0.68);
+  }
+
+  .scanlines {
+    display: none;
+  }
+}

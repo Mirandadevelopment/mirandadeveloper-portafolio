@@ -108,11 +108,11 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-44 text-center md:pt-48">
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-cyan uppercase">
+          <span data-floaty className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-cyan uppercase">
             <span className="h-2 w-2 animate-pulse rounded-full bg-neon-cyan glow-cyan" />
             Disponível para oportunidades
           </span>
-          <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
+          <span data-floaty className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
             <span className="h-2 w-2 rounded-full bg-neon-purple glow-purple" />
             Operação, logística e desenvolvimento
           </span>
@@ -144,7 +144,7 @@ export default function Hero() {
           <Magnetic>
             <a
               href="#projetos"
-              className="group relative block overflow-hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-8 py-3.5 font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950"
+              data-floaty className="group relative block overflow-hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-8 py-3.5 font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950"
             >
               <span className="relative z-10">Ver Projetos</span>
               <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
@@ -154,7 +154,7 @@ export default function Hero() {
             <a
               href="Allan-Miranda-CV.html"
               download
-              className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-neon-cyan transition-all duration-200 hover:scale-105 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan"
+              data-floaty className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-neon-cyan transition-all duration-200 hover:scale-105 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan"
             >
               Baixar CV
             </a>
@@ -163,7 +163,7 @@ export default function Hero() {
 
         <div data-reveal-group className="mx-auto mt-16 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
           {stats.map((s) => (
-            <div key={s.label} data-reveal-child className="glass neon-border rounded-xl px-3 py-5">
+            <div key={s.label} data-reveal-child data-floaty className="glass neon-border rounded-xl px-3 py-5">
               <Counter value={s.value} suffix={s.suffix} />
               <div className="mt-1 text-xs text-slate-400 sm:text-sm">{s.label}</div>
             </div>
