@@ -2,30 +2,30 @@ import SectionHeading from './SectionHeading.jsx'
 
 const milestones = [
   {
-    tag: 'Exército Brasileiro',
-    title: 'Formação Militar',
-    text: 'Ex-paraquedista (PQD). Disciplina, liderança e resiliência sob pressão — a base de tudo o que faço hoje.',
+    tag: 'Sodexo · 2016–2021',
+    title: 'Infraestrutura e manutenção técnica',
+    text: 'Atuação em contratos corporativos com manutenção preventiva e corretiva, apoio operacional e controle de materiais de uso diário.',
     dot: 'bg-neon-cyan glow-cyan',
     bar: 'from-neon-cyan/60 to-neon-cyan/10',
   },
   {
-    tag: 'Unicesumar',
-    title: 'Graduação em ADS',
-    text: 'Análise e Desenvolvimento de Sistemas: da arquitetura de software à gestão de projetos, teoria aplicada à prática diária.',
+    tag: 'EPS / Petrobras · 2021–2025',
+    title: 'Controle de materiais e logística crítica',
+    text: 'Gestão de almoxarifado, compras técnicas e fabricação de embalagens sob medida para transporte seguro de materiais críticos.',
     dot: 'bg-neon-purple glow-purple',
     bar: 'from-neon-purple/60 to-neon-purple/10',
   },
   {
-    tag: 'Lua · vRP · Creative',
-    title: 'Especialista FiveM',
-    text: 'Otimização de servidores de grande porte, frameworks, inventários, whitelist e integração web-game.',
+    tag: 'Freelancer · 2024–Atual',
+    title: 'Sistemas de operação e desenvolvimento Full Stack',
+    text: 'Desenvolvimento de automações, bots e sistemas com SQL em tempo real, incluindo diagnóstico de infraestrutura e recuperação de dados.',
     dot: 'bg-neon-blue glow-cyan',
     bar: 'from-neon-blue/60 to-neon-blue/10',
   },
   {
-    tag: 'Node.js · React · Discord',
-    title: 'Full Stack & Automação',
-    text: 'Sistemas de gestão, bots para comunidades e dashboards em tempo real — código enxuto, escalável e auditável.',
+    tag: 'Unicesumar · ADS',
+    title: 'Formação acadêmica em tecnologia',
+    text: 'Graduação em andamento com foco em desenvolvimento de sistemas, arquitetura, redes e aplicação prática no cenário operacional.',
     dot: 'bg-emerald-400 glow-cyan',
     bar: 'from-emerald-400/60 to-emerald-400/10',
   },
@@ -41,10 +41,10 @@ export default function Timeline() {
             eyebrowClass="text-neon-cyan"
             title={
               <>
-                Da caserna ao <span className="text-gradient">código</span>
+                Operação, logística e <span className="text-gradient">software</span>
               </>
             }
-            description="Uma jornada construída com método, disciplina e entrega sob pressão."
+            description="Evolução profissional com entregas práticas em ambientes críticos e alta exigência técnica."
           />
         </div>
 

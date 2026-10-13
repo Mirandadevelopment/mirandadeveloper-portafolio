@@ -2,18 +2,34 @@ import { useState } from 'react'
 import { site } from '../config/site.js'
 import LikeDislike from './LikeDislike.jsx'
 
-const categories = ['Todos', 'FiveM', 'Bots/Automação', 'Full Stack']
+const categories = ['Todos', 'Operações', 'Automação', 'Sistemas']
 
 const projects = [
   {
     id: 1,
-    title: 'Apex Nexus V3',
-    category: 'Bots/Automação',
-    repo: 'https://github.com/Mirandadevelopment/discord-bot-professional-v3',
+    title: 'Gestão de Almoxarifado e Compras Técnicas',
+    category: 'Operações',
+    repo: 'https://github.com/Mirandadevelopment',
     gradient: 'from-neon-purple to-neon-blue',
     description:
-      'Bot de alta performance para Discord com sistema de tickets, whitelist automatizada e dashboard de gerenciamento.',
-    tags: ['Node.js', 'discord.js', 'Automação', 'Dashboard'],
+      'Estruturação de controle de estoque, fluxo de entrada/saída e compras de insumos para operação contínua de marcenaria técnica.',
+    tags: ['Estoque', 'Compras', 'Almoxarifado', 'Logística'],
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9-4 9 4-9 4-9-4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10l9 4 9-4V7" />
+      </svg>
+    ),
+  },
+  {
+    id: 2,
+    title: 'Automação de Servidores e Bots',
+    category: 'Automação',
+    repo: 'https://github.com/Mirandadevelopment/discord-bot-professional-v3',
+    gradient: 'from-neon-cyan to-neon-purple',
+    description:
+      'Bots de alta performance em Node.js e Python para gestão de fluxos operacionais, integrações e suporte a equipes em tempo real.',
+    tags: ['Node.js', 'Python', 'APIs', 'Bots'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 4v5c0 4.4-3 8-7 9-4-1-7-4.6-7-9V7l7-4z" />
@@ -22,30 +38,30 @@ const projects = [
     ),
   },
   {
-    id: 2,
-    title: 'Frameworks & Scripts FiveM',
-    category: 'FiveM',
-    repo: 'https://github.com/Mirandadevelopment/complexodamare.fivem-hypnonema',
-    gradient: 'from-neon-cyan to-neon-purple',
+    id: 3,
+    title: 'Modelagem SQL para Operação em Tempo Real',
+    category: 'Sistemas',
+    repo: 'https://github.com/Mirandadevelopment',
+    gradient: 'from-neon-blue to-neon-cyan',
     description:
-      'Otimização de servidores com redução drástica de consumo (ms/tick), sistemas customizados de inventário, whitelist e integração web-game.',
-    tags: ['Lua', 'vRP', 'Creative', 'MySQL'],
+      'Modelagem e otimização de bancos SQL para sistemas com alta disponibilidade, rastreabilidade e estabilidade de dados.',
+    tags: ['SQL', 'Modelagem', 'Disponibilidade', 'Dados'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 4h16v14H4z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 22l3-4 3 4" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 11h3l-1.5 3h3L10 17" />
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
       </svg>
     ),
   },
   {
-    id: 3,
-    title: 'Gestão de Bases · RJ v6 & Capital SP',
-    category: 'FiveM',
-    gradient: 'from-neon-blue to-neon-cyan',
+    id: 4,
+    title: 'Logística de Materiais Críticos (Petrobras)',
+    category: 'Operações',
+    gradient: 'from-emerald-400 to-neon-cyan',
     description:
-      'Administração técnica e otimização de bases de grande porte, garantindo estabilidade, segurança e performance para comunidades ativas.',
-    tags: ['Lua', 'Infra', 'Anti-cheat', 'SQL'],
+      'Fabricação de embalagens sob medida e suporte logístico para transporte seguro de materiais críticos para plataformas.',
+    tags: ['Petrobras', 'Embalagens', 'Campo', 'Segurança'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18" />
@@ -55,29 +71,14 @@ const projects = [
     ),
   },
   {
-    id: 4,
-    title: 'Mu Mobile Server (Lab)',
-    category: 'Full Stack',
-    gradient: 'from-emerald-400 to-neon-cyan',
-    description:
-      'Ambiente local de testes complexo com SQL Server, gerenciamento de rede e virtualização — simulando uma infraestrutura de produção real.',
-    tags: ['SQL Server', 'Windows Server', 'VirtualBox', 'Redes'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
-        <rect x="3" y="4" width="18" height="12" rx="2" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 20h8M12 16v4" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7 9h4v3H7z" />
-      </svg>
-    ),
-  },
-  {
     id: 5,
-    title: 'Sistema de Gestão Integrado',
-    category: 'Full Stack',
+    title: 'Scripts para Economia e Inventário (FiveM)',
+    category: 'Sistemas',
+    repo: 'https://github.com/Mirandadevelopment/complexodamare.fivem-hypnonema',
     gradient: 'from-neon-cyan to-emerald-400',
     description:
-      'Plataformas de gestão com autenticação, dashboards em tempo real, relatórios e integração com APIs externas.',
-    tags: ['React', 'Node.js', 'PostgreSQL', 'REST'],
+      'Criação de scripts complexos em Lua para frameworks QBcore e Creative, focados em economia, inventário e estabilidade.',
+    tags: ['Lua', 'QBcore', 'Creative', 'Inventário'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <rect x="3" y="3" width="7" height="7" rx="1.5" />
@@ -89,13 +90,13 @@ const projects = [
   },
   {
     id: 6,
-    title: 'Automação & Comunidade Discord',
-    category: 'Bots/Automação',
+    title: 'Diagnóstico de Infraestrutura e Recuperação de Dados',
+    category: 'Automação',
     repo: 'https://github.com/Mirandadevelopment',
     gradient: 'from-neon-purple to-fuchsia-500',
     description:
-      'Bots de alta complexidade com verificação automática, sistema de níveis, integração com APIs de jogos e moderação eficiente.',
-    tags: ['discord.js', 'Node.js', 'APIs', 'Moderação'],
+      'Consultoria técnica para identificação de falhas operacionais, continuidade de serviços e recuperação de dados críticos.',
+    tags: ['Infraestrutura', 'Consultoria', 'Recuperação', 'Suporte'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <path strokeLinecap="round" strokeLinejoin="round" d="M7 9l-2 3 2 3" />
@@ -124,10 +125,10 @@ export default function Portfolio() {
         <div className="mb-12 text-center" data-reveal>
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-purple uppercase">Portfólio</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Projetos em <span className="text-gradient">Destaque</span>
+            Entregas em <span className="text-gradient">Destaque</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Soluções reais em FiveM, automação e sistemas web. Clique no card para ver o código e curta os seus favoritos.
+            Casos reais em operação, logística, automação e sistemas para ambientes de alta exigência.
           </p>
         </div>
 
@@ -189,7 +190,7 @@ export default function Portfolio() {
                     ))}
                   </div>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-neon-cyan transition-transform duration-300 group-hover:translate-x-1">
-                    Ver código
+                    Ver referência
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
                     </svg>

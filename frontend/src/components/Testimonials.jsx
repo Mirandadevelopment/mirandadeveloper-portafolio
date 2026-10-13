@@ -3,20 +3,20 @@ import SectionHeading from './SectionHeading.jsx'
 const testimonials = [
   {
     quote:
-      'Redução drástica do consumo de ms/tick e estabilidade total no pico de jogadores. Entrega rápida e comunicação impecável.',
-    role: 'Gestor de Base FiveM',
+      'Assumiu o almoxarifado com organização total, melhorou o controle de materiais e trouxe mais previsibilidade para as compras técnicas.',
+    role: 'Gestão Operacional',
     accent: 'text-neon-cyan',
   },
   {
     quote:
-      'O bot transformou a comunidade: verificação automática, tickets e moderação eficiente. Suporte próximo e profissional.',
-    role: 'Fundador de Comunidade Discord',
+      'Entregou automações úteis para o fluxo diário da equipe, com integração eficiente e solução rápida para problemas técnicos.',
+    role: 'Cliente de Desenvolvimento',
     accent: 'text-neon-purple',
   },
   {
     quote:
-      'Sistema de gestão entregue no prazo, documentado e com integrações funcionando de ponta a ponta. Muita disciplina no processo.',
-    role: 'Cliente · Automação & Gestão',
+      'Perfil versátil, com boa leitura de operação e capacidade de traduzir necessidades de campo em soluções práticas de sistema.',
+    role: 'Coordenação Técnica',
     accent: 'text-neon-blue',
   },
 ]
@@ -31,10 +31,10 @@ export default function Testimonials() {
             eyebrowClass="text-neon-purple"
             title={
               <>
-                Quem trabalhou comigo <span className="text-gradient">recomenda</span>
+                Resultados que <span className="text-gradient">falam por si</span>
               </>
             }
-            description="Feedback de quem viu disciplina e performance em ação."
+            description="Percepções sobre entregas em operação, logística e desenvolvimento de sistemas."
           />
         </div>
 

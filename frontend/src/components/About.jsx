@@ -3,33 +3,31 @@ export default function About() {
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-9 w-9 text-neon-cyan">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 15l-2.5 1.6 1-2.9L8 11.5h3l1-2.9 1 2.9h3l-2.5 2.2 1 2.9L12 15z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M6 10h12M7 14h10M8 18h8" />
         </svg>
       ),
-      title: 'Disciplina Militar',
-      text: 'Ex-Paraquedista (PQD) do Exército Brasileiro. Hábito de cumprir prazos, seguir padrões e manter a calma sob pressão.',
+      title: 'Controle de Materiais',
+      text: 'Gestão integral de almoxarifado, controle de estoque e compras técnicas com foco em confiabilidade operacional.',
     },
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-9 w-9 text-neon-purple">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3 1.8 8.5 12 14l8.4-4.5V17h1.7v-8L12 3z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 12.2V17c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.8" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M12 3v18" />
+          <rect x="4" y="4" width="16" height="16" rx="2" />
         </svg>
       ),
-      title: 'Formação Acadêmica',
-      text: 'Graduando em Análise e Desenvolvimento de Sistemas (ADS) pela Unicesumar, unindo teoria à prática diária.',
+      title: 'Automação e Desenvolvimento',
+      text: 'Automação de processos com Node.js, Python e C++, além de integração de sistemas e bancos SQL para operações em tempo real.',
     },
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-9 w-9 text-neon-blue">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 15.5 14 12l3.5 3.5" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3a9 9 0 1 0 9 9" />
-          <circle cx="12" cy="12" r="3" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l4-4 4 4 4-4 6 6" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 20h18" />
         </svg>
       ),
-      title: 'Resolução de Problemas',
-      text: 'Paixão por transformar problemas complexos em soluções simples, performáticas e de manutenção clara.',
+      title: 'Logística Técnica',
+      text: 'Atuação em operações críticas para Petrobras e Sodexo, com foco em fluxo logístico, infraestrutura e eficiência de campo.',
     },
   ]
 
@@ -39,7 +37,7 @@ export default function About() {
         <div className="mb-14 text-center" data-reveal>
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-purple uppercase">Sobre mim</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Disciplina que <span className="text-gradient">vira código</span>
+            Tecnologia aplicada à <span className="text-gradient">operação real</span>
           </h2>
         </div>
 
@@ -48,39 +46,37 @@ export default function About() {
             <div className="neon-border glass float-slow rounded-2xl p-8">
               <div className="font-display text-5xl font-extrabold text-gradient">AM</div>
               <div className="mt-2 font-mono text-sm text-neon-cyan">
-                &gt; init allan.miranda --discipline --focus --leadership
+                &gt; init allan.miranda.da.rosa --operacoes --software --logistica
               </div>
               <div className="mt-4 font-mono text-xs text-slate-400">
-                &gt; serial: <span className="text-neon-purple">PQD_82061</span>
+                &gt; role: <span className="text-neon-purple">analista_sistemas_operacao</span>
               </div>
               <div className="mt-1 font-mono text-xs text-slate-400">
-                &gt; status: <span className="text-emerald-400">ready_for_missions</span>
+                &gt; stack: <span className="text-emerald-400">[node, python, cpp, sql]</span>
               </div>
               <div className="mt-1 font-mono text-xs text-slate-400">
-                &gt; location: <span className="text-slate-300">rio_de_janeiro.brasil</span>
+                &gt; location: <span className="text-slate-300">mage.rj.brasil</span>
               </div>
               <div className="mt-1 font-mono text-xs text-slate-400">
-                &gt; remote: <span className="text-slate-300">[brasil, eua, canada]</span>
+                &gt; focus: <span className="text-slate-300">materiais, estoque, automacao</span>
               </div>
             </div>
           </div>
 
           <div data-reveal-right>
             <p className="text-lg leading-relaxed text-slate-300">
-              Sou desenvolvedor <strong className="text-white">Full Stack</strong> e especialista no
-              ecossistema <strong className="text-neon-cyan">FiveM</strong>, focado em criar soluções
-              robustas com <strong className="text-neon-purple">Lua, JavaScript e Node.js</strong>.
-              Atuei na otimização de servidores de grande porte, automação para Discord e sistemas de
-              gestão integrados.
+              Sou <strong className="text-white">Analista de Sistemas de Operação</strong> e
+              <strong className="text-neon-cyan"> Desenvolvedor Full Stack</strong>, com trajetória
+              prática em controle de materiais, compras técnicas e gestão de estoque.
             </p>
             <p className="mt-4 leading-relaxed text-slate-400">
-              A vida militar me ensinou que performance não é sorte — é método. O mesmo rigor com que se
-              salta de paraquedas, cumpre-se uma missão ou lidera-se uma equipe é o que aplico em cada linha
-              de código: precisão, disciplina e entrega sob pressão.
+              Como freelancer, desenvolvo scripts e automações para sistemas complexos com
+              <strong className="text-neon-purple"> Node.js, Python, C++, Lua e SQL</strong>, conectando
+              tecnologia a necessidades operacionais reais.
             </p>
             <p className="mt-4 leading-relaxed text-slate-400">
-              Hoje, moro no Rio de Janeiro e estou aberto a oportunidades presenciais e remotas, no Brasil
-              ou no exterior — especialmente EUA e Canadá.
+              Também atuei em operações e infraestrutura em contratos de grande porte, contribuindo com
+              logística técnica, organização de layouts e suporte a equipes multidisciplinares.
             </p>
           </div>
         </div>

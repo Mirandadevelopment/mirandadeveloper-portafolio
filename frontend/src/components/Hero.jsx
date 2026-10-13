@@ -5,16 +5,16 @@ import Magnetic from './Magnetic.jsx'
 import { site } from '../config/site.js'
 
 const phrases = [
+  'Analista de Sistemas de Operação',
   'Desenvolvedor Full Stack',
-  'Especialista FiveM · Lua/JS',
-  'Automação para Discord',
-  'Sistemas de Gestão',
+  'Automação com Node.js, Python e C++',
+  'Especialista em Controle de Materiais e Logística',
 ]
 
 const stats = [
-  { value: 4, suffix: '+', label: 'Anos de código' },
-  { value: 50, suffix: '+', label: 'Scripts FiveM' },
-  { value: 10, suffix: '+', label: 'Bases otimizadas' },
+  { value: 9, suffix: '+', label: 'Anos em operações e infraestrutura' },
+  { value: 2, suffix: '+', label: 'Anos em desenvolvimento freelancer' },
+  { value: 3, suffix: '', label: 'Frentes: logística, estoque e automação' },
 ]
 
 function Counter({ value, suffix }) {
@@ -114,14 +114,14 @@ export default function Hero() {
           </span>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
             <span className="h-2 w-2 rounded-full bg-neon-purple glow-purple" />
-            Eterno PQD · Curso concluído em 12/02/2012
+            Operação, logística e desenvolvimento
           </span>
         </div>
 
         <h1 className="font-display mt-8 text-4xl leading-tight font-extrabold text-white sm:text-6xl md:text-7xl">
-          <GlitchText text="Allan Miranda" />
-          <span className="mt-2 block text-2xl font-bold sm:text-3xl md:text-4xl">
-            <span className="text-gradient text-glow">Full Stack &amp; FiveM Specialist</span>
+          <GlitchText text="Allan Miranda da Rosa" />
+          <span className="mt-2 block text-xl font-bold sm:text-2xl md:text-3xl">
+            <span className="text-gradient text-glow">Analista de Sistemas de Operação | Desenvolvedor Full Stack</span>
           </span>
         </h1>
 
@@ -135,8 +135,9 @@ export default function Hero() {
         </p>
 
         <p className="mx-auto mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
-          Ex-militar e Eterno PQD do Exército Brasileiro. Curso de Paraquedista concluído em 12/02/2012,
-          com disciplina, foco sob pressão e liderança aplicados à engenharia de software de alto desempenho.
+          Profissional versátil com atuação em Análise de Sistemas de Operação, desenvolvimento de software,
+          controle de materiais, compras técnicas e gestão de estoque, com entregas para contextos de alta exigência
+          como Petrobras e Sodexo.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -160,7 +161,7 @@ export default function Hero() {
           </Magnetic>
         </div>
 
-        <div data-reveal-group className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
+        <div data-reveal-group className="mx-auto mt-16 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
           {stats.map((s) => (
             <div key={s.label} data-reveal-child className="glass neon-border rounded-xl px-3 py-5">
               <Counter value={s.value} suffix={s.suffix} />

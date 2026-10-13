@@ -2,50 +2,48 @@ import { useEffect, useRef, useState } from 'react'
 
 const skillGroups = [
   {
-    title: 'Linguagens & Core',
+    title: 'Desenvolvimento & Programação',
     color: 'from-neon-cyan to-neon-blue',
     items: [
-      { name: 'Lua', level: 95 },
-      { name: 'JavaScript', level: 92 },
-      { name: 'Node.js', level: 90 },
-      { name: 'TypeScript', level: 85 },
-      { name: 'Python', level: 80 },
-      { name: 'HTML5 / CSS3', level: 88 },
-      { name: 'SQL', level: 82 },
+      { name: 'JavaScript (Node.js)', level: 90 },
+      { name: 'Python', level: 85 },
+      { name: 'C++ / C#', level: 78 },
+      { name: 'Lua', level: 88 },
+      { name: 'Git / GitHub', level: 87 },
+      { name: 'SQL', level: 84 },
     ],
   },
   {
-    title: 'Desenvolvimento FiveM',
+    title: 'Dados & BI',
     color: 'from-neon-purple to-neon-cyan',
     items: [
-      { name: 'Frameworks vRP / Creative', level: 94 },
-      { name: 'Otimização (ms/tick)', level: 96 },
-      { name: 'Sistemas de Inventário', level: 90 },
-      { name: 'Whitelist & Anti-cheat', level: 88 },
-      { name: 'Integração Web-Game', level: 86 },
-      { name: 'Gestão de Bases', level: 92 },
+      { name: 'Power BI', level: 72 },
+      { name: 'Excel Avançado com Copilot', level: 82 },
+      { name: 'Modelagem SQL', level: 84 },
+      { name: 'Análise de indicadores', level: 79 },
+      { name: 'Relatórios operacionais', level: 83 },
     ],
   },
   {
-    title: 'Automação & Bots',
+    title: 'Tecnologias & Frameworks',
     color: 'from-neon-blue to-neon-purple',
     items: [
-      { name: 'discord.js / burrito', level: 91 },
-      { name: 'Integração com APIs', level: 89 },
-      { name: 'Dashboards em tempo real', level: 88 },
-      { name: 'Sistema de Tickets', level: 93 },
-      { name: 'Verificação automática', level: 87 },
+      { name: 'QBcore / Creative (FiveM)', level: 88 },
+      { name: 'APIs e integrações', level: 86 },
+      { name: 'Supabase', level: 78 },
+      { name: 'AWS', level: 70 },
+      { name: 'Automação de sistemas', level: 90 },
     ],
   },
   {
-    title: 'Infraestrutura & Redes',
+    title: 'Gestão Operacional',
     color: 'from-emerald-400 to-neon-cyan',
     items: [
-      { name: 'Servidores dedicados', level: 85 },
-      { name: 'SQL Server / MySQL', level: 86 },
-      { name: 'Virtualização (VirtualBox)', level: 84 },
-      { name: 'Windows Server', level: 80 },
-      { name: 'Hospedagem remota', level: 88 },
+      { name: 'Controle de Estoque', level: 93 },
+      { name: 'Compras Técnicas', level: 90 },
+      { name: 'Almoxarifado', level: 92 },
+      { name: 'Logística de Materiais', level: 91 },
+      { name: 'Organização de Layouts', level: 85 },
     ],
   },
 ]
@@ -111,10 +109,10 @@ export default function Skills() {
         <div className="mb-14 text-center">
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-cyan uppercase">Habilidades</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Matriz de <span className="text-gradient">Maestria</span>
+            Competências em <span className="text-gradient">tecnologia e operação</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Domínio medido em projetos reais — as barras revelam o nível em cada tecnologia.
+            Experiência construída entre desenvolvimento de software, análise de dados e gestão de materiais.
           </p>
         </div>
 

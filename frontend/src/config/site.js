@@ -1,12 +1,13 @@
 export const site = {
-  name: 'Allan Miranda',
+  name: 'Allan Miranda da Rosa',
   brand: 'ALLAN.DEV',
-  role: 'Full Stack & FiveM Specialist',
-  email: 'allan.miranda.dev@protonmail.com',
-  location: 'Rio de Janeiro, Brasil',
-  availability: 'Presencial & Remoto (BR / EUA / Canadá)',
+  role: 'Analista de Sistemas de Operação | Desenvolvedor Full Stack',
+  email: 'zeusmiranda63@gmail.com',
+  location: 'Rua Santa Margarida, 330 — Magé, RJ, 25931-646',
+  availability: 'Disponível para oportunidades presenciais e remotas',
   profileName: 'MirandaDeveloper',
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
+  phone: ['(21) 96758-9784', '(21) 98045-3478'],
   supabase: {
     url: 'https://zvtcjyujcdlbviqrjnwx.supabase.co',
     anonKey: 'sb_publishable_BAR0saBEocMbykt6Y0jwiw_RczCdxRS',
