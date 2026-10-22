@@ -72,7 +72,7 @@ export default function About() {
 
           <div data-reveal-right>
             <p className="text-lg leading-relaxed text-slate-300">
-              Sou <strong className="text-white">Allan Miranda da Rosa</strong> — desenvolvedor{' '}
+              Sou <strong className="text-white">{site.name}</strong> — desenvolvedor{' '}
               <strong className="text-neon-cyan">Full Stack</strong>, analista de sistemas de operação e
               especialista em <strong className="text-neon-purple">FiveM (Lua/JS)</strong> e automação.
             </p>
