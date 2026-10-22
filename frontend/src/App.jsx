@@ -5,6 +5,7 @@ import { prefersReducedMotion } from './hooks/useInView.js'
 
 import CustomCursor from './components/CustomCursor.jsx'
 import ParticleBackground from './components/ParticleBackground.jsx'
+import CodeRain from './components/CodeRain.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
 import BackToTop from './components/BackToTop.jsx'
 import FloatingWhatsApp from './components/FloatingWhatsApp.jsx'
@@ -139,6 +140,8 @@ export default function App() {
       <div className="scanlines" aria-hidden="true" />
       <CustomCursor />
       <ParticleBackground />
+      {/* Chuva Matrix em todo o site */}
+      <CodeRain global opacity={0.22} speed={0.85} />
       <Navbar />
       <main id="conteudo" className="relative z-10">
         <Hero />

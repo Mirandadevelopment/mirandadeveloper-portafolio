@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { prefersReducedMotion } from '../hooks/useInView.js'
 
-export default function ParticleBackground({ density = 0.00012 }) {
+export default function ParticleBackground({ density = 0.0001 }) {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -13,21 +13,22 @@ export default function ParticleBackground({ density = 0.00012 }) {
     let particles = []
     let raf = null
 
-    const colors = ['0,212,255', '168,85,247', '59,130,246']
+    // Matrix green + teal + soft indigo
+    const colors = ['57,255,20', '45,212,191', '56,189,248']
     const reduced = prefersReducedMotion()
     const isCoarse = window.matchMedia('(pointer: coarse)').matches
 
     const resize = () => {
       width = canvas.width = window.innerWidth
       height = canvas.height = window.innerHeight
-      const factor = isCoarse ? 0.5 : 1
-      const count = Math.min(reduced ? 0 : 140, Math.floor(width * height * density * factor))
+      const factor = isCoarse ? 0.45 : 1
+      const count = Math.min(reduced ? 0 : 120, Math.floor(width * height * density * factor))
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        r: Math.random() * 1.8 + 0.6,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.6 + 0.5,
         c: colors[Math.floor(Math.random() * colors.length)],
       }))
       if (reduced) drawStatic()
@@ -38,14 +39,14 @@ export default function ParticleBackground({ density = 0.00012 }) {
       for (const p of particles) {
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${p.c},0.8)`
+        ctx.fillStyle = `rgba(${p.c},0.7)`
         ctx.fill()
       }
     }
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height)
-      const linkDist = 130
+      const linkDist = 120
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
@@ -56,7 +57,7 @@ export default function ParticleBackground({ density = 0.00012 }) {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${p.c},0.8)`
+        ctx.fillStyle = `rgba(${p.c},0.75)`
         ctx.fill()
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -65,12 +66,12 @@ export default function ParticleBackground({ density = 0.00012 }) {
           const dy = p.y - q.y
           const dist = Math.hypot(dx, dy)
           if (dist < linkDist) {
-            const alpha = (1 - dist / linkDist) * 0.55
+            const alpha = (1 - dist / linkDist) * 0.4
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x, q.y)
             ctx.strokeStyle = `rgba(${p.c},${alpha})`
-            ctx.lineWidth = 0.6
+            ctx.lineWidth = 0.55
             ctx.stroke()
           }
         }
@@ -91,7 +92,7 @@ export default function ParticleBackground({ density = 0.00012 }) {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 h-full w-full opacity-60"
+      className="fixed inset-0 z-0 h-full w-full opacity-45"
       aria-hidden="true"
     />
   )
