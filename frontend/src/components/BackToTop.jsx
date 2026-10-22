@@ -14,7 +14,7 @@ export default function BackToTop() {
     <a
       href="#inicio"
       aria-label="Voltar ao topo"
-      className={`neon-border fixed right-5 bottom-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-night-800/80 text-neon-cyan backdrop-blur transition-all duration-300 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan ${
+      className={`neon-border fixed right-5 bottom-20 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-night-800/80 text-neon-cyan backdrop-blur transition-all duration-300 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan sm:bottom-24 ${
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       }`}
     >

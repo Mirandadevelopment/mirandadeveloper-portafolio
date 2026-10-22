@@ -7,6 +7,7 @@ import CustomCursor from './components/CustomCursor.jsx'
 import ParticleBackground from './components/ParticleBackground.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
 import BackToTop from './components/BackToTop.jsx'
+import FloatingWhatsApp from './components/FloatingWhatsApp.jsx'
 import ClickBurst from './components/ClickBurst.jsx'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
@@ -161,6 +162,7 @@ export default function App() {
       </main>
       <Footer />
       <BackToTop />
+      <FloatingWhatsApp />
     </div>
   )
 }

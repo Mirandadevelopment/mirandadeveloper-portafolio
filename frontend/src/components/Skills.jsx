@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 
 const skillGroups = [
   {
-    title: 'Linguagens & Core',
+    title: 'Linguagens e core',
     color: 'from-neon-cyan to-neon-blue',
+    tip: 'Base sólida para APIs, bots, automações e sistemas web em produção.',
     items: [
       { name: 'JavaScript / Node.js', level: 92 },
       { name: 'Lua (FiveM)', level: 95 },
@@ -15,20 +16,22 @@ const skillGroups = [
     ],
   },
   {
-    title: 'FiveM & Frameworks',
+    title: 'FiveM e frameworks',
     color: 'from-neon-purple to-neon-cyan',
+    tip: 'Foco em estabilidade, economia, inventário e performance em bases grandes.',
     items: [
       { name: 'QBcore / Creative', level: 94 },
       { name: 'Otimização (ms/tick)', level: 96 },
-      { name: 'Sistemas de Inventário', level: 90 },
-      { name: 'Economia & Jobs', level: 88 },
-      { name: 'Whitelist & Anti-cheat', level: 87 },
-      { name: 'Integração Web-Game', level: 86 },
+      { name: 'Sistemas de inventário', level: 90 },
+      { name: 'Economia e jobs', level: 88 },
+      { name: 'Whitelist e anti-cheat', level: 87 },
+      { name: 'Integração web-game', level: 86 },
     ],
   },
   {
-    title: 'Automação & Dados',
+    title: 'Automação e dados',
     color: 'from-neon-blue to-neon-purple',
+    tip: 'Bots, APIs e painéis que reduzem trabalho manual e dão visibilidade aos dados.',
     items: [
       { name: 'discord.js / Bots', level: 91 },
       { name: 'APIs REST', level: 89 },
@@ -38,11 +41,12 @@ const skillGroups = [
     ],
   },
   {
-    title: 'Operações & Infra',
+    title: 'Operações e infra',
     color: 'from-emerald-400 to-neon-cyan',
+    tip: 'Experiência real em estoque e logística aplicada a sistemas e servidores.',
     items: [
-      { name: 'Controle de Estoque', level: 93 },
-      { name: 'Logística & Compras', level: 90 },
+      { name: 'Controle de estoque', level: 93 },
+      { name: 'Logística e compras', level: 90 },
       { name: 'Git / GitHub', level: 90 },
       { name: 'Servidores / SQL Server', level: 85 },
       { name: 'AWS (fundamentos)', level: 70 },
@@ -50,7 +54,7 @@ const skillGroups = [
   },
 ]
 
-function SkillCard({ group }) {
+function SkillCard({ group, open, onToggle }) {
   const ref = useRef(null)
   const [active, setActive] = useState(false)
 
@@ -70,15 +74,41 @@ function SkillCard({ group }) {
   }, [])
 
   return (
-    <div
+    <button
+      type="button"
       ref={ref}
       data-reveal-child
-      className="glass neon-border group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/40"
+      onClick={onToggle}
+      aria-expanded={open}
+      className={`glass neon-border group w-full rounded-2xl p-6 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/40 ${
+        open ? 'ring-1 ring-neon-cyan/50 bg-neon-cyan/5' : ''
+      }`}
     >
-      <h3 className="font-display flex items-center gap-2 text-base font-bold text-white">
-        <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-r ${group.color}`} />
-        {group.title}
+      <h3 className="font-display flex items-center justify-between gap-2 text-base font-bold text-white">
+        <span className="flex items-center gap-2">
+          <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-r ${group.color}`} />
+          {group.title}
+        </span>
+        <span
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-sm transition-transform ${
+            open ? 'rotate-45 border-neon-cyan text-neon-cyan' : 'border-slate-600 text-slate-400'
+          }`}
+          aria-hidden="true"
+        >
+          +
+        </span>
       </h3>
+
+      <div
+        className={`grid transition-all duration-300 ${
+          open ? 'mt-3 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <p className="text-sm leading-relaxed text-slate-400">{group.tip}</p>
+        </div>
+      </div>
+
       <ul className="mt-6 space-y-4">
         {group.items.map((item, i) => (
           <li key={item.name}>
@@ -100,27 +130,37 @@ function SkillCard({ group }) {
           </li>
         ))}
       </ul>
-    </div>
+      <p className="mt-4 text-center text-[11px] text-slate-500">
+        {open ? 'Clique para fechar' : 'Clique para ver o resumo'}
+      </p>
+    </button>
   )
 }
 
 export default function Skills() {
+  const [openTitle, setOpenTitle] = useState(null)
+
   return (
     <section id="habilidades" className="relative py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-14 text-center">
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-cyan uppercase">Habilidades</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Matriz de <span className="text-gradient">Maestria</span>
+            Matriz de <span className="text-gradient">domínio</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Stack técnica + experiência operacional — do código à gestão de materiais.
+            Stack técnica + experiência operacional — do código à gestão de materiais. Clique em um card para abrir o resumo.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-reveal-group>
           {skillGroups.map((g) => (
-            <SkillCard key={g.title} group={g} />
+            <SkillCard
+              key={g.title}
+              group={g}
+              open={openTitle === g.title}
+              onToggle={() => setOpenTitle((t) => (t === g.title ? null : g.title))}
+            />
           ))}
         </div>
       </div>
