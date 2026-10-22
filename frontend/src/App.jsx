@@ -14,6 +14,7 @@ import Marquee from './components/Marquee.jsx'
 import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Portfolio from './components/Portfolio.jsx'
+import Services from './components/Services.jsx'
 import Differentials from './components/Differentials.jsx'
 import SystemSection from './components/SystemSection.jsx'
 import Timeline from './components/Timeline.jsx'
@@ -144,6 +145,8 @@ export default function App() {
         <Skills />
         <CodeDivider label="modulo: projetos" />
         <Portfolio />
+        <CodeDivider label="modulo: orcamento" />
+        <Services />
         <Differentials />
         <SystemSection />
         <Timeline />

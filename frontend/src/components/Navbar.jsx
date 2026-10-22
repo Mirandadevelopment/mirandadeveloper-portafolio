@@ -5,8 +5,8 @@ const links = [
   { label: 'Sobre', href: '#sobre' },
   { label: 'Habilidades', href: '#habilidades' },
   { label: 'Projetos', href: '#projetos' },
+  { label: 'Serviços', href: '#servicos' },
   { label: 'Trajetória', href: '#trajetoria' },
-  { label: 'Sistema', href: '#sistema' },
   { label: 'Contato', href: '#contato' },
 ]
 
@@ -68,7 +68,7 @@ export default function Navbar() {
           ALLAN<span className="text-gradient">.DEV</span>
         </a>
 
-        <ul className="hidden items-center gap-5 lg:flex">
+        <ul className="hidden items-center gap-4 xl:flex">
           {desktopLinks.map((l) => {
             const isActive = active === l.href
             return (
@@ -93,10 +93,10 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="#contato"
+          href="#servicos"
           className="hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-5 py-2.5 text-sm font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950 lg:inline-flex"
         >
-          Contato
+          Orçamento
         </a>
 
         <button

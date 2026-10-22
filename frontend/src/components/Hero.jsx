@@ -6,15 +6,15 @@ import { site } from '../config/site.js'
 
 const phrases = [
   'Desenvolvedor Full Stack',
+  'Analista de Sistemas de Operação',
   'Especialista FiveM · Lua/JS',
-  'Automação para Discord',
-  'Sistemas de Gestão',
+  'Automação & Logística',
 ]
 
 const stats = [
   { value: 4, suffix: '+', label: 'Anos de código' },
   { value: 50, suffix: '+', label: 'Scripts FiveM' },
-  { value: 10, suffix: '+', label: 'Bases otimizadas' },
+  { value: 8, suffix: '+', label: 'Anos em operações' },
 ]
 
 function Counter({ value, suffix }) {
@@ -110,18 +110,18 @@ export default function Hero() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-cyan uppercase">
             <span className="h-2 w-2 animate-pulse rounded-full bg-neon-cyan glow-cyan" />
-            Disponível para oportunidades
+            Disponível para projetos
           </span>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
             <span className="h-2 w-2 rounded-full bg-neon-purple glow-purple" />
-            Eterno PQD · Curso concluído em 12/02/2012
+            ADS · Unicesumar
           </span>
         </div>
 
         <h1 className="font-display mt-8 text-4xl leading-tight font-extrabold text-white sm:text-6xl md:text-7xl">
           <GlitchText text="Allan Miranda" />
           <span className="mt-2 block text-2xl font-bold sm:text-3xl md:text-4xl">
-            <span className="text-gradient text-glow">Full Stack &amp; FiveM Specialist</span>
+            <span className="text-gradient text-glow">Full Stack · Sistemas · FiveM</span>
           </span>
         </h1>
 
@@ -135,27 +135,38 @@ export default function Hero() {
         </p>
 
         <p className="mx-auto mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
-          Ex-militar e Eterno PQD do Exército Brasileiro. Curso de Paraquedista concluído em 12/02/2012,
-          com disciplina, foco sob pressão e liderança aplicados à engenharia de software de alto desempenho.
+          Profissional versátil com trajetória em Análise de Sistemas, Desenvolvimento Full Stack e
+          Controle de Materiais/Logística. Automatizo processos com Node.js, Python e Lua — e entrego
+          soluções reais para inventário, servidores e operações de alto desempenho.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Magnetic>
             <a
-              href="#projetos"
+              href="#servicos"
               className="group relative block overflow-hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-8 py-3.5 font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950"
             >
-              <span className="relative z-10">Ver Projetos</span>
+              <span className="relative z-10">Montar orçamento</span>
               <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
             </a>
           </Magnetic>
           <Magnetic>
             <a
-              href="Allan-Miranda-CV.html"
+              href={site.cvUrl}
               download
               className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-neon-cyan transition-all duration-200 hover:scale-105 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan"
             >
-              Baixar CV
+              Baixar Currículo
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+              className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-emerald-400 transition-all duration-200 hover:scale-105 hover:bg-emerald-400/10 focus-visible:ring-2 focus-visible:ring-emerald-400"
+            >
+              WhatsApp
             </a>
           </Magnetic>
         </div>
