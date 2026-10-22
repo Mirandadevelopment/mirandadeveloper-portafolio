@@ -3,10 +3,9 @@ import { site } from '../config/site.js'
 import Magnetic from './Magnetic.jsx'
 
 /**
- * Preços alinhados ao mercado BR 2025/2026 (freelancer pleno):
- * landing/site (Zammes, Freelancer.com.br, Atomic), bots profissionais,
- * scripts FiveM (Fiverr + práticas BR), API/dashboard (faixas backend).
- * Valores de referência — orçamento final após conversa.
+ * Preços competitivos (júnior alto / pleno baixo) — valor justo para
+ * fechar clientes mais rápido sem parecer serviço barato.
+ * Referência de mercado BR 2025/2026; valor final após conversa.
  */
 const services = [
   {
@@ -14,91 +13,91 @@ const services = [
     category: 'Web',
     title: 'Landing Page profissional',
     description: 'Página de alta conversão, responsiva, animada e otimizada para SEO.',
-    price: 2200,
+    price: 1500,
   },
   {
     id: 'site-institucional',
     category: 'Web',
     title: 'Site institucional (até 5 páginas)',
     description: 'Site completo com seções, formulário de contato e design personalizado.',
-    price: 4500,
+    price: 3200,
   },
   {
     id: 'ecommerce',
     category: 'Web',
     title: 'E-commerce básico',
     description: 'Loja online com catálogo, carrinho e integração de pagamento.',
-    price: 12000,
+    price: 8500,
   },
   {
     id: 'bot-discord-basico',
     category: 'Bots',
     title: 'Bot Discord (tickets + whitelist)',
     description: 'Bot de tickets, whitelist automatizada e moderação essencial.',
-    price: 1500,
+    price: 1000,
   },
   {
     id: 'bot-discord-avancado',
     category: 'Bots',
     title: 'Bot Discord avançado',
     description: 'Dashboard, níveis, integração com APIs e automação completa.',
-    price: 3200,
+    price: 2200,
   },
   {
     id: 'script-fivem',
     category: 'FiveM',
     title: 'Script FiveM customizado',
     description: 'Sistemas de inventário, economia, jobs ou recursos exclusivos (QBcore/Creative).',
-    price: 2500,
+    price: 1800,
   },
   {
     id: 'otimizacao-fivem',
     category: 'FiveM',
     title: 'Otimização de base FiveM',
     description: 'Redução de ms/tick, limpeza de recursos e estabilidade em servidores grandes.',
-    price: 2000,
+    price: 1400,
   },
   {
     id: 'api-backend',
     category: 'Backend',
     title: 'API REST / Backend Node.js',
     description: 'API escalável com autenticação, banco de dados e documentação.',
-    price: 6500,
+    price: 4500,
   },
   {
     id: 'dashboard',
     category: 'Sistemas',
     title: 'Dashboard / Sistema de gestão',
     description: 'Painel administrativo com relatórios, gráficos e controle de usuários.',
-    price: 8500,
+    price: 5500,
   },
   {
     id: 'automacao',
     category: 'Automação',
     title: 'Automação de processos',
     description: 'Scripts em Node.js ou Python para otimizar fluxos operacionais e dados.',
-    price: 2500,
+    price: 1800,
   },
   {
     id: 'estoque-logistica',
     category: 'Sistemas',
     title: 'Sistema de estoque / logística',
     description: 'Controle de materiais, compras, inventário e relatórios de almoxarifado.',
-    price: 9500,
+    price: 6500,
   },
   {
     id: 'whatsapp-integracao',
     category: 'Integração',
     title: 'Integração WhatsApp Business',
     description: 'Fluxos automatizados, notificações e atendimento via WhatsApp.',
-    price: 1800,
+    price: 1200,
   },
   {
     id: 'consultoria',
     category: 'Consultoria',
     title: 'Consultoria técnica (pacote 5h)',
     description: 'Diagnóstico de infraestrutura, código, performance e arquitetura.',
-    price: 900,
+    price: 650,
   },
 ]
 
@@ -152,7 +151,7 @@ export default function Services() {
             Monte seu <span className="text-gradient">orçamento</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Selecione os serviços que precisa. Valores de referência do mercado brasileiro (freelancer pleno).
+            Selecione os serviços que precisa. Valores justos e competitivos.
             O total é calculado na hora e você envia direto pro WhatsApp.
           </p>
         </div>
