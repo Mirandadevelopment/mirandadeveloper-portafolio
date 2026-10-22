@@ -3,17 +3,64 @@ import { site } from '../config/site.js'
 import Magnetic from './Magnetic.jsx'
 
 /**
- * Preços competitivos (júnior alto / pleno baixo) — valor justo para
- * fechar clientes mais rápido sem parecer serviço barato.
- * Referência de mercado BR 2025/2026; valor final após conversa.
+ * Preços competitivos + planos Dev Fixo FiveM (mensal).
+ * Valores de referência — negociamos com humildade para caber no bolso do cliente.
  */
 const services = [
+  {
+    id: 'fivem-dev-fixo',
+    category: 'Dev Fixo',
+    title: 'Dev Fixo FiveM (mensal)',
+    description:
+      'Manutenção da cidade, estabilidade dos sistemas, instalações, atualizações e suporte contínuo. Compromisso com o funcionamento dos sistemas da base.',
+    price: 500,
+    period: '/mês',
+    highlight: true,
+  },
+  {
+    id: 'fivem-dev-fixo-plus',
+    category: 'Dev Fixo',
+    title: 'Dev Fixo FiveM Plus (mensal)',
+    description:
+      'Tudo do plano mensal + prioridade no atendimento, mais horas de desenvolvimento e criação de scripts sob demanda dentro do mês.',
+    price: 900,
+    period: '/mês',
+    highlight: true,
+  },
+  {
+    id: 'fivem-script-avulso',
+    category: 'Dev Fixo',
+    title: 'Criação de script FiveM (avulso)',
+    description:
+      'Script sob medida (jobs, inventário, economia, HUD, etc.). Valor de entrada acessível — escopo define o total final.',
+    price: 500,
+    period: '',
+  },
+  {
+    id: 'fivem-instalacao',
+    category: 'Dev Fixo',
+    title: 'Instalação e atualização de scripts',
+    description:
+      'Instalação, configuração e atualização de recursos da cidade, com testes de estabilidade.',
+    price: 500,
+    period: '',
+  },
+  {
+    id: 'fivem-manutencao-pontual',
+    category: 'Dev Fixo',
+    title: 'Manutenção pontual da cidade',
+    description:
+      'Diagnóstico, correção de bugs, limpeza de recursos e estabilização sem contrato mensal.',
+    price: 500,
+    period: '',
+  },
   {
     id: 'landing',
     category: 'Web',
     title: 'Landing Page profissional',
     description: 'Página de alta conversão, responsiva, animada e otimizada para SEO.',
     price: 1500,
+    period: '',
   },
   {
     id: 'site-institucional',
@@ -21,6 +68,7 @@ const services = [
     title: 'Site institucional (até 5 páginas)',
     description: 'Site completo com seções, formulário de contato e design personalizado.',
     price: 3200,
+    period: '',
   },
   {
     id: 'ecommerce',
@@ -28,6 +76,7 @@ const services = [
     title: 'E-commerce básico',
     description: 'Loja online com catálogo, carrinho e integração de pagamento.',
     price: 8500,
+    period: '',
   },
   {
     id: 'bot-discord-basico',
@@ -35,6 +84,7 @@ const services = [
     title: 'Bot Discord (tickets + whitelist)',
     description: 'Bot de tickets, whitelist automatizada e moderação essencial.',
     price: 1000,
+    period: '',
   },
   {
     id: 'bot-discord-avancado',
@@ -42,6 +92,7 @@ const services = [
     title: 'Bot Discord avançado',
     description: 'Dashboard, níveis, integração com APIs e automação completa.',
     price: 2200,
+    period: '',
   },
   {
     id: 'script-fivem',
@@ -49,6 +100,7 @@ const services = [
     title: 'Script FiveM customizado',
     description: 'Sistemas de inventário, economia, jobs ou recursos exclusivos (QBcore/Creative).',
     price: 1800,
+    period: '',
   },
   {
     id: 'otimizacao-fivem',
@@ -56,6 +108,7 @@ const services = [
     title: 'Otimização de base FiveM',
     description: 'Redução de ms/tick, limpeza de recursos e estabilidade em servidores grandes.',
     price: 1400,
+    period: '',
   },
   {
     id: 'api-backend',
@@ -63,6 +116,7 @@ const services = [
     title: 'API REST / Backend Node.js',
     description: 'API escalável com autenticação, banco de dados e documentação.',
     price: 4500,
+    period: '',
   },
   {
     id: 'dashboard',
@@ -70,6 +124,7 @@ const services = [
     title: 'Dashboard / Sistema de gestão',
     description: 'Painel administrativo com relatórios, gráficos e controle de usuários.',
     price: 5500,
+    period: '',
   },
   {
     id: 'automacao',
@@ -77,6 +132,7 @@ const services = [
     title: 'Automação de processos',
     description: 'Scripts em Node.js ou Python para otimizar fluxos operacionais e dados.',
     price: 1800,
+    period: '',
   },
   {
     id: 'estoque-logistica',
@@ -84,6 +140,7 @@ const services = [
     title: 'Sistema de estoque / logística',
     description: 'Controle de materiais, compras, inventário e relatórios de almoxarifado.',
     price: 6500,
+    period: '',
   },
   {
     id: 'whatsapp-integracao',
@@ -91,6 +148,7 @@ const services = [
     title: 'Integração WhatsApp Business',
     description: 'Fluxos automatizados, notificações e atendimento via WhatsApp.',
     price: 1200,
+    period: '',
   },
   {
     id: 'consultoria',
@@ -98,13 +156,22 @@ const services = [
     title: 'Consultoria técnica (pacote 5h)',
     description: 'Diagnóstico de infraestrutura, código, performance e arquitetura.',
     price: 650,
+    period: '',
   },
 ]
 
-const categories = ['Todos', ...new Set(services.map((s) => s.category))]
+const categoryOrder = ['Dev Fixo', 'FiveM', 'Web', 'Bots', 'Backend', 'Sistemas', 'Automação', 'Integração', 'Consultoria']
+const categories = [
+  'Todos',
+  ...categoryOrder.filter((c) => services.some((s) => s.category === c)),
+]
 
 function formatBRL(value) {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
+function priceLabel(s) {
+  return `${formatBRL(s.price)}${s.period || ''}`
 }
 
 export default function Services() {
@@ -133,10 +200,15 @@ export default function Services() {
     [selectedList],
   )
 
+  const hasMonthly = selectedList.some((s) => s.period === '/mês')
+
   const buildWhatsAppUrl = () => {
-    const lines = selectedList.map((s) => `• ${s.title}: ${formatBRL(s.price)}`)
+    const lines = selectedList.map((s) => `• ${s.title}: ${priceLabel(s)}`)
     const namePart = clientName.trim() ? `Nome: ${clientName.trim()}\n\n` : ''
-    const text = `Olá Allan! Fiz um orçamento no seu portfólio:\n\n${namePart}${lines.join('\n')}\n\n*Total estimado: ${formatBRL(total)}*\n\nGostaria de conversar sobre esses serviços.`
+    const totalLine = hasMonthly
+      ? `*Total estimado: ${formatBRL(total)}* (itens mensais se aplicam por mês)`
+      : `*Total estimado: ${formatBRL(total)}*`
+    const text = `Olá Allan! Fiz um orçamento no seu portfólio:\n\n${namePart}${lines.join('\n')}\n\n${totalLine}\n\nGostaria de conversar sobre esses serviços. Se precisar, podemos negociar para caber no meu orçamento.`
     return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
   }
 
@@ -151,8 +223,9 @@ export default function Services() {
             Monte seu <span className="text-gradient">orçamento</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Selecione os serviços que precisa. Valores justos e competitivos.
-            O total é calculado na hora e você envia direto pro WhatsApp.
+            Inclui <strong className="text-slate-300">Dev Fixo FiveM a partir de R$ 500/mês</strong> —
+            manutenção, instalações, atualizações e criação de scripts. Valores de referência;
+            negociamos com transparência para caber no seu bolso.
           </p>
         </div>
 
@@ -189,12 +262,20 @@ export default function Services() {
                     className={`glass neon-border group relative rounded-2xl p-5 text-left transition-all duration-300 hover:-translate-y-1 ${
                       isOn
                         ? 'ring-2 ring-neon-cyan/70 bg-neon-cyan/5 glow-cyan'
-                        : 'hover:border-neon-cyan/40'
+                        : s.highlight
+                          ? 'ring-1 ring-emerald-400/30 hover:border-emerald-400/40'
+                          : 'hover:border-neon-cyan/40'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <span className="rounded-full bg-neon-purple/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-neon-purple uppercase">
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase ${
+                            s.category === 'Dev Fixo'
+                              ? 'bg-emerald-400/15 text-emerald-400'
+                              : 'bg-neon-purple/15 text-neon-purple'
+                          }`}
+                        >
                           {s.category}
                         </span>
                         <h3 className="font-display mt-2 text-base font-bold text-white group-hover:text-neon-cyan">
@@ -216,7 +297,7 @@ export default function Services() {
                     </div>
                     <p className="mt-2 text-sm leading-relaxed text-slate-400">{s.description}</p>
                     <div className="mt-4 font-display text-lg font-bold text-gradient">
-                      a partir de {formatBRL(s.price)}
+                      a partir de {priceLabel(s)}
                     </div>
                   </button>
                 )
@@ -227,7 +308,9 @@ export default function Services() {
           <aside className="lg:col-span-2" data-reveal-right>
             <div className="glass neon-border sticky top-24 rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold text-white">Seu orçamento</h3>
-              <p className="mt-1 text-xs text-slate-500">Valores de referência · ajuste final após conversa</p>
+              <p className="mt-1 text-xs text-slate-500">
+                Valores de referência · negociamos para caber no seu bolso
+              </p>
 
               <div className="mt-5">
                 <label htmlFor="client-name" className="mb-1.5 block text-xs font-semibold tracking-wider text-slate-400 uppercase">
@@ -255,7 +338,7 @@ export default function Services() {
                     className="flex items-start justify-between gap-3 rounded-lg bg-night-800/50 px-3 py-2.5 text-sm"
                   >
                     <span className="text-slate-200">{s.title}</span>
-                    <span className="shrink-0 font-mono text-neon-cyan">{formatBRL(s.price)}</span>
+                    <span className="shrink-0 font-mono text-neon-cyan">{priceLabel(s)}</span>
                   </li>
                 ))}
               </ul>
@@ -267,6 +350,11 @@ export default function Services() {
                     {formatBRL(total)}
                   </span>
                 </div>
+                {hasMonthly && (
+                  <p className="mt-1 text-right text-[11px] text-slate-500">
+                    Inclui item(ns) mensal(is)
+                  </p>
+                )}
               </div>
 
               <Magnetic>
@@ -293,7 +381,7 @@ export default function Services() {
               </Magnetic>
 
               <p className="mt-3 text-center text-[11px] text-slate-500">
-                Abre o WhatsApp com a seleção pronta · {site.phone}
+                Pode negociar o valor · WhatsApp {site.phone}
               </p>
             </div>
           </aside>
