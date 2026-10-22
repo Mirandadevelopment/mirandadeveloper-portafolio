@@ -11,7 +11,9 @@ import {
   loadSession,
   clearSession,
   sessionFromAuth,
+  isAdminEmail,
 } from '../lib/supabase.js'
+import AdminModeration from './AdminModeration.jsx'
 
 function formatDate(iso) {
   try {
@@ -25,7 +27,6 @@ function formatDate(iso) {
   }
 }
 
-/** Senha com mínimo 8 caracteres, letra e número. */
 function validatePassword(password) {
   if (password.length < 8) return 'A senha precisa ter pelo menos 8 caracteres.'
   if (!/[A-Za-z]/.test(password)) return 'A senha precisa ter pelo menos uma letra.'
@@ -54,6 +55,8 @@ export default function Feedback() {
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
 
+  const admin = !!(session && (session.isAdmin || isAdminEmail(session.email)))
+
   useEffect(() => {
     const boot = async () => {
       const oauth = parseOAuthHash()
@@ -64,14 +67,21 @@ export default function Feedback() {
           saveSession(sess)
           setSession(sess)
           setMode('comment')
-          setMessage({ type: 'ok', text: 'Login com Google concluído com segurança.' })
+          setMessage({
+            type: 'ok',
+            text: sess.isAdmin
+              ? 'Login admin com Google. Painel de moderação liberado.'
+              : 'Login com Google concluído com segurança.',
+          })
           window.history.replaceState(null, '', window.location.pathname + window.location.search)
         } catch {
           setMessage({ type: 'err', text: 'Não foi possível concluir o login com Google.' })
         }
       } else {
         const s = loadSession()
-        if (s?.access_token) setSession(s)
+        if (s?.access_token) {
+          setSession({ ...s, isAdmin: s.isAdmin || isAdminEmail(s.email) })
+        }
       }
       loadComments()
     }
@@ -140,7 +150,12 @@ export default function Feedback() {
       saveSession(sess)
       setSession(sess)
       setMode('comment')
-      setMessage({ type: 'ok', text: 'Login realizado com sucesso.' })
+      setMessage({
+        type: 'ok',
+        text: sess.isAdmin
+          ? 'Login admin realizado. Use o painel abaixo para moderar.'
+          : 'Login realizado com sucesso.',
+      })
       setForm((f) => ({ ...f, password: '' }))
     } catch (err) {
       setMessage({
@@ -218,8 +233,13 @@ export default function Feedback() {
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3 text-sm">
               <p className="text-slate-300">
                 Conectado como <strong className="text-neon-cyan">{session.name}</strong>
+                {admin && (
+                  <span className="ml-2 rounded-full bg-amber-400/20 px-2 py-0.5 text-[10px] font-bold uppercase text-amber-200">
+                    Admin
+                  </span>
+                )}
                 {session.email && (
-                  <span className="ml-2 text-xs text-slate-500">{session.email}</span>
+                  <span className="ml-2 block text-xs text-slate-500 sm:inline">{session.email}</span>
                 )}
               </p>
               <button
@@ -306,60 +326,23 @@ export default function Feedback() {
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Nome
                 </label>
-                <input
-                  name="name"
-                  required
-                  maxLength={80}
-                  value={form.name}
-                  onChange={onChange}
-                  placeholder="Seu nome"
-                  className={inputClass}
-                  autoComplete="name"
-                />
+                <input name="name" required maxLength={80} value={form.name} onChange={onChange} placeholder="Seu nome" className={inputClass} autoComplete="name" />
               </div>
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   E-mail
                 </label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={onChange}
-                  placeholder="voce@email.com"
-                  className={inputClass}
-                  autoComplete="email"
-                />
+                <input name="email" type="email" required value={form.email} onChange={onChange} placeholder="voce@email.com" className={inputClass} autoComplete="email" />
               </div>
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Senha
                 </label>
-                <input
-                  name="password"
-                  type="password"
-                  required
-                  minLength={8}
-                  value={form.password}
-                  onChange={onChange}
-                  placeholder="Mínimo 8 caracteres, com letra e número"
-                  className={inputClass}
-                  autoComplete="new-password"
-                />
+                <input name="password" type="password" required minLength={8} value={form.password} onChange={onChange} placeholder="Mínimo 8 caracteres, com letra e número" className={inputClass} autoComplete="new-password" />
               </div>
-              <button
-                type="submit"
-                disabled={busy}
-                className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60"
-              >
+              <button type="submit" disabled={busy} className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60">
                 {busy ? 'Criando…' : 'Criar conta com e-mail'}
               </button>
-              <ul className="space-y-1 text-center text-[11px] text-slate-500">
-                <li>Confirmação por e-mail obrigatória</li>
-                <li>Senha armazenada com criptografia (Supabase Auth)</li>
-                <li>Comentários só ficam públicos após aprovação</li>
-              </ul>
             </form>
           )}
 
@@ -369,39 +352,20 @@ export default function Feedback() {
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   E-mail
                 </label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={onChange}
-                  placeholder="voce@email.com"
-                  className={inputClass}
-                  autoComplete="email"
-                />
+                <input name="email" type="email" required value={form.email} onChange={onChange} placeholder="voce@email.com" className={inputClass} autoComplete="email" />
               </div>
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Senha
                 </label>
-                <input
-                  name="password"
-                  type="password"
-                  required
-                  value={form.password}
-                  onChange={onChange}
-                  placeholder="Sua senha"
-                  className={inputClass}
-                  autoComplete="current-password"
-                />
+                <input name="password" type="password" required value={form.password} onChange={onChange} placeholder="Sua senha" className={inputClass} autoComplete="current-password" />
               </div>
-              <button
-                type="submit"
-                disabled={busy}
-                className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60"
-              >
+              <button type="submit" disabled={busy} className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60">
                 {busy ? 'Entrando…' : 'Entrar com e-mail'}
               </button>
+              <p className="text-center text-[11px] text-slate-500">
+                Admin: entre com o e-mail cadastrado como administrador.
+              </p>
             </form>
           )}
 
@@ -411,27 +375,11 @@ export default function Feedback() {
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Seu comentário
                 </label>
-                <textarea
-                  name="content"
-                  required
-                  rows={4}
-                  maxLength={2000}
-                  value={form.content}
-                  onChange={onChange}
-                  placeholder="Conte como foi a experiência ou o que espera do projeto…"
-                  className={`${inputClass} resize-none`}
-                />
+                <textarea name="content" required rows={4} maxLength={2000} value={form.content} onChange={onChange} placeholder="Conte como foi a experiência ou o que espera do projeto…" className={`${inputClass} resize-none`} />
               </div>
-              <button
-                type="submit"
-                disabled={busy}
-                className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60"
-              >
+              <button type="submit" disabled={busy} className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60">
                 {busy ? 'Enviando…' : 'Enviar feedback'}
               </button>
-              <p className="text-center text-[11px] text-slate-500">
-                Moderação ativa: o texto só aparece no site depois da aprovação.
-              </p>
             </form>
           )}
 
@@ -440,15 +388,15 @@ export default function Feedback() {
               Use <strong className="text-white">Google</strong> ou e-mail verificado para enviar um feedback.
             </p>
           )}
+
+          {admin && session && <AdminModeration session={session} />}
         </div>
 
         <div className="mt-12" data-reveal>
           <h3 className="font-display mb-6 text-center text-lg font-bold text-white">
             Feedbacks aprovados
           </h3>
-          {loadingComments && (
-            <p className="text-center text-sm text-slate-500">Carregando…</p>
-          )}
+          {loadingComments && <p className="text-center text-sm text-slate-500">Carregando…</p>}
           {!loadingComments && comments.length === 0 && (
             <p className="text-center text-sm text-slate-500">
               Ainda não há comentários públicos. Seja o primeiro a enviar um feedback.
