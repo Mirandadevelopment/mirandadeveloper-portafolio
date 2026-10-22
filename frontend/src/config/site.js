@@ -7,7 +7,7 @@ export const site = {
   emailAlt: 'allan.miranda.dev@protonmail.com',
   phone: '(21) 96758-9784',
   phone2: '(21) 98045-3478',
-  whatsapp: '5521967589784',
+  whatsapp: '5521980453478',
   location: 'Magé / Rio de Janeiro, RJ — Brasil',
   address: 'Rua Santa Margarida, 330 — Magé, RJ, 25931-646',
   availability: 'Presencial & Remoto (BR / EUA / Canadá)',
