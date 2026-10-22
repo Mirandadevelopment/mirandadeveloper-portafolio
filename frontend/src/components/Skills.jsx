@@ -5,47 +5,47 @@ const skillGroups = [
     title: 'Linguagens & Core',
     color: 'from-neon-cyan to-neon-blue',
     items: [
-      { name: 'Lua', level: 95 },
-      { name: 'JavaScript', level: 92 },
-      { name: 'Node.js', level: 90 },
+      { name: 'JavaScript / Node.js', level: 92 },
+      { name: 'Lua (FiveM)', level: 95 },
+      { name: 'Python', level: 82 },
       { name: 'TypeScript', level: 85 },
-      { name: 'Python', level: 80 },
+      { name: 'C++ / C#', level: 75 },
+      { name: 'SQL / MySQL', level: 86 },
       { name: 'HTML5 / CSS3', level: 88 },
-      { name: 'SQL', level: 82 },
     ],
   },
   {
-    title: 'Desenvolvimento FiveM',
+    title: 'FiveM & Frameworks',
     color: 'from-neon-purple to-neon-cyan',
     items: [
-      { name: 'Frameworks vRP / Creative', level: 94 },
+      { name: 'QBcore / Creative', level: 94 },
       { name: 'Otimização (ms/tick)', level: 96 },
       { name: 'Sistemas de Inventário', level: 90 },
-      { name: 'Whitelist & Anti-cheat', level: 88 },
+      { name: 'Economia & Jobs', level: 88 },
+      { name: 'Whitelist & Anti-cheat', level: 87 },
       { name: 'Integração Web-Game', level: 86 },
-      { name: 'Gestão de Bases', level: 92 },
     ],
   },
   {
-    title: 'Automação & Bots',
+    title: 'Automação & Dados',
     color: 'from-neon-blue to-neon-purple',
     items: [
-      { name: 'discord.js / burrito', level: 91 },
-      { name: 'Integração com APIs', level: 89 },
-      { name: 'Dashboards em tempo real', level: 88 },
-      { name: 'Sistema de Tickets', level: 93 },
-      { name: 'Verificação automática', level: 87 },
+      { name: 'discord.js / Bots', level: 91 },
+      { name: 'APIs REST', level: 89 },
+      { name: 'Supabase / Backend', level: 84 },
+      { name: 'Power BI / Excel IA', level: 80 },
+      { name: 'Automação de fluxos', level: 88 },
     ],
   },
   {
-    title: 'Infraestrutura & Redes',
+    title: 'Operações & Infra',
     color: 'from-emerald-400 to-neon-cyan',
     items: [
-      { name: 'Servidores dedicados', level: 85 },
-      { name: 'SQL Server / MySQL', level: 86 },
-      { name: 'Virtualização (VirtualBox)', level: 84 },
-      { name: 'Windows Server', level: 80 },
-      { name: 'Hospedagem remota', level: 88 },
+      { name: 'Controle de Estoque', level: 93 },
+      { name: 'Logística & Compras', level: 90 },
+      { name: 'Git / GitHub', level: 90 },
+      { name: 'Servidores / SQL Server', level: 85 },
+      { name: 'AWS (fundamentos)', level: 70 },
     ],
   },
 ]
@@ -114,7 +114,7 @@ export default function Skills() {
             Matriz de <span className="text-gradient">Maestria</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Domínio medido em projetos reais — as barras revelam o nível em cada tecnologia.
+            Stack técnica + experiência operacional — do código à gestão de materiais.
           </p>
         </div>
 

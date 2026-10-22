@@ -3,6 +3,16 @@ import { site } from '../config/site.js'
 
 const socials = [
   {
+    name: 'WhatsApp',
+    href: `https://wa.me/${site.whatsapp}`,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
+        <path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1 2.9 1.2 3.1c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3 0-.1-.2-.2-.5-.3z" />
+        <path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3A9.9 9.9 0 0 0 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.1 8.1 0 0 1 3.8 12c0-4.5 3.7-8.2 8.2-8.2S20.2 7.5 20.2 12s-3.7 8.2-8.2 8.2z" />
+      </svg>
+    ),
+  },
+  {
     name: 'GitHub',
     href: site.social.github,
     icon: (
@@ -76,7 +86,7 @@ export default function Contact() {
             Vamos <span className="text-gradient">conversar?</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Tem um projeto, uma vaga ou precisa otimizar sua base? Chama no formulário ou pelas redes abaixo.
+            Prefere montar o orçamento na seção Serviços e enviar pelo WhatsApp, ou prefere o formulário abaixo.
           </p>
         </div>
 
@@ -105,11 +115,20 @@ export default function Contact() {
                 ))}
               </ul>
 
-              <div className="mt-8 border-t border-night-700 pt-6">
-                <div className="font-mono text-xs text-slate-500">localização</div>
-                <div className="mt-1 text-sm font-medium text-slate-200">{site.location}</div>
-                <div className="mt-3 font-mono text-xs text-slate-500">disponibilidade</div>
-                <div className="mt-1 text-sm font-medium text-emerald-400">{site.availability}</div>
+              <div className="mt-8 border-t border-night-700 pt-6 space-y-3">
+                <div>
+                  <div className="font-mono text-xs text-slate-500">telefone</div>
+                  <div className="mt-1 text-sm font-medium text-slate-200">{site.phone}</div>
+                  <div className="text-sm text-slate-400">{site.phone2}</div>
+                </div>
+                <div>
+                  <div className="font-mono text-xs text-slate-500">localização</div>
+                  <div className="mt-1 text-sm font-medium text-slate-200">{site.location}</div>
+                </div>
+                <div>
+                  <div className="font-mono text-xs text-slate-500">disponibilidade</div>
+                  <div className="mt-1 text-sm font-medium text-emerald-400">{site.availability}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -159,7 +178,7 @@ export default function Contact() {
                   required
                   value={form.subject}
                   onChange={handleChange}
-                  placeholder="Ex.: Otimização de base FiveM"
+                  placeholder="Ex.: Sistema de estoque / Bot Discord"
                   className={inputClass}
                 />
               </div>

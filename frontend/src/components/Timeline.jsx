@@ -2,32 +2,32 @@ import SectionHeading from './SectionHeading.jsx'
 
 const milestones = [
   {
-    tag: 'Exército Brasileiro',
-    title: 'Formação Militar',
-    text: 'Ex-paraquedista (PQD). Disciplina, liderança e resiliência sob pressão — a base de tudo o que faço hoje.',
-    dot: 'bg-neon-cyan glow-cyan',
-    bar: 'from-neon-cyan/60 to-neon-cyan/10',
+    tag: 'Sodexo · 2016–2021',
+    title: 'Facilities & Manutenção',
+    text: 'Contratos corporativos de infraestrutura e manutenção predial. Controle de materiais de uso diário e apoio a equipes de engenharia.',
+    dot: 'bg-slate-400',
+    bar: 'from-slate-400/60 to-slate-400/10',
   },
   {
-    tag: 'Unicesumar',
-    title: 'Graduação em ADS',
-    text: 'Análise e Desenvolvimento de Sistemas: da arquitetura de software à gestão de projetos, teoria aplicada à prática diária.',
-    dot: 'bg-neon-purple glow-purple',
-    bar: 'from-neon-purple/60 to-neon-purple/10',
-  },
-  {
-    tag: 'Lua · vRP · Creative',
-    title: 'Especialista FiveM',
-    text: 'Otimização de servidores de grande porte, frameworks, inventários, whitelist e integração web-game.',
+    tag: 'EPS / Petrobras · 2021–2025',
+    title: 'Controle de Materiais & Logística',
+    text: 'Gestão integral de almoxarifado (marcenaria), compras técnicas e fabricação de embalagens sob medida para plataformas Petrobras.',
     dot: 'bg-neon-blue glow-cyan',
     bar: 'from-neon-blue/60 to-neon-blue/10',
   },
   {
-    tag: 'Node.js · React · Discord',
-    title: 'Full Stack & Automação',
-    text: 'Sistemas de gestão, bots para comunidades e dashboards em tempo real — código enxuto, escalável e auditável.',
-    dot: 'bg-emerald-400 glow-cyan',
-    bar: 'from-emerald-400/60 to-emerald-400/10',
+    tag: 'Freelancer · 2024–Atual',
+    title: 'Full Stack & FiveM',
+    text: 'Scripts complexos em Lua (QBcore/Creative), bots Node.js/Python, modelagem SQL e sistemas de economia/inventário para servidores.',
+    dot: 'bg-neon-cyan glow-cyan',
+    bar: 'from-neon-cyan/60 to-neon-cyan/10',
+  },
+  {
+    tag: 'Unicesumar · 2026–2028',
+    title: 'ADS — Análise e Desenvolvimento de Sistemas',
+    text: 'Graduação em andamento (EAD · Polo Piabetá). Unindo teoria de software com prática em automação, APIs e sistemas de gestão.',
+    dot: 'bg-neon-purple glow-purple',
+    bar: 'from-neon-purple/60 to-neon-purple/10',
   },
 ]
 
@@ -41,10 +41,10 @@ export default function Timeline() {
             eyebrowClass="text-neon-cyan"
             title={
               <>
-                Da caserna ao <span className="text-gradient">código</span>
+                Operações + <span className="text-gradient">código</span>
               </>
             }
-            description="Uma jornada construída com método, disciplina e entrega sob pressão."
+            description="Da logística de grandes empresas ao desenvolvimento de sistemas e servidores."
           />
         </div>
 

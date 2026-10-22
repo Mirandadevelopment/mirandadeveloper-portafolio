@@ -1,3 +1,5 @@
+import { site } from '../config/site.js'
+
 export default function About() {
   const pillars = [
     {
@@ -7,8 +9,8 @@ export default function About() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
         </svg>
       ),
-      title: 'Disciplina Militar',
-      text: 'Ex-Paraquedista (PQD) do Exército Brasileiro. Hábito de cumprir prazos, seguir padrões e manter a calma sob pressão.',
+      title: 'Operações & Logística',
+      text: 'Experiência real em controle de materiais, almoxarifado e logística para Petrobras e Sodexo — disciplina de inventário aplicada a sistemas.',
     },
     {
       icon: (
@@ -17,8 +19,8 @@ export default function About() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 12.2V17c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.8" />
         </svg>
       ),
-      title: 'Formação Acadêmica',
-      text: 'Graduando em Análise e Desenvolvimento de Sistemas (ADS) pela Unicesumar, unindo teoria à prática diária.',
+      title: 'Formação em ADS',
+      text: 'Graduando em Análise e Desenvolvimento de Sistemas (Unicesumar). Teoria de software aplicada diariamente em projetos reais.',
     },
     {
       icon: (
@@ -28,8 +30,8 @@ export default function About() {
           <circle cx="12" cy="12" r="3" />
         </svg>
       ),
-      title: 'Resolução de Problemas',
-      text: 'Paixão por transformar problemas complexos em soluções simples, performáticas e de manutenção clara.',
+      title: 'Full Stack & Automação',
+      text: 'Scripts em Lua (QBcore/Creative), bots Node.js/Python, APIs, SQL e sistemas de gestão com foco em performance e clareza.',
     },
   ]
 
@@ -39,7 +41,7 @@ export default function About() {
         <div className="mb-14 text-center" data-reveal>
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-purple uppercase">Sobre mim</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Disciplina que <span className="text-gradient">vira código</span>
+            Código com <span className="text-gradient">experiência real</span>
           </h2>
         </div>
 
@@ -48,40 +50,58 @@ export default function About() {
             <div className="neon-border glass float-slow rounded-2xl p-8">
               <div className="font-display text-5xl font-extrabold text-gradient">AM</div>
               <div className="mt-2 font-mono text-sm text-neon-cyan">
-                &gt; init allan.miranda --discipline --focus --leadership
+                &gt; init allan.miranda --fullstack --logistics --focus
               </div>
               <div className="mt-4 font-mono text-xs text-slate-400">
-                &gt; serial: <span className="text-neon-purple">PQD_82061</span>
+                &gt; role: <span className="text-neon-purple">Analista · Full Stack · FiveM</span>
               </div>
               <div className="mt-1 font-mono text-xs text-slate-400">
-                &gt; status: <span className="text-emerald-400">ready_for_missions</span>
+                &gt; status: <span className="text-emerald-400">open_for_projects</span>
               </div>
               <div className="mt-1 font-mono text-xs text-slate-400">
-                &gt; location: <span className="text-slate-300">rio_de_janeiro.brasil</span>
+                &gt; location: <span className="text-slate-300">mage_rj.brasil</span>
               </div>
               <div className="mt-1 font-mono text-xs text-slate-400">
                 &gt; remote: <span className="text-slate-300">[brasil, eua, canada]</span>
+              </div>
+              <div className="mt-1 font-mono text-xs text-slate-400">
+                &gt; ops: <span className="text-slate-300">petrobras · sodexo · freela</span>
               </div>
             </div>
           </div>
 
           <div data-reveal-right>
             <p className="text-lg leading-relaxed text-slate-300">
-              Sou desenvolvedor <strong className="text-white">Full Stack</strong> e especialista no
-              ecossistema <strong className="text-neon-cyan">FiveM</strong>, focado em criar soluções
-              robustas com <strong className="text-neon-purple">Lua, JavaScript e Node.js</strong>.
-              Atuei na otimização de servidores de grande porte, automação para Discord e sistemas de
-              gestão integrados.
+              Sou <strong className="text-white">Allan Miranda da Rosa</strong> — desenvolvedor{' '}
+              <strong className="text-neon-cyan">Full Stack</strong>, analista de sistemas de operação e
+              especialista em <strong className="text-neon-purple">FiveM (Lua/JS)</strong> e automação.
             </p>
             <p className="mt-4 leading-relaxed text-slate-400">
-              A vida militar me ensinou que performance não é sorte — é método. O mesmo rigor com que se
-              salta de paraquedas, cumpre-se uma missão ou lidera-se uma equipe é o que aplico em cada linha
-              de código: precisão, disciplina e entrega sob pressão.
+              Unei uma sólida trajetória em Controle de Materiais, Compras e Gestão de Estoque (Petrobras via
+              EPS e Sodexo) com desenvolvimento de software. Aplico Node.js, Python, C++ e SQL para resolver
+              desafios reais de inventário, logística e sistemas de tempo real.
             </p>
             <p className="mt-4 leading-relaxed text-slate-400">
-              Hoje, moro no Rio de Janeiro e estou aberto a oportunidades presenciais e remotas, no Brasil
-              ou no exterior — especialmente EUA e Canadá.
+              Atualmente graduando em ADS pela Unicesumar e disponível para projetos presenciais e remotos.
+              Baixe meu currículo completo ou monte um orçamento na seção de serviços.
             </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={site.cvUrl}
+                download
+                className="inline-flex items-center gap-2 rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 px-4 py-2 text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/20"
+              >
+                Baixar CV (HTML)
+              </a>
+              <a
+                href={`https://wa.me/${site.whatsapp}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-emerald-400/40 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-400 transition-all hover:bg-emerald-400/20"
+              >
+                Falar no WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
