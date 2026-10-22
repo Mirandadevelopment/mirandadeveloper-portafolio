@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react'
 import {
   signUp,
   signIn,
+  signInWithGoogle,
+  parseOAuthHash,
+  fetchUser,
   fetchApprovedComments,
   submitComment,
   saveSession,
   loadSession,
   clearSession,
+  sessionFromAuth,
 } from '../lib/supabase.js'
 
 function formatDate(iso) {
@@ -28,7 +32,7 @@ export default function Feedback() {
   const [mode, setMode] = useState('comment') // comment | login | register
   const [form, setForm] = useState({
     name: '',
-    username: '',
+    email: '',
     password: '',
     content: '',
   })
@@ -36,9 +40,29 @@ export default function Feedback() {
   const [message, setMessage] = useState({ type: '', text: '' })
 
   useEffect(() => {
-    const s = loadSession()
-    if (s?.access_token) setSession(s)
-    loadComments()
+    const boot = async () => {
+      // Retorno do Google OAuth
+      const oauth = parseOAuthHash()
+      if (oauth?.access_token) {
+        try {
+          const user = await fetchUser(oauth.access_token)
+          const sess = sessionFromAuth({ ...oauth, user })
+          saveSession(sess)
+          setSession(sess)
+          setMode('comment')
+          setMessage({ type: 'ok', text: 'Login com Google feito com sucesso.' })
+          // Limpa o hash da URL
+          window.history.replaceState(null, '', window.location.pathname + window.location.search)
+        } catch {
+          setMessage({ type: 'err', text: 'Não foi possível concluir o login com Google.' })
+        }
+      } else {
+        const s = loadSession()
+        if (s?.access_token) setSession(s)
+      }
+      loadComments()
+    }
+    boot()
   }, [])
 
   const loadComments = async () => {
@@ -60,32 +84,26 @@ export default function Feedback() {
     setBusy(true)
     setMessage({ type: '', text: '' })
     try {
-      const username = form.username.trim().toLowerCase()
-      if (username.length < 3) throw new Error('Usuário precisa ter pelo menos 3 caracteres.')
       if (form.password.length < 6) throw new Error('Senha precisa ter pelo menos 6 caracteres.')
-
       const data = await signUp({
         name: form.name,
-        username,
+        email: form.email,
         password: form.password,
       })
 
-      // Alguns projetos exigem confirmação de e-mail; tentamos logar em seguida
-      let next = data
-      if (!data.access_token) {
-        next = await signIn({ username, password: form.password })
+      if (data.access_token) {
+        const sess = sessionFromAuth(data)
+        saveSession(sess)
+        setSession(sess)
+        setMode('comment')
+        setMessage({ type: 'ok', text: 'Conta criada! Você já pode enviar seu feedback.' })
+      } else {
+        setMessage({
+          type: 'ok',
+          text: 'Conta criada! Confira seu e-mail e clique no link de confirmação. Depois faça login.',
+        })
+        setMode('login')
       }
-
-      const sess = {
-        access_token: next.access_token,
-        user: next.user,
-        username,
-        name: form.name.trim() || username,
-      }
-      saveSession(sess)
-      setSession(sess)
-      setMode('comment')
-      setMessage({ type: 'ok', text: 'Conta criada! Agora você pode deixar seu feedback.' })
       setForm((f) => ({ ...f, password: '' }))
     } catch (err) {
       setMessage({ type: 'err', text: err.message || 'Erro ao criar conta.' })
@@ -99,15 +117,8 @@ export default function Feedback() {
     setBusy(true)
     setMessage({ type: '', text: '' })
     try {
-      const username = form.username.trim().toLowerCase()
-      const data = await signIn({ username, password: form.password })
-      const meta = data.user?.user_metadata || {}
-      const sess = {
-        access_token: data.access_token,
-        user: data.user,
-        username: meta.username || username,
-        name: meta.full_name || username,
-      }
+      const data = await signIn({ email: form.email, password: form.password })
+      const sess = sessionFromAuth(data)
       saveSession(sess)
       setSession(sess)
       setMode('comment')
@@ -147,7 +158,7 @@ export default function Feedback() {
     } catch (err) {
       setMessage({
         type: 'err',
-        text: err.message || 'Erro ao enviar. Confira se a tabela de comentários está configurada no Supabase.',
+        text: err.message || 'Erro ao enviar. Confira se a tabela está configurada no Supabase.',
       })
     } finally {
       setBusy(false)
@@ -175,8 +186,7 @@ export default function Feedback() {
             Deixe seu <span className="text-gradient">feedback</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Comentários de clientes e futuros clientes. Você cria uma conta simples, envia o texto e eu
-            aprovo antes de aparecer aqui.
+            Entre com Google ou e-mail, envie seu comentário e eu aprovo antes de aparecer no site.
           </p>
         </div>
 
@@ -184,7 +194,10 @@ export default function Feedback() {
           {session ? (
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3 text-sm">
               <p className="text-slate-300">
-                Logado como <strong className="text-neon-cyan">@{session.username}</strong>
+                Logado como <strong className="text-neon-cyan">{session.name}</strong>
+                {session.email && (
+                  <span className="ml-2 text-xs text-slate-500">{session.email}</span>
+                )}
               </p>
               <button
                 type="button"
@@ -195,25 +208,59 @@ export default function Feedback() {
               </button>
             </div>
           ) : (
-            <div className="mb-5 flex flex-wrap gap-2 text-sm">
+            <div className="mb-5 space-y-3">
               <button
                 type="button"
-                onClick={() => setMode('login')}
-                className={`rounded-full px-4 py-1.5 font-semibold transition ${
-                  mode === 'login' ? 'bg-neon-cyan/20 text-neon-cyan' : 'text-slate-400 hover:text-white'
-                }`}
+                onClick={() => signInWithGoogle()}
+                className="flex w-full items-center justify-center gap-3 rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
               >
-                Entrar
+                <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                  <path
+                    fill="#EA4335"
+                    d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.9-5.5 3.9-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.7 3.4 14.6 2.5 12 2.5 6.8 2.5 2.5 6.8 2.5 12S6.8 21.5 12 21.5c5.5 0 9.1-3.9 9.1-9.3 0-.6-.1-1.1-.2-1.6H12z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M3.9 7.3l3.2 2.4C8 7.5 9.9 6.2 12 6.2c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.7 3.4 14.6 2.5 12 2.5 8.3 2.5 5.1 4.6 3.9 7.3z"
+                  />
+                  <path
+                    fill="#4A90E2"
+                    d="M12 21.5c2.5 0 4.6-.8 6.1-2.2l-3-2.4c-.8.6-1.9 1-3.1 1-3.1 0-5.7-2.1-6.6-4.9l-3.2 2.5c1.5 3 4.6 5 8.8 5z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.4 13c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9L2.2 6.8C1.6 8.3 1.3 10 1.3 11.8c0 1.8.3 3.5.9 5l3.2-2.5c-.2-.5-.3-1-.3-1.3z"
+                  />
+                </svg>
+                Continuar com Google
               </button>
-              <button
-                type="button"
-                onClick={() => setMode('register')}
-                className={`rounded-full px-4 py-1.5 font-semibold transition ${
-                  mode === 'register' ? 'bg-neon-cyan/20 text-neon-cyan' : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Criar conta
-              </button>
+
+              <div className="flex items-center gap-3 text-xs text-slate-500">
+                <span className="h-px flex-1 bg-white/10" />
+                ou e-mail
+                <span className="h-px flex-1 bg-white/10" />
+              </div>
+
+              <div className="flex flex-wrap gap-2 text-sm">
+                <button
+                  type="button"
+                  onClick={() => setMode('login')}
+                  className={`rounded-full px-4 py-1.5 font-semibold transition ${
+                    mode === 'login' ? 'bg-neon-cyan/20 text-neon-cyan' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Entrar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode('register')}
+                  className={`rounded-full px-4 py-1.5 font-semibold transition ${
+                    mode === 'register' ? 'bg-neon-cyan/20 text-neon-cyan' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Criar conta
+                </button>
+              </div>
             </div>
           )}
 
@@ -247,18 +294,17 @@ export default function Feedback() {
               </div>
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  Usuário (único)
+                  E-mail
                 </label>
                 <input
-                  name="username"
+                  name="email"
+                  type="email"
                   required
-                  value={form.username}
+                  value={form.email}
                   onChange={onChange}
-                  placeholder="ex: joao_dev"
+                  placeholder="voce@email.com"
                   className={inputClass}
-                  autoComplete="username"
-                  pattern="[A-Za-z0-9._-]{3,24}"
-                  title="3 a 24 caracteres: letras, números, . _ -"
+                  autoComplete="email"
                 />
               </div>
               <div>
@@ -282,10 +328,10 @@ export default function Feedback() {
                 disabled={busy}
                 className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60"
               >
-                {busy ? 'Criando…' : 'Criar conta'}
+                {busy ? 'Criando…' : 'Criar conta com e-mail'}
               </button>
               <p className="text-center text-[11px] text-slate-500">
-                A senha é criptografada pelo Supabase. Não guardamos senha em texto puro.
+                Você recebe um e-mail para confirmar a conta. A senha é criptografada pelo Supabase.
               </p>
             </form>
           )}
@@ -294,16 +340,17 @@ export default function Feedback() {
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  Usuário
+                  E-mail
                 </label>
                 <input
-                  name="username"
+                  name="email"
+                  type="email"
                   required
-                  value={form.username}
+                  value={form.email}
                   onChange={onChange}
-                  placeholder="seu_usuario"
+                  placeholder="voce@email.com"
                   className={inputClass}
-                  autoComplete="username"
+                  autoComplete="email"
                 />
               </div>
               <div>
@@ -326,7 +373,7 @@ export default function Feedback() {
                 disabled={busy}
                 className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60"
               >
-                {busy ? 'Entrando…' : 'Entrar'}
+                {busy ? 'Entrando…' : 'Entrar com e-mail'}
               </button>
             </form>
           )}
@@ -362,15 +409,7 @@ export default function Feedback() {
 
           {!session && mode === 'comment' && (
             <p className="text-center text-sm text-slate-400">
-              Para comentar,{' '}
-              <button type="button" className="text-neon-cyan underline" onClick={() => setMode('register')}>
-                crie uma conta
-              </button>{' '}
-              ou{' '}
-              <button type="button" className="text-neon-cyan underline" onClick={() => setMode('login')}>
-                entre
-              </button>
-              .
+              Use <strong className="text-white">Google</strong> ou e-mail para enviar um feedback.
             </p>
           )}
         </div>

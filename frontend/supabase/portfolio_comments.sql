@@ -16,7 +16,6 @@ create index if not exists portfolio_comments_approved_idx
 
 alter table public.portfolio_comments enable row level security;
 
--- Leitura pública só de aprovados
 drop policy if exists "Leitura de comentários aprovados" on public.portfolio_comments;
 create policy "Leitura de comentários aprovados"
   on public.portfolio_comments
@@ -24,7 +23,6 @@ create policy "Leitura de comentários aprovados"
   to anon, authenticated
   using (approved = true);
 
--- Usuário logado pode inserir o próprio comentário (sempre pending)
 drop policy if exists "Inserir comentário autenticado" on public.portfolio_comments;
 create policy "Inserir comentário autenticado"
   on public.portfolio_comments
@@ -35,8 +33,18 @@ create policy "Inserir comentário autenticado"
     and approved = false
   );
 
--- Ninguém atualiza/apaga pelo front (você aprova no painel do Supabase)
--- No Table Editor: mude approved para true nos comentários bons.
+-- Aprovação: Table Editor → portfolio_comments → approved = true
 
--- Auth: desative "Confirm email" em Authentication > Providers > Email
--- se quiser login imediato após criar conta (e-mail sintético @mirandadeveloper.local).
+-- ============================================================
+-- AUTH (painel Supabase)
+-- ============================================================
+-- 1) E-mail: DEIXE "Confirm email" LIGADO (mais seguro).
+-- 2) Google: Authentication → Providers → Google
+--    - Ative Google
+--    - Client ID e Client Secret do Google Cloud Console
+--    - Em Authorized redirect URIs do Google, adicione:
+--      https://SEU_PROJECT.supabase.co/auth/v1/callback
+--    - Em Supabase → URL Configuration → Redirect URLs, adicione:
+--      https://mirandadevelopment.github.io/mirandadeveloper-portafolio/
+-- 3) Telefone/SMS: Authentication → Providers → Phone
+--    - Exige Twilio (ou outro) com custo por SMS — opcional depois.
