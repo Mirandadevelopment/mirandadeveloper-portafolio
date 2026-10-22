@@ -25,11 +25,26 @@ function formatDate(iso) {
   }
 }
 
+/** Senha com mínimo 8 caracteres, letra e número. */
+function validatePassword(password) {
+  if (password.length < 8) return 'A senha precisa ter pelo menos 8 caracteres.'
+  if (!/[A-Za-z]/.test(password)) return 'A senha precisa ter pelo menos uma letra.'
+  if (!/[0-9]/.test(password)) return 'A senha precisa ter pelo menos um número.'
+  return null
+}
+
+function sanitizeComment(text) {
+  return String(text || '')
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+    .trim()
+    .slice(0, 2000)
+}
+
 export default function Feedback() {
   const [session, setSession] = useState(null)
   const [comments, setComments] = useState([])
   const [loadingComments, setLoadingComments] = useState(true)
-  const [mode, setMode] = useState('comment') // comment | login | register
+  const [mode, setMode] = useState('comment')
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -41,7 +56,6 @@ export default function Feedback() {
 
   useEffect(() => {
     const boot = async () => {
-      // Retorno do Google OAuth
       const oauth = parseOAuthHash()
       if (oauth?.access_token) {
         try {
@@ -50,8 +64,7 @@ export default function Feedback() {
           saveSession(sess)
           setSession(sess)
           setMode('comment')
-          setMessage({ type: 'ok', text: 'Login com Google feito com sucesso.' })
-          // Limpa o hash da URL
+          setMessage({ type: 'ok', text: 'Login com Google concluído com segurança.' })
           window.history.replaceState(null, '', window.location.pathname + window.location.search)
         } catch {
           setMessage({ type: 'err', text: 'Não foi possível concluir o login com Google.' })
@@ -84,10 +97,12 @@ export default function Feedback() {
     setBusy(true)
     setMessage({ type: '', text: '' })
     try {
-      if (form.password.length < 6) throw new Error('Senha precisa ter pelo menos 6 caracteres.')
+      const pwdError = validatePassword(form.password)
+      if (pwdError) throw new Error(pwdError)
+
       const data = await signUp({
-        name: form.name,
-        email: form.email,
+        name: form.name.trim().slice(0, 80),
+        email: form.email.trim().toLowerCase(),
         password: form.password,
       })
 
@@ -96,11 +111,11 @@ export default function Feedback() {
         saveSession(sess)
         setSession(sess)
         setMode('comment')
-        setMessage({ type: 'ok', text: 'Conta criada! Você já pode enviar seu feedback.' })
+        setMessage({ type: 'ok', text: 'Conta criada. Você já pode enviar seu feedback.' })
       } else {
         setMessage({
           type: 'ok',
-          text: 'Conta criada! Confira seu e-mail e clique no link de confirmação. Depois faça login.',
+          text: 'Conta criada. Abra o e-mail de confirmação e, em seguida, faça login.',
         })
         setMode('login')
       }
@@ -117,15 +132,21 @@ export default function Feedback() {
     setBusy(true)
     setMessage({ type: '', text: '' })
     try {
-      const data = await signIn({ email: form.email, password: form.password })
+      const data = await signIn({
+        email: form.email.trim().toLowerCase(),
+        password: form.password,
+      })
       const sess = sessionFromAuth(data)
       saveSession(sess)
       setSession(sess)
       setMode('comment')
-      setMessage({ type: 'ok', text: 'Login feito com sucesso.' })
+      setMessage({ type: 'ok', text: 'Login realizado com sucesso.' })
       setForm((f) => ({ ...f, password: '' }))
     } catch (err) {
-      setMessage({ type: 'err', text: err.message || 'Erro ao entrar.' })
+      setMessage({
+        type: 'err',
+        text: err.message || 'E-mail ou senha incorretos. Se acabou de se cadastrar, confirme o e-mail primeiro.',
+      })
     } finally {
       setBusy(false)
     }
@@ -141,24 +162,25 @@ export default function Feedback() {
     setBusy(true)
     setMessage({ type: '', text: '' })
     try {
-      if (form.content.trim().length < 5) {
+      const content = sanitizeComment(form.content)
+      if (content.length < 5) {
         throw new Error('Escreva pelo menos algumas palavras no feedback.')
       }
       await submitComment({
         accessToken: session.access_token,
-        authorName: session.name,
-        username: session.username,
-        content: form.content,
+        authorName: String(session.name || 'Cliente').slice(0, 80),
+        username: String(session.username || 'user').slice(0, 24),
+        content,
       })
       setForm((f) => ({ ...f, content: '' }))
       setMessage({
         type: 'ok',
-        text: 'Feedback enviado! Ele fica visível no site depois que eu aprovar.',
+        text: 'Feedback enviado. Ele só fica público depois da aprovação.',
       })
     } catch (err) {
       setMessage({
         type: 'err',
-        text: err.message || 'Erro ao enviar. Confira se a tabela está configurada no Supabase.',
+        text: err.message || 'Erro ao enviar. Verifique a configuração no Supabase.',
       })
     } finally {
       setBusy(false)
@@ -168,7 +190,7 @@ export default function Feedback() {
   const logout = () => {
     clearSession()
     setSession(null)
-    setMessage({ type: 'ok', text: 'Você saiu da conta.' })
+    setMessage({ type: 'ok', text: 'Sessão encerrada.' })
   }
 
   const inputClass =
@@ -186,7 +208,8 @@ export default function Feedback() {
             Deixe seu <span className="text-gradient">feedback</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Entre com Google ou e-mail, envie seu comentário e eu aprovo antes de aparecer no site.
+            Acesso com Google ou e-mail verificado. Comentários passam por aprovação antes de
+            aparecerem no site.
           </p>
         </div>
 
@@ -194,7 +217,7 @@ export default function Feedback() {
           {session ? (
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3 text-sm">
               <p className="text-slate-300">
-                Logado como <strong className="text-neon-cyan">{session.name}</strong>
+                Conectado como <strong className="text-neon-cyan">{session.name}</strong>
                 {session.email && (
                   <span className="ml-2 text-xs text-slate-500">{session.email}</span>
                 )}
@@ -237,7 +260,7 @@ export default function Feedback() {
 
               <div className="flex items-center gap-3 text-xs text-slate-500">
                 <span className="h-px flex-1 bg-white/10" />
-                ou e-mail
+                ou e-mail verificado
                 <span className="h-px flex-1 bg-white/10" />
               </div>
 
@@ -266,6 +289,7 @@ export default function Feedback() {
 
           {message.text && (
             <div
+              role="status"
               className={`mb-4 rounded-lg px-4 py-3 text-sm ${
                 message.type === 'ok'
                   ? 'border border-emerald-400/30 bg-emerald-400/10 text-emerald-300'
@@ -277,7 +301,7 @@ export default function Feedback() {
           )}
 
           {!session && mode === 'register' && (
-            <form onSubmit={handleRegister} className="space-y-4">
+            <form onSubmit={handleRegister} className="space-y-4" autoComplete="on">
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Nome
@@ -285,6 +309,7 @@ export default function Feedback() {
                 <input
                   name="name"
                   required
+                  maxLength={80}
                   value={form.name}
                   onChange={onChange}
                   placeholder="Seu nome"
@@ -315,10 +340,10 @@ export default function Feedback() {
                   name="password"
                   type="password"
                   required
-                  minLength={6}
+                  minLength={8}
                   value={form.password}
                   onChange={onChange}
-                  placeholder="Mínimo 6 caracteres"
+                  placeholder="Mínimo 8 caracteres, com letra e número"
                   className={inputClass}
                   autoComplete="new-password"
                 />
@@ -330,14 +355,16 @@ export default function Feedback() {
               >
                 {busy ? 'Criando…' : 'Criar conta com e-mail'}
               </button>
-              <p className="text-center text-[11px] text-slate-500">
-                Você recebe um e-mail para confirmar a conta. A senha é criptografada pelo Supabase.
-              </p>
+              <ul className="space-y-1 text-center text-[11px] text-slate-500">
+                <li>Confirmação por e-mail obrigatória</li>
+                <li>Senha armazenada com criptografia (Supabase Auth)</li>
+                <li>Comentários só ficam públicos após aprovação</li>
+              </ul>
             </form>
           )}
 
           {!session && mode === 'login' && (
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-4" autoComplete="on">
               <div>
                 <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   E-mail
@@ -388,9 +415,10 @@ export default function Feedback() {
                   name="content"
                   required
                   rows={4}
+                  maxLength={2000}
                   value={form.content}
                   onChange={onChange}
-                  placeholder="Conte como foi trabalhar comigo ou o que espera do projeto…"
+                  placeholder="Conte como foi a experiência ou o que espera do projeto…"
                   className={`${inputClass} resize-none`}
                 />
               </div>
@@ -402,14 +430,14 @@ export default function Feedback() {
                 {busy ? 'Enviando…' : 'Enviar feedback'}
               </button>
               <p className="text-center text-[11px] text-slate-500">
-                Seu comentário só aparece no site depois da minha aprovação.
+                Moderação ativa: o texto só aparece no site depois da aprovação.
               </p>
             </form>
           )}
 
           {!session && mode === 'comment' && (
             <p className="text-center text-sm text-slate-400">
-              Use <strong className="text-white">Google</strong> ou e-mail para enviar um feedback.
+              Use <strong className="text-white">Google</strong> ou e-mail verificado para enviar um feedback.
             </p>
           )}
         </div>
