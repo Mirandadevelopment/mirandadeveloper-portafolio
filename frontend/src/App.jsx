@@ -22,7 +22,7 @@ import FAQ from './components/FAQ.jsx'
 import SystemSection from './components/SystemSection.jsx'
 import Timeline from './components/Timeline.jsx'
 import Testimonials from './components/Testimonials.jsx'
-import LikeCTA from './components/LikeCTA.jsx'
+import Feedback from './components/Feedback.jsx'
 import CodeDivider from './components/CodeDivider.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
@@ -140,7 +140,6 @@ export default function App() {
       <div className="scanlines" aria-hidden="true" />
       <CustomCursor />
       <ParticleBackground />
-      {/* Chuva Matrix em todo o site */}
       <CodeRain global opacity={0.22} speed={0.85} />
       <Navbar />
       <main id="conteudo" className="relative z-10">
@@ -158,7 +157,7 @@ export default function App() {
         <Timeline />
         <Testimonials />
         <CodeDivider label="módulo: feedback" />
-        <LikeCTA />
+        <Feedback />
         <Contact />
       </main>
       <Footer />
