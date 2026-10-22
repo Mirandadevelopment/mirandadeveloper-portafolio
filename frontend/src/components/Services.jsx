@@ -293,7 +293,7 @@ export default function Services() {
               </Magnetic>
 
               <p className="mt-3 text-center text-[11px] text-slate-500">
-                Abre o WhatsApp com a seleção pronta · {site.phone2}
+                Abre o WhatsApp com a seleção pronta · {site.phone}
               </p>
             </div>
           </aside>
