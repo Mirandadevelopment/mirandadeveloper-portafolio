@@ -18,7 +18,6 @@ import Portfolio from './components/Portfolio.jsx'
 import Services from './components/Services.jsx'
 import Process from './components/Process.jsx'
 import FAQ from './components/FAQ.jsx'
-import Differentials from './components/Differentials.jsx'
 import SystemSection from './components/SystemSection.jsx'
 import Timeline from './components/Timeline.jsx'
 import Testimonials from './components/Testimonials.jsx'
@@ -152,7 +151,6 @@ export default function App() {
         <Services />
         <Process />
         <FAQ />
-        <Differentials />
         <SystemSection />
         <Timeline />
         <Testimonials />

@@ -3,168 +3,254 @@ import { site } from '../config/site.js'
 import Magnetic from './Magnetic.jsx'
 
 /**
- * Preços competitivos + planos Dev Fixo FiveM (mensal).
- * Valores de referência — negociamos com humildade para caber no bolso do cliente.
+ * Orçamento organizado por tipo de programação.
+ * Clique na categoria para ver o que pode ser feito nela.
  */
-const services = [
+const categories = [
   {
-    id: 'fivem-dev-fixo',
-    category: 'Dev Fixo',
-    title: 'Dev Fixo FiveM (mensal)',
-    description:
-      'Manutenção da cidade, estabilidade dos sistemas, instalações, atualizações e suporte contínuo. Compromisso com o funcionamento dos sistemas da base.',
-    price: 500,
-    period: '/mês',
-    highlight: true,
+    id: 'dev-fixo',
+    title: 'Dev Fixo FiveM',
+    subtitle: 'Manutenção mensal da cidade',
+    accent: 'emerald',
+    items: [
+      {
+        id: 'fivem-dev-fixo',
+        title: 'Dev Fixo FiveM (mensal)',
+        description: 'Manutenção da cidade, estabilidade dos sistemas, instalações, atualizações e suporte contínuo.',
+        price: 500,
+        period: '/mês',
+      },
+      {
+        id: 'fivem-dev-fixo-plus',
+        title: 'Dev Fixo FiveM Plus (mensal)',
+        description: 'Plano mensal com prioridade, mais horas e criação de scripts sob demanda no mês.',
+        price: 900,
+        period: '/mês',
+      },
+      {
+        id: 'fivem-manutencao-pontual',
+        title: 'Manutenção pontual da cidade',
+        description: 'Diagnóstico, correção de bugs e estabilização sem contrato mensal.',
+        price: 500,
+        period: '',
+      },
+    ],
   },
   {
-    id: 'fivem-dev-fixo-plus',
-    category: 'Dev Fixo',
-    title: 'Dev Fixo FiveM Plus (mensal)',
-    description:
-      'Tudo do plano mensal + prioridade no atendimento, mais horas de desenvolvimento e criação de scripts sob demanda dentro do mês.',
-    price: 900,
-    period: '/mês',
-    highlight: true,
+    id: 'fivem',
+    title: 'FiveM / Lua',
+    subtitle: 'Scripts, otimização e recursos da cidade',
+    accent: 'cyan',
+    items: [
+      {
+        id: 'fivem-script-avulso',
+        title: 'Criação de script FiveM',
+        description: 'Jobs, inventário, economia, HUD e sistemas sob medida (QBcore/Creative).',
+        price: 500,
+        period: '',
+      },
+      {
+        id: 'fivem-instalacao',
+        title: 'Instalação e atualização de scripts',
+        description: 'Instalação, configuração e atualização de recursos com testes de estabilidade.',
+        price: 500,
+        period: '',
+      },
+      {
+        id: 'script-fivem',
+        title: 'Script FiveM customizado (completo)',
+        description: 'Sistema mais robusto de inventário, economia ou jobs exclusivos.',
+        price: 1800,
+        period: '',
+      },
+      {
+        id: 'otimizacao-fivem',
+        title: 'Otimização de base FiveM',
+        description: 'Redução de ms/tick, limpeza de recursos e estabilidade em servidores grandes.',
+        price: 1400,
+        period: '',
+      },
+    ],
   },
   {
-    id: 'fivem-script-avulso',
-    category: 'Dev Fixo',
-    title: 'Criação de script FiveM (avulso)',
-    description:
-      'Script sob medida (jobs, inventário, economia, HUD, etc.). Valor de entrada acessível — escopo define o total final.',
-    price: 500,
-    period: '',
+    id: 'python',
+    title: 'Python',
+    subtitle: 'Automação, bots e scripts de dados',
+    accent: 'yellow',
+    items: [
+      {
+        id: 'python-automacao',
+        title: 'Automação com Python',
+        description: 'Scripts para automatizar tarefas, planilhas, relatórios e fluxos operacionais.',
+        price: 1200,
+        period: '',
+      },
+      {
+        id: 'python-bot',
+        title: 'Bot / integração em Python',
+        description: 'Bots de monitoramento, integração com APIs e automações sob medida.',
+        price: 1500,
+        period: '',
+      },
+      {
+        id: 'python-dados',
+        title: 'Scripts de dados e relatórios',
+        description: 'Tratamento de dados, geração de relatórios e apoio a decisões operacionais.',
+        price: 1400,
+        period: '',
+      },
+    ],
   },
   {
-    id: 'fivem-instalacao',
-    category: 'Dev Fixo',
-    title: 'Instalação e atualização de scripts',
-    description:
-      'Instalação, configuração e atualização de recursos da cidade, com testes de estabilidade.',
-    price: 500,
-    period: '',
+    id: 'javascript',
+    title: 'JavaScript / Node.js',
+    subtitle: 'APIs, backends e automações',
+    accent: 'lime',
+    items: [
+      {
+        id: 'api-backend',
+        title: 'API REST / Backend Node.js',
+        description: 'API escalável com autenticação, banco de dados e documentação.',
+        price: 4500,
+        period: '',
+      },
+      {
+        id: 'automacao-node',
+        title: 'Automação com Node.js',
+        description: 'Fluxos automatizados, integrações e scripts de alta performance.',
+        price: 1800,
+        period: '',
+      },
+      {
+        id: 'whatsapp-integracao',
+        title: 'Integração WhatsApp Business',
+        description: 'Fluxos automatizados, notificações e atendimento via WhatsApp.',
+        price: 1200,
+        period: '',
+      },
+    ],
   },
   {
-    id: 'fivem-manutencao-pontual',
-    category: 'Dev Fixo',
-    title: 'Manutenção pontual da cidade',
-    description:
-      'Diagnóstico, correção de bugs, limpeza de recursos e estabilização sem contrato mensal.',
-    price: 500,
-    period: '',
+    id: 'web',
+    title: 'Web / React',
+    subtitle: 'Sites, landing pages e lojas',
+    accent: 'purple',
+    items: [
+      {
+        id: 'landing',
+        title: 'Landing Page profissional',
+        description: 'Página de alta conversão, responsiva, animada e otimizada para SEO.',
+        price: 1500,
+        period: '',
+      },
+      {
+        id: 'site-institucional',
+        title: 'Site institucional (até 5 páginas)',
+        description: 'Site completo com seções, formulário de contato e design personalizado.',
+        price: 3200,
+        period: '',
+      },
+      {
+        id: 'ecommerce',
+        title: 'E-commerce básico',
+        description: 'Loja online com catálogo, carrinho e integração de pagamento.',
+        price: 8500,
+        period: '',
+      },
+      {
+        id: 'dashboard',
+        title: 'Dashboard / painel web',
+        description: 'Painel administrativo com relatórios, gráficos e controle de usuários.',
+        price: 5500,
+        period: '',
+      },
+    ],
   },
   {
-    id: 'landing',
-    category: 'Web',
-    title: 'Landing Page profissional',
-    description: 'Página de alta conversão, responsiva, animada e otimizada para SEO.',
-    price: 1500,
-    period: '',
+    id: 'discord',
+    title: 'Discord / Bots',
+    subtitle: 'Tickets, whitelist e comunidade',
+    accent: 'indigo',
+    items: [
+      {
+        id: 'bot-discord-basico',
+        title: 'Bot Discord (tickets + whitelist)',
+        description: 'Bot de tickets, whitelist automatizada e moderação essencial.',
+        price: 1000,
+        period: '',
+      },
+      {
+        id: 'bot-discord-avancado',
+        title: 'Bot Discord avançado',
+        description: 'Dashboard, níveis, integração com APIs e automação completa.',
+        price: 2200,
+        period: '',
+      },
+    ],
   },
   {
-    id: 'site-institucional',
-    category: 'Web',
-    title: 'Site institucional (até 5 páginas)',
-    description: 'Site completo com seções, formulário de contato e design personalizado.',
-    price: 3200,
-    period: '',
-  },
-  {
-    id: 'ecommerce',
-    category: 'Web',
-    title: 'E-commerce básico',
-    description: 'Loja online com catálogo, carrinho e integração de pagamento.',
-    price: 8500,
-    period: '',
-  },
-  {
-    id: 'bot-discord-basico',
-    category: 'Bots',
-    title: 'Bot Discord (tickets + whitelist)',
-    description: 'Bot de tickets, whitelist automatizada e moderação essencial.',
-    price: 1000,
-    period: '',
-  },
-  {
-    id: 'bot-discord-avancado',
-    category: 'Bots',
-    title: 'Bot Discord avançado',
-    description: 'Dashboard, níveis, integração com APIs e automação completa.',
-    price: 2200,
-    period: '',
-  },
-  {
-    id: 'script-fivem',
-    category: 'FiveM',
-    title: 'Script FiveM customizado',
-    description: 'Sistemas de inventário, economia, jobs ou recursos exclusivos (QBcore/Creative).',
-    price: 1800,
-    period: '',
-  },
-  {
-    id: 'otimizacao-fivem',
-    category: 'FiveM',
-    title: 'Otimização de base FiveM',
-    description: 'Redução de ms/tick, limpeza de recursos e estabilidade em servidores grandes.',
-    price: 1400,
-    period: '',
-  },
-  {
-    id: 'api-backend',
-    category: 'Backend',
-    title: 'API REST / Backend Node.js',
-    description: 'API escalável com autenticação, banco de dados e documentação.',
-    price: 4500,
-    period: '',
-  },
-  {
-    id: 'dashboard',
-    category: 'Sistemas',
-    title: 'Dashboard / Sistema de gestão',
-    description: 'Painel administrativo com relatórios, gráficos e controle de usuários.',
-    price: 5500,
-    period: '',
-  },
-  {
-    id: 'automacao',
-    category: 'Automação',
-    title: 'Automação de processos',
-    description: 'Scripts em Node.js ou Python para otimizar fluxos operacionais e dados.',
-    price: 1800,
-    period: '',
-  },
-  {
-    id: 'estoque-logistica',
-    category: 'Sistemas',
-    title: 'Sistema de estoque / logística',
-    description: 'Controle de materiais, compras, inventário e relatórios de almoxarifado.',
-    price: 6500,
-    period: '',
-  },
-  {
-    id: 'whatsapp-integracao',
-    category: 'Integração',
-    title: 'Integração WhatsApp Business',
-    description: 'Fluxos automatizados, notificações e atendimento via WhatsApp.',
-    price: 1200,
-    period: '',
-  },
-  {
-    id: 'consultoria',
-    category: 'Consultoria',
-    title: 'Consultoria técnica (pacote 5h)',
-    description: 'Diagnóstico de infraestrutura, código, performance e arquitetura.',
-    price: 650,
-    period: '',
+    id: 'sistemas',
+    title: 'Sistemas e logística',
+    subtitle: 'Estoque, gestão e consultoria',
+    accent: 'blue',
+    items: [
+      {
+        id: 'estoque-logistica',
+        title: 'Sistema de estoque / logística',
+        description: 'Controle de materiais, compras, inventário e relatórios de almoxarifado.',
+        price: 6500,
+        period: '',
+      },
+      {
+        id: 'consultoria',
+        title: 'Consultoria técnica (pacote 5h)',
+        description: 'Diagnóstico de infraestrutura, código, performance e arquitetura.',
+        price: 650,
+        period: '',
+      },
+    ],
   },
 ]
 
-const categoryOrder = ['Dev Fixo', 'FiveM', 'Web', 'Bots', 'Backend', 'Sistemas', 'Automação', 'Integração', 'Consultoria']
-const categories = [
-  'Todos',
-  ...categoryOrder.filter((c) => services.some((s) => s.category === c)),
-]
+const allItems = categories.flatMap((c) => c.items.map((item) => ({ ...item, categoryId: c.id, categoryTitle: c.title })))
+
+const accentMap = {
+  emerald: {
+    badge: 'bg-emerald-400/15 text-emerald-400',
+    ring: 'ring-emerald-400/40',
+    border: 'hover:border-emerald-400/40',
+  },
+  cyan: {
+    badge: 'bg-neon-cyan/15 text-neon-cyan',
+    ring: 'ring-neon-cyan/40',
+    border: 'hover:border-neon-cyan/40',
+  },
+  yellow: {
+    badge: 'bg-yellow-400/15 text-yellow-300',
+    ring: 'ring-yellow-400/40',
+    border: 'hover:border-yellow-400/40',
+  },
+  lime: {
+    badge: 'bg-lime-400/15 text-lime-300',
+    ring: 'ring-lime-400/40',
+    border: 'hover:border-lime-400/40',
+  },
+  purple: {
+    badge: 'bg-neon-purple/15 text-neon-purple',
+    ring: 'ring-neon-purple/40',
+    border: 'hover:border-neon-purple/40',
+  },
+  indigo: {
+    badge: 'bg-indigo-400/15 text-indigo-300',
+    ring: 'ring-indigo-400/40',
+    border: 'hover:border-indigo-400/40',
+  },
+  blue: {
+    badge: 'bg-neon-blue/15 text-neon-blue',
+    ring: 'ring-neon-blue/40',
+    border: 'hover:border-neon-blue/40',
+  },
+}
 
 function formatBRL(value) {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -175,13 +261,11 @@ function priceLabel(s) {
 }
 
 export default function Services() {
+  const [openCat, setOpenCat] = useState('dev-fixo')
   const [selected, setSelected] = useState(() => new Set())
-  const [filter, setFilter] = useState('Todos')
   const [clientName, setClientName] = useState('')
 
-  const visible = filter === 'Todos' ? services : services.filter((s) => s.category === filter)
-
-  const toggle = (id) => {
+  const toggleItem = (id) => {
     setSelected((prev) => {
       const next = new Set(prev)
       if (next.has(id)) next.delete(id)
@@ -191,7 +275,7 @@ export default function Services() {
   }
 
   const selectedList = useMemo(
-    () => services.filter((s) => selected.has(s.id)),
+    () => allItems.filter((s) => selected.has(s.id)),
     [selected],
   )
 
@@ -203,12 +287,12 @@ export default function Services() {
   const hasMonthly = selectedList.some((s) => s.period === '/mês')
 
   const buildWhatsAppUrl = () => {
-    const lines = selectedList.map((s) => `• ${s.title}: ${priceLabel(s)}`)
+    const lines = selectedList.map((s) => `• [${s.categoryTitle}] ${s.title}: ${priceLabel(s)}`)
     const namePart = clientName.trim() ? `Nome: ${clientName.trim()}\n\n` : ''
     const totalLine = hasMonthly
       ? `*Total estimado: ${formatBRL(total)}* (itens mensais se aplicam por mês)`
       : `*Total estimado: ${formatBRL(total)}*`
-    const text = `Olá Allan! Fiz um orçamento no seu portfólio:\n\n${namePart}${lines.join('\n')}\n\n${totalLine}\n\nGostaria de conversar sobre esses serviços. Se precisar, podemos negociar para caber no meu orçamento.`
+    const text = `Olá Allan! Fiz um orçamento no site mirandadeveloper:\n\n${namePart}${lines.join('\n')}\n\n${totalLine}\n\nGostaria de conversar. Se precisar, podemos negociar para caber no meu orçamento.`
     return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
   }
 
@@ -217,92 +301,114 @@ export default function Services() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-12 text-center" data-reveal>
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-cyan uppercase">
-            Serviços & Orçamento
+            Serviços e orçamento
           </span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Monte seu <span className="text-gradient">orçamento</span>
+            Escolha o tipo de <span className="text-gradient">programação</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Inclui <strong className="text-slate-300">Dev Fixo FiveM a partir de R$ 500/mês</strong> —
-            manutenção, instalações, atualizações e criação de scripts. Valores de referência;
-            negociamos com transparência para caber no seu bolso.
+            Clique em uma área (FiveM, Python, Web…) para ver o que posso criar.
+            Marque os itens, veja o total e envie no WhatsApp. Valores de referência — negociamos com transparência.
           </p>
         </div>
 
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
-          {categories.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => setFilter(c)}
-              aria-pressed={filter === c}
-              className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-neon-cyan ${
-                filter === c
-                  ? 'bg-gradient-to-r from-neon-cyan to-neon-purple text-night-950 shadow-lg shadow-neon-purple/30'
-                  : 'glass text-slate-300 hover:text-neon-cyan hover:glow-cyan'
-              }`}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-
         <div className="grid gap-8 lg:grid-cols-5">
-          <div className="lg:col-span-3" data-reveal-group>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {visible.map((s) => {
-                const isOn = selected.has(s.id)
-                return (
+          <div className="space-y-4 lg:col-span-3" data-reveal-group>
+            {categories.map((cat) => {
+              const isOpen = openCat === cat.id
+              const accent = accentMap[cat.accent] || accentMap.cyan
+              const selectedInCat = cat.items.filter((i) => selected.has(i.id)).length
+
+              return (
+                <div
+                  key={cat.id}
+                  data-reveal-child
+                  className={`glass neon-border overflow-hidden rounded-2xl transition-all duration-300 ${
+                    isOpen ? `ring-1 ${accent.ring}` : accent.border
+                  }`}
+                >
                   <button
-                    key={s.id}
                     type="button"
-                    data-reveal-child
-                    onClick={() => toggle(s.id)}
-                    aria-pressed={isOn}
-                    className={`glass neon-border group relative rounded-2xl p-5 text-left transition-all duration-300 hover:-translate-y-1 ${
-                      isOn
-                        ? 'ring-2 ring-neon-cyan/70 bg-neon-cyan/5 glow-cyan'
-                        : s.highlight
-                          ? 'ring-1 ring-emerald-400/30 hover:border-emerald-400/40'
-                          : 'hover:border-neon-cyan/40'
+                    onClick={() => setOpenCat(isOpen ? null : cat.id)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-center gap-4 p-5 text-left transition-colors hover:bg-white/[0.03]"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase ${accent.badge}`}>
+                          {cat.title}
+                        </span>
+                        {selectedInCat > 0 && (
+                          <span className="rounded-full bg-neon-cyan/15 px-2 py-0.5 text-[10px] font-semibold text-neon-cyan">
+                            {selectedInCat} selecionado{selectedInCat > 1 ? 's' : ''}
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1 text-sm text-slate-400">{cat.subtitle}</p>
+                    </div>
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-lg transition-all ${
+                        isOpen
+                          ? 'rotate-45 border-neon-cyan bg-neon-cyan/10 text-neon-cyan'
+                          : 'border-slate-600 text-slate-400'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </button>
+
+                  <div
+                    className={`grid transition-all duration-300 ${
+                      isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <span
-                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase ${
-                            s.category === 'Dev Fixo'
-                              ? 'bg-emerald-400/15 text-emerald-400'
-                              : 'bg-neon-purple/15 text-neon-purple'
-                          }`}
-                        >
-                          {s.category}
-                        </span>
-                        <h3 className="font-display mt-2 text-base font-bold text-white group-hover:text-neon-cyan">
-                          {s.title}
-                        </h3>
+                    <div className="overflow-hidden">
+                      <div className="space-y-3 border-t border-night-700 px-5 pb-5 pt-4">
+                        {cat.items.map((item) => {
+                          const isOn = selected.has(item.id)
+                          return (
+                            <button
+                              key={item.id}
+                              type="button"
+                              onClick={() => toggleItem(item.id)}
+                              aria-pressed={isOn}
+                              className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-all ${
+                                isOn
+                                  ? 'border-neon-cyan/50 bg-neon-cyan/10'
+                                  : 'border-night-700 bg-night-900/40 hover:border-neon-cyan/30'
+                              }`}
+                            >
+                              <span
+                                className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-all ${
+                                  isOn
+                                    ? 'border-neon-cyan bg-neon-cyan text-night-950'
+                                    : 'border-slate-600 text-transparent'
+                                }`}
+                                aria-hidden="true"
+                              >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="h-3 w-3">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                              </span>
+                              <div className="min-w-0 flex-1">
+                                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                                  <h4 className="font-display text-sm font-bold text-white">{item.title}</h4>
+                                  <span className="shrink-0 font-mono text-sm font-semibold text-neon-cyan">
+                                    a partir de {priceLabel(item)}
+                                  </span>
+                                </div>
+                                <p className="mt-1 text-sm leading-relaxed text-slate-400">{item.description}</p>
+                              </div>
+                            </button>
+                          )
+                        })}
                       </div>
-                      <span
-                        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-all ${
-                          isOn
-                            ? 'border-neon-cyan bg-neon-cyan text-night-950'
-                            : 'border-slate-600 text-transparent'
-                        }`}
-                        aria-hidden="true"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="h-3.5 w-3.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{s.description}</p>
-                    <div className="mt-4 font-display text-lg font-bold text-gradient">
-                      a partir de {priceLabel(s)}
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
           <aside className="lg:col-span-2" data-reveal-right>
@@ -329,7 +435,7 @@ export default function Services() {
               <ul className="mt-5 max-h-56 space-y-2 overflow-y-auto pr-1">
                 {selectedList.length === 0 && (
                   <li className="rounded-lg border border-dashed border-night-700 px-3 py-6 text-center text-sm text-slate-500">
-                    Nenhum serviço selecionado ainda.
+                    Abra uma categoria e marque o que precisa.
                   </li>
                 )}
                 {selectedList.map((s) => (
@@ -337,7 +443,10 @@ export default function Services() {
                     key={s.id}
                     className="flex items-start justify-between gap-3 rounded-lg bg-night-800/50 px-3 py-2.5 text-sm"
                   >
-                    <span className="text-slate-200">{s.title}</span>
+                    <span className="text-slate-200">
+                      <span className="block text-[10px] uppercase tracking-wider text-slate-500">{s.categoryTitle}</span>
+                      {s.title}
+                    </span>
                     <span className="shrink-0 font-mono text-neon-cyan">{priceLabel(s)}</span>
                   </li>
                 ))}
@@ -351,9 +460,7 @@ export default function Services() {
                   </span>
                 </div>
                 {hasMonthly && (
-                  <p className="mt-1 text-right text-[11px] text-slate-500">
-                    Inclui item(ns) mensal(is)
-                  </p>
+                  <p className="mt-1 text-right text-[11px] text-slate-500">Inclui item(ns) mensal(is)</p>
                 )}
               </div>
 

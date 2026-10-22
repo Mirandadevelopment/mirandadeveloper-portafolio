@@ -15,7 +15,7 @@ export default function LikeCTA() {
           Gostou do que <span className="text-gradient">viu?</span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-slate-400">
-          Cada curtida conta como uma validação de missão. Deixe sua marca e ajude a calibrar este sistema.
+          Deixe um coração se o site te agradou — ou um joinha para baixo se algo não encaixou. Ajuda a calibrar o que melhorar.
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-6">
