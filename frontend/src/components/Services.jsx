@@ -3,8 +3,10 @@ import { site } from '../config/site.js'
 import Magnetic from './Magnetic.jsx'
 
 /**
- * Orçamento organizado por tipo de programação.
- * Clique na categoria para ver o que pode ser feito nela.
+ * Preços de entrada acessíveis (mercado BR 2025/2026):
+ * Fiverr FiveM a partir de ~R$55–R$270; bots Discord R$30–R$350;
+ * landing freelancer R$800–R$1.500; host BR hora técnica ~R$60.
+ * Valores “a partir de” — negociáveis conforme escopo.
  */
 const categories = [
   {
@@ -17,21 +19,21 @@ const categories = [
         id: 'fivem-dev-fixo',
         title: 'Dev Fixo FiveM (mensal)',
         description: 'Manutenção da cidade, estabilidade dos sistemas, instalações, atualizações e suporte contínuo.',
-        price: 500,
+        price: 350,
         period: '/mês',
       },
       {
         id: 'fivem-dev-fixo-plus',
         title: 'Dev Fixo FiveM Plus (mensal)',
         description: 'Plano mensal com prioridade, mais horas e criação de scripts sob demanda no mês.',
-        price: 900,
+        price: 650,
         period: '/mês',
       },
       {
         id: 'fivem-manutencao-pontual',
         title: 'Manutenção pontual da cidade',
         description: 'Diagnóstico, correção de bugs e estabilização sem contrato mensal.',
-        price: 500,
+        price: 250,
         period: '',
       },
     ],
@@ -46,28 +48,28 @@ const categories = [
         id: 'fivem-script-avulso',
         title: 'Criação de script FiveM',
         description: 'Jobs, inventário, economia, HUD e sistemas sob medida (QBcore/Creative).',
-        price: 500,
+        price: 280,
         period: '',
       },
       {
         id: 'fivem-instalacao',
         title: 'Instalação e atualização de scripts',
         description: 'Instalação, configuração e atualização de recursos com testes de estabilidade.',
-        price: 500,
+        price: 150,
         period: '',
       },
       {
         id: 'script-fivem',
         title: 'Script FiveM customizado (completo)',
         description: 'Sistema mais robusto de inventário, economia ou jobs exclusivos.',
-        price: 1800,
+        price: 850,
         period: '',
       },
       {
         id: 'otimizacao-fivem',
         title: 'Otimização de base FiveM',
         description: 'Redução de ms/tick, limpeza de recursos e estabilidade em servidores grandes.',
-        price: 1400,
+        price: 550,
         period: '',
       },
     ],
@@ -82,21 +84,21 @@ const categories = [
         id: 'python-automacao',
         title: 'Automação com Python',
         description: 'Scripts para automatizar tarefas, planilhas, relatórios e fluxos operacionais.',
-        price: 1200,
+        price: 450,
         period: '',
       },
       {
         id: 'python-bot',
         title: 'Bot / integração em Python',
         description: 'Bots de monitoramento, integração com APIs e automações sob medida.',
-        price: 1500,
+        price: 550,
         period: '',
       },
       {
         id: 'python-dados',
         title: 'Scripts de dados e relatórios',
         description: 'Tratamento de dados, geração de relatórios e apoio a decisões operacionais.',
-        price: 1400,
+        price: 500,
         period: '',
       },
     ],
@@ -111,21 +113,21 @@ const categories = [
         id: 'api-backend',
         title: 'API REST / Backend Node.js',
         description: 'API escalável com autenticação, banco de dados e documentação.',
-        price: 4500,
+        price: 1800,
         period: '',
       },
       {
         id: 'automacao-node',
         title: 'Automação com Node.js',
         description: 'Fluxos automatizados, integrações e scripts de alta performance.',
-        price: 1800,
+        price: 650,
         period: '',
       },
       {
         id: 'whatsapp-integracao',
         title: 'Integração WhatsApp Business',
         description: 'Fluxos automatizados, notificações e atendimento via WhatsApp.',
-        price: 1200,
+        price: 450,
         period: '',
       },
     ],
@@ -140,28 +142,28 @@ const categories = [
         id: 'landing',
         title: 'Landing Page profissional',
         description: 'Página de alta conversão, responsiva, animada e otimizada para SEO.',
-        price: 1500,
+        price: 800,
         period: '',
       },
       {
         id: 'site-institucional',
         title: 'Site institucional (até 5 páginas)',
         description: 'Site completo com seções, formulário de contato e design personalizado.',
-        price: 3200,
+        price: 1600,
         period: '',
       },
       {
         id: 'ecommerce',
         title: 'E-commerce básico',
         description: 'Loja online com catálogo, carrinho e integração de pagamento.',
-        price: 8500,
+        price: 3800,
         period: '',
       },
       {
         id: 'dashboard',
         title: 'Dashboard / painel web',
         description: 'Painel administrativo com relatórios, gráficos e controle de usuários.',
-        price: 5500,
+        price: 2200,
         period: '',
       },
     ],
@@ -176,14 +178,14 @@ const categories = [
         id: 'bot-discord-basico',
         title: 'Bot Discord (tickets + whitelist)',
         description: 'Bot de tickets, whitelist automatizada e moderação essencial.',
-        price: 1000,
+        price: 350,
         period: '',
       },
       {
         id: 'bot-discord-avancado',
         title: 'Bot Discord avançado',
         description: 'Dashboard, níveis, integração com APIs e automação completa.',
-        price: 2200,
+        price: 850,
         period: '',
       },
     ],
@@ -198,14 +200,14 @@ const categories = [
         id: 'estoque-logistica',
         title: 'Sistema de estoque / logística',
         description: 'Controle de materiais, compras, inventário e relatórios de almoxarifado.',
-        price: 6500,
+        price: 2800,
         period: '',
       },
       {
         id: 'consultoria',
         title: 'Consultoria técnica (pacote 5h)',
         description: 'Diagnóstico de infraestrutura, código, performance e arquitetura.',
-        price: 650,
+        price: 300,
         period: '',
       },
     ],
@@ -308,7 +310,7 @@ export default function Services() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
             Clique em uma área (FiveM, Python, Web…) para ver o que posso criar.
-            Marque os itens, veja o total e envie no WhatsApp. Valores de referência — negociamos com transparência.
+            Valores de entrada acessíveis, alinhados ao mercado — o total final fecha no WhatsApp conforme o escopo.
           </p>
         </div>
 
@@ -415,7 +417,7 @@ export default function Services() {
             <div className="glass neon-border sticky top-24 rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold text-white">Seu orçamento</h3>
               <p className="mt-1 text-xs text-slate-500">
-                Valores de referência · negociamos para caber no seu bolso
+                Valores de entrada · negociamos o escopo no WhatsApp
               </p>
 
               <div className="mt-5">
@@ -488,7 +490,7 @@ export default function Services() {
               </Magnetic>
 
               <p className="mt-3 text-center text-[11px] text-slate-500">
-                Pode negociar o valor · WhatsApp {site.phone}
+                Pode negociar · WhatsApp {site.phone}
               </p>
             </div>
           </aside>
