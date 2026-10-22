@@ -8,14 +8,14 @@ export const site = {
   phone: '(21) 98045-3478',
   whatsapp: '5521980453478',
   location: 'Magé / Rio de Janeiro, RJ — Brasil',
-  // Endereço completo não é exposto na interface por privacidade
   availability: 'Presencial & Remoto (BR / EUA / Canadá)',
   profileName: 'MirandaDeveloper',
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
   cvUrl: 'Allan-Miranda-CV.html',
+  /** E-mails com acesso ao painel de moderação de comentários */
+  adminEmails: ['zeusmiranda63@gmail.com', 'allan.miranda.dev@protonmail.com'],
   supabase: {
     url: 'https://zvtcjyujcdlbviqrjnwx.supabase.co',
-    // Chave anon pública (padrão Supabase). Proteção real depende das RLS no banco.
     anonKey: 'sb_publishable_BAR0saBEocMbykt6Y0jwiw_RczCdxRS',
   },
   social: {

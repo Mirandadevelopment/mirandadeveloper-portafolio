@@ -14,16 +14,17 @@ const authHeaders = (accessToken) => ({
   'Content-Type': 'application/json',
 })
 
-/** URL de retorno após OAuth (Google). */
 export function getSiteOrigin() {
   if (typeof window === 'undefined') return ''
   return `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
 }
 
-/**
- * Cadastro com e-mail real.
- * Deixe "Confirm email" LIGADO no Supabase — o usuário confirma o link e a conta fica segura.
- */
+export function isAdminEmail(email) {
+  if (!email) return false
+  const list = (site.adminEmails || []).map((e) => e.toLowerCase().trim())
+  return list.includes(String(email).toLowerCase().trim())
+}
+
 export async function signUp({ name, email, password }) {
   const res = await fetch(`${url}/auth/v1/signup`, {
     method: 'POST',
@@ -31,15 +32,12 @@ export async function signUp({ name, email, password }) {
     body: JSON.stringify({
       email: email.trim().toLowerCase(),
       password,
-      data: {
-        full_name: name.trim(),
-      },
+      data: { full_name: name.trim() },
     }),
   })
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {
-    const msg = data?.msg || data?.error_description || data?.message || 'Não foi possível criar a conta.'
-    throw new Error(msg)
+    throw new Error(data?.msg || data?.error_description || data?.message || 'Não foi possível criar a conta.')
   }
   return data
 }
@@ -60,14 +58,11 @@ export async function signIn({ email, password }) {
   return data
 }
 
-/** Redireciona para o Google via Supabase OAuth. */
 export function signInWithGoogle() {
   const redirectTo = encodeURIComponent(getSiteOrigin())
-  const authUrl = `${url}/auth/v1/authorize?provider=google&redirect_to=${redirectTo}`
-  window.location.href = authUrl
+  window.location.href = `${url}/auth/v1/authorize?provider=google&redirect_to=${redirectTo}`
 }
 
-/** Lê tokens do hash após retorno do Google (#access_token=...). */
 export function parseOAuthHash() {
   if (typeof window === 'undefined') return null
   const hash = window.location.hash?.replace(/^#/, '')
@@ -96,6 +91,16 @@ export async function fetchApprovedComments() {
   return res.json()
 }
 
+/** Admin: lista pendentes e aprovados */
+export async function fetchAllComments(accessToken) {
+  const res = await fetch(
+    `${url}/rest/v1/portfolio_comments?select=id,author_name,username,content,approved,created_at&order=created_at.desc&limit=100`,
+    { headers: authHeaders(accessToken) },
+  )
+  if (!res.ok) throw new Error('Não foi possível carregar a moderação.')
+  return res.json()
+}
+
 export async function submitComment({ accessToken, authorName, username, content }) {
   const res = await fetch(`${url}/rest/v1/portfolio_comments`, {
     method: 'POST',
@@ -116,6 +121,36 @@ export async function submitComment({ accessToken, authorName, username, content
     throw new Error(msg || 'Não foi possível enviar o comentário.')
   }
   return data
+}
+
+export async function setCommentApproved({ accessToken, id, approved }) {
+  const res = await fetch(`${url}/rest/v1/portfolio_comments?id=eq.${encodeURIComponent(id)}`, {
+    method: 'PATCH',
+    headers: {
+      ...authHeaders(accessToken),
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify({ approved }),
+  })
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}))
+    const msg = Array.isArray(data) ? data[0]?.message : data?.message
+    throw new Error(msg || 'Não foi possível atualizar o comentário.')
+  }
+  return res.json()
+}
+
+export async function deleteComment({ accessToken, id }) {
+  const res = await fetch(`${url}/rest/v1/portfolio_comments?id=eq.${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+    headers: authHeaders(accessToken),
+  })
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}))
+    const msg = Array.isArray(data) ? data[0]?.message : data?.message
+    throw new Error(msg || 'Não foi possível excluir o comentário.')
+  }
+  return true
 }
 
 const SESSION_KEY = 'md-auth-session'
@@ -151,11 +186,7 @@ export function sessionFromAuth(data) {
   const meta = user?.user_metadata || {}
   const email = user?.email || ''
   const name =
-    meta.full_name ||
-    meta.name ||
-    meta.user_name ||
-    email.split('@')[0] ||
-    'Usuário'
+    meta.full_name || meta.name || meta.user_name || email.split('@')[0] || 'Usuário'
   const username =
     meta.user_name ||
     meta.preferred_username ||
@@ -168,5 +199,6 @@ export function sessionFromAuth(data) {
     name,
     username: String(username).toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 24) || 'user',
     email,
+    isAdmin: isAdminEmail(email),
   }
 }
