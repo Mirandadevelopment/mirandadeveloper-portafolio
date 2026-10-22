@@ -145,9 +145,9 @@ export default function App() {
         <Marquee />
         <About />
         <Skills />
-        <CodeDivider label="modulo: projetos" />
+        <CodeDivider label="módulo: projetos" />
         <Portfolio />
-        <CodeDivider label="modulo: orcamento" />
+        <CodeDivider label="módulo: orçamento" />
         <Services />
         <Process />
         <FAQ />
@@ -155,7 +155,7 @@ export default function App() {
         <SystemSection />
         <Timeline />
         <Testimonials />
-        <CodeDivider label="modulo: feedback" />
+        <CodeDivider label="módulo: feedback" />
         <LikeCTA />
         <Contact />
       </main>

@@ -12,9 +12,9 @@ const techs = [
   'SQL Server',
   'REST APIs',
   'Git',
-  'Virtualizacao',
+  'Virtualização',
   'Windows Server',
-  'Otimizacao FiveM',
+  'Otimização FiveM',
 ]
 
 export default function Marquee({ items = techs }) {

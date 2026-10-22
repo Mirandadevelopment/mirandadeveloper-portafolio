@@ -1,19 +1,19 @@
 const differentials = [
   {
-    title: 'Resolução Rápida de Problemas',
-    text: 'Método de diagnóstico militar: identificar, isolar e eliminar a causa raiz com rapidez e precisão.',
+    title: 'Resolução rápida de problemas',
+    text: 'Método de diagnóstico direto: identificar, isolar e eliminar a causa raiz com rapidez e precisão.',
     accent: 'text-neon-cyan',
     border: 'hover:border-neon-cyan/60',
   },
   {
-    title: 'Otimização Extrema de Performance',
+    title: 'Otimização extrema de performance',
     text: 'Redução de consumo de ms/tick em servidores FiveM e código enxuto, escalável e auditável.',
     accent: 'text-neon-purple',
     border: 'hover:border-neon-purple/60',
   },
   {
-    title: 'Parcerias Técnicas Premium',
-    text: 'Experiência com suporte técnico de alto nível, atendimento próximo e entrega consistente.',
+    title: 'Parcerias técnicas de alto nível',
+    text: 'Experiência com suporte técnico próximo, atendimento claro e entrega consistente.',
     accent: 'text-neon-blue',
     border: 'hover:border-neon-blue/60',
   },
@@ -26,7 +26,7 @@ export default function Differentials() {
         <div className="mb-14 text-center" data-reveal>
           <span className="text-xs font-semibold tracking-[0.3em] text-neon-cyan uppercase">Vantagem competitiva</span>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-5xl">
-            Por que <span className="text-gradient">escolher-me?</span>
+            Por que <span className="text-gradient">me escolher?</span>
           </h2>
         </div>
 

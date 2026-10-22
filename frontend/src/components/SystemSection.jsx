@@ -19,19 +19,19 @@ const codeLines = [
 const points = [
   {
     title: 'Metodologia de combate',
-    text: 'Diagnostico, isolamento e eliminacao da causa raiz. Como em uma missao real.',
+    text: 'Diagnóstico, isolamento e eliminação da causa raiz. Como em uma missão real.',
   },
   {
-    title: 'Otimizacao de performance',
-    text: 'Reducao de ms/tick, codigo enxuto, escalavel e auditavel.',
+    title: 'Otimização de performance',
+    text: 'Redução de ms/tick, código enxuto, escalável e auditável.',
   },
   {
     title: 'Automação eficiente',
     text: 'Bots robustos, dashboards em tempo real e integração web-game.',
   },
   {
-    title: 'Entrega sob pressao',
-    text: 'Prazos cumpridos com a disciplina de quem ja saltou de paraquedas.',
+    title: 'Entrega sob pressão',
+    text: 'Prazos cumpridos com a disciplina de quem já saltou de paraquedas.',
   },
 ]
 
@@ -47,10 +47,10 @@ export default function SystemSection() {
             eyebrowClass="text-neon-cyan"
             title={
               <>
-                Allan Miranda em <span className="text-gradient">execucao</span>
+                Allan Miranda em <span className="text-gradient">execução</span>
               </>
             }
-            description="Um perfil que roda como um programa bem escrito: sem bugs, com otimizacao maxima."
+            description="Um perfil que roda como um programa bem escrito: sem bugs, com otimização máxima."
           />
         </div>
 

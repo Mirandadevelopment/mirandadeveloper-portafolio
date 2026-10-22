@@ -9,7 +9,7 @@ export default function About() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
         </svg>
       ),
-      title: 'Operações & Logística',
+      title: 'Operações e logística',
       text: 'Experiência real em controle de materiais, almoxarifado e logística para Petrobras e Sodexo — disciplina de inventário aplicada a sistemas.',
     },
     {
@@ -30,7 +30,7 @@ export default function About() {
           <circle cx="12" cy="12" r="3" />
         </svg>
       ),
-      title: 'Full Stack & Automação',
+      title: 'Full Stack e automação',
       text: 'Scripts em Lua (QBcore/Creative), bots Node.js/Python, APIs, SQL e sistemas de gestão com foco em performance e clareza.',
     },
   ]
@@ -77,12 +77,12 @@ export default function About() {
               especialista em <strong className="text-neon-purple">FiveM (Lua/JS)</strong> e automação.
             </p>
             <p className="mt-4 leading-relaxed text-slate-400">
-              Unei uma sólida trajetória em Controle de Materiais, Compras e Gestão de Estoque (Petrobras via
-              EPS e Sodexo) com desenvolvimento de software. Aplico Node.js, Python, C++ e SQL para resolver
-              desafios reais de inventário, logística e sistemas de tempo real.
+              Juntei uma sólida trajetória em controle de materiais, compras e gestão de estoque (Petrobras via
+              EPS e Sodexo) ao desenvolvimento de software. Uso Node.js, Python, C++ e SQL para resolver
+              desafios reais de inventário, logística e sistemas em tempo real.
             </p>
             <p className="mt-4 leading-relaxed text-slate-400">
-              Atualmente graduando em ADS pela Unicesumar e disponível para projetos presenciais e remotos.
+              Atualmente sou graduando em ADS pela Unicesumar e estou disponível para projetos presenciais e remotos.
               Baixe meu currículo completo ou monte um orçamento na seção de serviços.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
