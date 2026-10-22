@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-night-950: #05050f;
-  --color-night-900: #0a0a18;
-  --color-night-800: #111124;
-  --color-night-700: #1a1a33;
-  --color-neon-cyan: #00d4ff;
-  --color-neon-purple: #a855f7;
-  --color-neon-blue: #3b82f6;
+  --color-night-950: #030712;
+  --color-night-900: #0b1020;
+  --color-night-800: #121a2e;
+  --color-night-700: #1c2740;
+  --color-neon-cyan: #22d3ee;
+  --color-neon-purple: #c084fc;
+  --color-neon-blue: #60a5fa;
   --font-display: "Orbitron", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
 }
@@ -17,7 +17,7 @@ html {
 }
 
 body {
-  background-color: #05050f;
+  background-color: #030712;
   color: #e2e8f0;
   font-family: var(--font-body);
   overflow-x: hidden;
@@ -28,12 +28,12 @@ section[id] {
 }
 
 :focus-visible {
-  outline: 2px solid #00d4ff;
+  outline: 2px solid #22d3ee;
   outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(168, 85, 247, 0.4);
+  background: rgba(192, 132, 252, 0.4);
   color: #fff;
 }
 
@@ -41,21 +41,21 @@ section[id] {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a18;
+  background: #0b1020;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00d4ff, #a855f7);
+  background: linear-gradient(180deg, #22d3ee, #c084fc);
   border-radius: 8px;
 }
 
 @utility glass {
-  background: rgba(17, 17, 36, 0.55);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(18, 26, 46, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.12);
 }
 
 @utility text-gradient {
-  background: linear-gradient(90deg, #00d4ff, #a855f7);
+  background: linear-gradient(90deg, #22d3ee, #c084fc 55%, #34d399);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -69,7 +69,7 @@ section[id] {
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.6), rgba(168, 85, 247, 0.6));
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.55), rgba(192, 132, 252, 0.55), rgba(52, 211, 153, 0.35));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -78,17 +78,17 @@ section[id] {
 }
 
 @utility glow-cyan {
-  box-shadow: 0 0 22px rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.35);
 }
 
 @utility glow-purple {
-  box-shadow: 0 0 22px rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 22px rgba(192, 132, 252, 0.35);
 }
 
 @utility grid-overlay {
   background-image:
-    linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 
@@ -105,19 +105,19 @@ section[id] {
 .cursor-dot {
   width: 8px;
   height: 8px;
-  background: #00d4ff;
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.9);
+  background: #22d3ee;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.9);
 }
 .cursor-ring {
   width: 36px;
   height: 36px;
-  border: 1.5px solid rgba(168, 85, 247, 0.8);
+  border: 1.5px solid rgba(192, 132, 252, 0.8);
   transition: width 0.18s ease, height 0.18s ease, opacity 0.18s ease;
 }
 .cursor-ring.cursor-hover {
   width: 58px;
   height: 58px;
-  background: rgba(168, 85, 247, 0.08);
+  background: rgba(192, 132, 252, 0.08);
 }
 
 @media (pointer: coarse) {
@@ -133,7 +133,7 @@ section[id] {
   width: 3px;
   height: 1em;
   margin-left: 4px;
-  background: #00d4ff;
+  background: #22d3ee;
   vertical-align: text-bottom;
   animation: caret-blink 0.8s step-end infinite;
 }
@@ -166,8 +166,8 @@ section[id] {
   z-index: 2;
   padding: 4px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #00d4ff, #a855f7 65%, #3b82f6);
-  box-shadow: 0 0 28px rgba(0, 212, 255, 0.35), 0 0 64px rgba(168, 85, 247, 0.2);
+  background: linear-gradient(135deg, #22d3ee, #c084fc 65%, #34d399);
+  box-shadow: 0 0 28px rgba(34, 211, 238, 0.35), 0 0 64px rgba(192, 132, 252, 0.2);
 }
 .profile-avatar {
   display: block;
@@ -175,14 +175,14 @@ section[id] {
   height: 100%;
   border-radius: inherit;
   object-fit: cover;
-  border: 3px solid #05050f;
-  background: #111124;
+  border: 3px solid #030712;
+  background: #121a2e;
 }
 .profile-halo {
   position: absolute;
   inset: 7px;
   border-radius: 9999px;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.16), transparent 66%);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.16), transparent 66%);
   filter: blur(7px);
 }
 .profile-label {
@@ -201,9 +201,9 @@ section[id] {
 
 .bg-aurora {
   background:
-    radial-gradient(ellipse 60% 45% at 20% 0%, rgba(0, 212, 255, 0.12), transparent 60%),
-    radial-gradient(ellipse 55% 40% at 85% 15%, rgba(168, 85, 247, 0.14), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(59, 130, 246, 0.1), transparent 60%);
+    radial-gradient(ellipse 60% 45% at 20% 0%, rgba(34, 211, 238, 0.14), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 85% 15%, rgba(192, 132, 252, 0.16), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(52, 211, 153, 0.1), transparent 60%);
 }
 
 .scanlines {
@@ -211,13 +211,13 @@ section[id] {
   inset: 0;
   z-index: 35;
   pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.01) 0 1px, transparent 1px 3px);
 }
 
 @utility text-glow {
   text-shadow:
-    0 0 18px rgba(0, 212, 255, 0.45),
-    0 0 55px rgba(168, 85, 247, 0.3);
+    0 0 18px rgba(34, 211, 238, 0.45),
+    0 0 55px rgba(192, 132, 252, 0.3);
 }
 
 .glitch {
@@ -231,13 +231,13 @@ section[id] {
   pointer-events: none;
 }
 .glitch::before {
-  color: rgba(0, 212, 255, 0.7);
+  color: rgba(34, 211, 238, 0.7);
   z-index: 0;
   opacity: 0;
   animation: glitch-a 4.2s infinite steps(1);
 }
 .glitch::after {
-  color: rgba(168, 85, 247, 0.7);
+  color: rgba(192, 132, 252, 0.7);
   z-index: 0;
   opacity: 0;
   animation: glitch-b 3.7s infinite steps(1);
@@ -346,7 +346,7 @@ section[id] {
 @media (hover: hover) and (pointer: fine) {
   .portfolio-card:hover {
     transform: translateY(-8px) scale(1.012);
-    box-shadow: 0 22px 46px rgba(0, 0, 0, 0.34), 0 0 28px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 22px 46px rgba(0, 0, 0, 0.34), 0 0 28px rgba(34, 211, 238, 0.1);
   }
 
   .portfolio-card:hover::after {
@@ -379,5 +379,3 @@ section[id] {
     transform: translateY(-4px);
   }
 }
-
-

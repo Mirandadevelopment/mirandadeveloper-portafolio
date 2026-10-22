@@ -117,9 +117,8 @@ export default function Contact() {
 
               <div className="mt-8 border-t border-night-700 pt-6 space-y-3">
                 <div>
-                  <div className="font-mono text-xs text-slate-500">telefone</div>
+                  <div className="font-mono text-xs text-slate-500">WhatsApp empresa</div>
                   <div className="mt-1 text-sm font-medium text-slate-200">{site.phone}</div>
-                  <div className="text-sm text-slate-400">{site.phone2}</div>
                 </div>
                 <div>
                   <div className="font-mono text-xs text-slate-500">localização</div>

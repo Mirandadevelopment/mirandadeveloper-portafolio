@@ -15,6 +15,8 @@ import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Portfolio from './components/Portfolio.jsx'
 import Services from './components/Services.jsx'
+import Process from './components/Process.jsx'
+import FAQ from './components/FAQ.jsx'
 import Differentials from './components/Differentials.jsx'
 import SystemSection from './components/SystemSection.jsx'
 import Timeline from './components/Timeline.jsx'
@@ -147,6 +149,8 @@ export default function App() {
         <Portfolio />
         <CodeDivider label="modulo: orcamento" />
         <Services />
+        <Process />
+        <FAQ />
         <Differentials />
         <SystemSection />
         <Timeline />
