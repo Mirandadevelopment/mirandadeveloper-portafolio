@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Currículo — Allan Miranda</title>
+  <title>Currículo — Allan Miranda da Rosa</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -13,7 +13,7 @@
       padding: 40px 16px;
     }
     .page {
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto;
       background: #0a0a18;
       border: 1px solid rgba(0, 212, 255, 0.25);
@@ -21,22 +21,22 @@
       padding: 44px;
       box-shadow: 0 0 40px rgba(0, 212, 255, 0.12);
     }
-    h1 { font-size: 30px; color: #fff; letter-spacing: 1px; }
-    .role { color: #00d4ff; font-weight: 600; margin-top: 4px; }
-    .contact { color: #94a3b8; font-size: 14px; margin-top: 8px; }
+    h1 { font-size: 28px; color: #fff; letter-spacing: 1px; }
+    .role { color: #00d4ff; font-weight: 600; margin-top: 6px; font-size: 15px; }
+    .contact { color: #94a3b8; font-size: 13px; margin-top: 10px; line-height: 1.6; }
     h2 {
-      font-size: 15px; text-transform: uppercase; letter-spacing: 3px;
-      color: #a855f7; margin: 28px 0 12px;
+      font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px;
+      color: #a855f7; margin: 26px 0 12px;
       border-bottom: 1px solid rgba(168, 85, 247, 0.3); padding-bottom: 6px;
     }
-    p, li { color: #cbd5e1; font-size: 14px; line-height: 1.65; }
-    ul { padding-left: 18px; }
-    .item { margin-bottom: 12px; }
-    .item-title { font-weight: 600; color: #fff; }
-    .item-meta { color: #00d4ff; font-size: 13px; }
+    p, li { color: #cbd5e1; font-size: 13.5px; line-height: 1.65; }
+    ul { padding-left: 18px; margin-top: 6px; }
+    .item { margin-bottom: 14px; }
+    .item-title { font-weight: 600; color: #fff; font-size: 14px; }
+    .item-meta { color: #00d4ff; font-size: 12.5px; margin-top: 2px; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .tag {
-      font-size: 12px; padding: 3px 10px; border-radius: 20px;
+      font-size: 11.5px; padding: 3px 10px; border-radius: 20px;
       border: 1px solid rgba(0, 212, 255, 0.3); color: #7dd3fc;
     }
     .print-btn {
@@ -44,6 +44,12 @@
       background: linear-gradient(90deg, #00d4ff, #a855f7);
       color: #05050f; border: none; padding: 10px 18px;
       border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 14px;
+      z-index: 10;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+    @media (max-width: 640px) {
+      .page { padding: 28px 20px; }
+      .two-col { grid-template-columns: 1fr; }
     }
     @media print {
       body { background: #fff; padding: 0; }
@@ -62,63 +68,106 @@
   <button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
 
   <div class="page">
-    <h1>ALLAN MIRANDA</h1>
-    <div class="role">Desenvolvedor Full Stack &middot; Especialista FiveM (Lua/JS)</div>
+    <h1>ALLAN MIRANDA DA ROSA</h1>
+    <div class="role">Analista de Sistemas de Operação · Desenvolvedor Full Stack · Especialista em Controle de Materiais e Logística</div>
     <div class="contact">
-      Rio de Janeiro, Brasil &middot; Aberto a presencial e remoto (BR / EUA / Canad&aacute;)<br />
-      GitHub &middot; LinkedIn &middot; Discord
+      Rua Santa Margarida, 330 — Magé, RJ, 25931-646<br />
+      (21) 96758-9784 · (21) 98045-3478 · zeusmiranda63@gmail.com<br />
+      GitHub: github.com/Mirandadevelopment · LinkedIn: linkedin.com/in/allan-miranda-374b1a214
     </div>
 
-    <h2>Resumo</h2>
+    <h2>Resumo profissional</h2>
     <p>
-      Desenvolvedor Full Stack e especialista no ecossistema FiveM, focado em scripts avan&ccedil;ados em Lua/JS,
-      otimiza&ccedil;&atilde;o de consumo (ms/tick), automa&ccedil;&atilde;o para Discord e sistemas de gest&atilde;o.
-      Ex-militar e Eterno PQD do Ex&eacute;rcito Brasileiro. Curso de Paraquedista conclu&iacute;do em 12/02/2012,
-      como Aluno 01 da &Aacute;rea de Est&aacute;gio, aplicando disciplina, lideran&ccedil;a e foco sob press&atilde;o
-      no desenvolvimento de software de alto desempenho.
+      Profissional versátil com sólida trajetória em Análise de Sistemas de Operação e Desenvolvimento de Software,
+      aliada a vasta experiência prática em Controle de Materiais, Compras e Gestão de Estoque. Especialista em
+      automação de processos com Node.js, Python e C++, com foco em otimização de fluxos logísticos e operacionais.
+      Graduando em ADS pela Unicesumar. Atuou em projetos complexos para grandes empresas como Petrobras e Sodexo.
     </p>
 
-    <h2>Forma&ccedil;&atilde;o</h2>
+    <h2>Experiência profissional</h2>
+
     <div class="item">
-      <div class="item-title">An&aacute;lise e Desenvolvimento de Sistemas (ADS)</div>
-      <div class="item-meta">Unicesumar &mdash; Graduando</div>
-    </div>
-    <div class="item">
-      <div class="item-title">Ex-militar &mdash; Eterno PQD</div>
-      <div class="item-meta">Aluno 01 da &Aacute;rea de Est&aacute;gio · Curso conclu&iacute;do em 12/02/2012 · Disciplina e lideran&ccedil;a</div>
+      <div class="item-title">Analista de Sistemas de Operação &amp; Desenvolvedor (Freelancer)</div>
+      <div class="item-meta">Jan 2024 – Atualmente</div>
+      <ul>
+        <li>Desenvolvimento Full Stack: scripts complexos em Lua para frameworks QBcore e Creative (FiveM), focados em sistemas de economia e inventário.</li>
+        <li>Automação e Bots: bots de alta performance em Node.js e Python para gestão de servidores e integração de fluxos de trabalho.</li>
+        <li>Gestão de Dados: modelagem e otimização de bancos SQL para sistemas de tempo real com alta disponibilidade.</li>
+        <li>Consultoria técnica: diagnóstico de infraestrutura e recuperação de dados.</li>
+      </ul>
     </div>
 
-    <h2>Habilidades T&eacute;cnicas</h2>
-    <ul>
-      <li>Linguagens &amp; Core: Lua, JavaScript, Node.js, TypeScript, Python, HTML5/CSS3, SQL</li>
-      <li>FiveM: vRP, Creative, otimiza&ccedil;&atilde;o ms/tick, invent&aacute;rio, whitelist, integra&ccedil;&atilde;o web-game, anti-cheat, gest&atilde;o de bases (RJ v6, Capital SP)</li>
-      <li>Automa&ccedil;&atilde;o &amp; Bots: discord.js / node-discord-burrito, APIs, tickets, verifica&ccedil;&atilde;o autom&aacute;tica, dashboards</li>
-      <li>Infraestrutura: servidores dedicados, SQL Server/MySQL, VirtualBox, Windows Server, hospedagem remota</li>
-    </ul>
-
-    <h2>Projetos em Destaque</h2>
     <div class="item">
-      <div class="item-title">Apex Nexus V3</div>
-      <div class="item-meta">Bot Discord de alta performance</div>
-      <p>Bot com sistema de tickets, whitelist automatizada e dashboard de gerenciamento.</p>
-    </div>
-    <div class="item">
-      <div class="item-title">Frameworks &amp; Scripts FiveM</div>
-      <div class="item-meta">Otimiza&ccedil;&atilde;o de servidores</div>
-      <p>Sistemas customizados e otimiza&ccedil;&atilde;o de consumo para comunidades de grande porte.</p>
-    </div>
-    <div class="item">
-      <div class="item-title">Mu Mobile Server (Lab)</div>
-      <div class="item-meta">Ambiente local de testes</div>
-      <p>Infraestrutura complexa com SQL Server, gerenciamento de rede e virtualiza&ccedil;&atilde;o.</p>
+      <div class="item-title">EPS — Engenharia, Projetos e Serviços Ltda. (Terceirizado Petrobras)</div>
+      <div class="item-meta">2021 – 2025</div>
+      <ul>
+        <li>Administração e Controle de Materiais (2025): gestão integral do almoxarifado da marcenaria, controle rigoroso de estoques e compras técnicas de insumos.</li>
+        <li>Logística Petrobras: fabricação de embalagens sob medida (caixas de madeira/compensado) para transporte seguro de materiais críticos às plataformas.</li>
+        <li>Manutenção e Layout: montagens complexas, remanejamento e remapeamento de layouts de escritório (Drywall, divisórias de vidro, persianas e Blindex).</li>
+      </ul>
     </div>
 
-    <h2>Diferenciais</h2>
+    <div class="item">
+      <div class="item-title">Sodexo Facilities Services Ltda. / Sodexo do Brasil Comercial S.A.</div>
+      <div class="item-meta">2016 – 2021</div>
+      <ul>
+        <li>Contratos focados em manutenção predial e serviços de infraestrutura para grandes clientes corporativos.</li>
+        <li>Manutenções preventivas e corretivas em ambientes de alta exigência técnica, com controle de materiais de uso diário e apoio operacional às equipes de engenharia.</li>
+      </ul>
+    </div>
+
+    <h2>Formação acadêmica</h2>
+    <div class="item">
+      <div class="item-title">Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)</div>
+      <div class="item-meta">Faculdade Unicesumar (EAD) — Polo Piabetá · Previsão: 2026 – 2028</div>
+    </div>
+
+    <h2>Formação complementar &amp; certificações</h2>
+    <div class="item">
+      <div class="item-title">Tecnologia, Dados e Ferramentas — Grupo Voitto (Ago/2026)</div>
+      <ul>
+        <li>Fundamentos em Python (20h)</li>
+        <li>Fundamentos de Excel e Copilot com IA (8h)</li>
+        <li>Fundamentos de Power BI (6h)</li>
+        <li>Fundamentos de PowerPoint (3h)</li>
+      </ul>
+    </div>
+    <div class="item">
+      <div class="item-title">Extensão Profissional e Acadêmica — UniCesumar / YouTube (Set/2026)</div>
+      <ul>
+        <li>Logística e Distribuição (12h) · Desenvolvimento de Sistemas Web (10h)</li>
+        <li>Arquitetura e Redes de Computadores (10h) · Informática e Sistemas Operacionais (10h)</li>
+        <li>Tecnologias Educacionais (10h) · Cuidador de Idosos (10h)</li>
+      </ul>
+    </div>
+
+    <h2>Competências e habilidades</h2>
+    <div class="two-col">
+      <div>
+        <div class="item-title">Desenvolvimento &amp; Programação</div>
+        <p>JavaScript (Node.js), Python, C++, C#, Lua, Git, GitHub, Supabase, APIs, SQL</p>
+      </div>
+      <div>
+        <div class="item-title">Dados &amp; Business Intelligence</div>
+        <p>Power BI, Excel Avançado com Copilot (IA)</p>
+      </div>
+      <div>
+        <div class="item-title">Tecnologias &amp; Frameworks</div>
+        <p>QBcore, Creative (FiveM), AWS, automação de hardware e sistemas</p>
+      </div>
+      <div>
+        <div class="item-title">Gestão &amp; Operacional</div>
+        <p>Gestão de Infraestrutura, Drywall, Controle de Estoque, Compras Técnicas, Almoxarifado, Marcenaria Técnica e Organização de Layouts</p>
+      </div>
+    </div>
+
+    <h2>Soft skills</h2>
     <div class="tags">
-      <span class="tag">Resolu&ccedil;&atilde;o r&aacute;pida de problemas</span>
-      <span class="tag">Otimiza&ccedil;&atilde;o extrema de performance</span>
-      <span class="tag">Parcerias t&eacute;cnicas premium</span>
-      <span class="tag">Disciplina &amp; lideran&ccedil;a</span>
+      <span class="tag">Resolução de problemas complexos</span>
+      <span class="tag">Pensamento analítico</span>
+      <span class="tag">Comunicação técnica assertiva</span>
+      <span class="tag">Trabalho em equipes multidisciplinares</span>
+      <span class="tag">Disciplina operacional</span>
     </div>
   </div>
 </body>

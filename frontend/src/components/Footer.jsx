@@ -10,6 +10,7 @@ const nav = [
   { label: 'Sobre', href: '#sobre' },
   { label: 'Habilidades', href: '#habilidades' },
   { label: 'Projetos', href: '#projetos' },
+  { label: 'Serviços', href: '#servicos' },
   { label: 'Contato', href: '#contato' },
 ]
 
