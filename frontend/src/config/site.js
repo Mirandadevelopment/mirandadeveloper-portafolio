@@ -1,7 +1,7 @@
 export const site = {
   name: 'Allan Miranda',
   fullName: 'Allan Miranda',
-  brand: 'ALLAN.DEV',
+  brand: 'mirandadeveloper',
   role: 'Analista de Sistemas · Full Stack · Especialista FiveM & Logística',
   email: 'zeusmiranda63@gmail.com',
   emailAlt: 'allan.miranda.dev@protonmail.com',

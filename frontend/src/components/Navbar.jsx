@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { site } from '../config/site.js'
 
 const links = [
   { label: 'Início', href: '#inicio' },
@@ -64,8 +65,8 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#inicio" className="font-display text-lg font-bold tracking-widest text-white" aria-label="Allan Miranda — início">
-          ALLAN<span className="text-gradient">.DEV</span>
+        <a href="#inicio" className="font-display text-sm font-bold tracking-wide text-white sm:text-base" aria-label={`${site.name} — início`}>
+          miranda<span className="text-gradient">developer</span>
         </a>
 
         <ul className="hidden items-center gap-4 xl:flex">

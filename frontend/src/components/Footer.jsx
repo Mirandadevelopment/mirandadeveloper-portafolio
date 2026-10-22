@@ -19,8 +19,8 @@ export default function Footer() {
     <footer className="relative border-t border-night-700 py-10">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="font-display font-bold tracking-widest text-white">
-            ALLAN<span className="text-gradient">.DEV</span>
+          <div className="font-display text-sm font-bold tracking-wide text-white sm:text-base">
+            miranda<span className="text-gradient">developer</span>
           </div>
 
           <ul className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
