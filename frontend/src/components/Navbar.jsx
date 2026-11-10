@@ -65,7 +65,8 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#inicio" className="font-display text-sm font-bold tracking-wide text-white sm:text-base" aria-label={`${site.name} — início`}>
+        <a href="#inicio" className="flex items-center gap-2 font-display text-sm font-bold tracking-wide text-white sm:text-base" aria-label={`${site.name} — início`}>
+          <span className="reactor-core scale-75" aria-hidden="true" />
           miranda<span className="text-gradient">developer</span>
         </a>
 
@@ -97,7 +98,7 @@ export default function Navbar() {
           href="#servicos"
           className="hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-5 py-2.5 text-sm font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950 lg:inline-flex"
         >
-          Orçamento
+          Iniciar missão
         </a>
 
         <button

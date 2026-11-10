@@ -3,6 +3,7 @@ import { useInView, prefersReducedMotion } from '../hooks/useInView.js'
 import GlitchText from './GlitchText.jsx'
 import Magnetic from './Magnetic.jsx'
 import { site } from '../config/site.js'
+import { recordPortfolioEvent } from '../lib/supabase.js'
 
 const phrases = [
   'Desenvolvedor Full Stack',
@@ -106,10 +107,24 @@ export default function Hero() {
       <div className="absolute top-1/4 left-10 h-64 w-64 -z-10 bg-neon-cyan/10 blur-3xl" />
       <div className="absolute right-10 bottom-1/4 h-64 w-64 -z-10 bg-neon-purple/10 blur-3xl" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-44 text-center md:pt-48">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-44 text-center md:pt-48">
+        <div className="mx-auto mb-7 flex max-w-3xl items-center justify-between gap-4 text-left hud-panel px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-3">
+            <span className="reactor-core" aria-hidden="true" />
+            <div>
+              <div className="hud-label">Arc interface // online</div>
+              <div className="mt-1 text-[11px] text-slate-400">Sistema operacional: MIRANDA OS 3.0</div>
+            </div>
+          </div>
+          <div className="hidden text-right sm:block">
+            <div className="hud-label">Core load</div>
+            <div className="mt-1 font-mono text-xs text-emerald-300">98.7% stable</div>
+          </div>
+        </div>
+
         <div className="flex flex-wrap items-center justify-center gap-3">
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-cyan uppercase">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-neon-cyan glow-cyan" />
+          <span className="h-2 w-2 animate-pulse rounded-full bg-reactor-red shadow-[0_0_12px_rgba(255,59,48,0.8)]" />
             Disponível para projetos
           </span>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
@@ -134,7 +149,7 @@ export default function Hero() {
           {text}
         </p>
 
-        <p className="mx-auto mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
           Profissional versátil com trajetória em Análise de Sistemas, Desenvolvimento Full Stack e
           Controle de Materiais/Logística. Automatizo processos com Node.js, Python e Lua — e entrego
           soluções reais para inventário, servidores e operações de alto desempenho.
@@ -146,7 +161,7 @@ export default function Hero() {
               href="#servicos"
               className="group relative block overflow-hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-8 py-3.5 font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950"
             >
-              <span className="relative z-10">Montar orçamento</span>
+              <span className="relative z-10">Ativar projeto</span>
               <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
             </a>
           </Magnetic>
@@ -154,9 +169,10 @@ export default function Hero() {
             <a
               href={site.cvUrl}
               download
+              onClick={() => recordPortfolioEvent({ event: 'cv_download' }).catch(() => {})}
               className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-neon-cyan transition-all duration-200 hover:scale-105 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan"
             >
-              Baixar Currículo
+              Acessar currículo
             </a>
           </Magnetic>
           <Magnetic>

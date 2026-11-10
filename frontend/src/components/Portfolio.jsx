@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { site } from '../config/site.js'
 import LikeDislike from './LikeDislike.jsx'
+import { fetchPublicPortfolioStats, recordPortfolioEvent } from '../lib/supabase.js'
 
 const categories = ['Todos', 'FiveM', 'Bots/Automação', 'Full Stack']
 
@@ -116,7 +117,22 @@ function GithubIcon({ className }) {
 
 export default function Portfolio() {
   const [filter, setFilter] = useState('Todos')
+  const [stats, setStats] = useState({ site: {}, projects: [] })
   const visible = filter === 'Todos' ? projects : projects.filter((p) => p.category === filter)
+
+  useEffect(() => {
+    fetchPublicPortfolioStats().then((data) => {
+      setStats({
+        site: data?.site || {},
+        projects: Array.isArray(data?.projects) ? data.projects : [],
+      })
+    }).catch(() => {})
+  }, [])
+
+  const ranking = [...stats.projects]
+    .map((item) => ({ ...item, project: projects.find((p) => `proj-${p.id}` === item.project_id) }))
+    .filter((item) => item.project)
+    .slice(0, 3)
 
   return (
     <section id="projetos" className="relative py-24">
@@ -129,7 +145,40 @@ export default function Portfolio() {
           <p className="mx-auto mt-4 max-w-2xl text-slate-400">
             Soluções reais em FiveM, automação e sistemas web. Clique no card para ver o código e curta os seus favoritos.
           </p>
+          <div className="mx-auto mt-7 grid max-w-3xl grid-cols-2 gap-3 text-left sm:grid-cols-4">
+            {[
+              ['Visitas', stats.site.views],
+              ['CVs baixados', stats.site.cv_downloads],
+              ['Projetos', projects.length],
+              ['Cliques em projetos', stats.projects.reduce((sum, item) => sum + Number(item.project_clicks || 0), 0)],
+            ].map(([label, value]) => (
+              <div key={label} className="hud-panel rounded-xl px-4 py-3">
+                <div className="hud-label">{label}</div>
+                <div className="mt-1 font-display text-xl font-bold text-white">{Number(value || 0).toLocaleString('pt-BR')}</div>
+              </div>
+            ))}
+          </div>
         </div>
+
+        {ranking.length > 0 && (
+          <div className="mx-auto mb-10 max-w-3xl hud-panel rounded-2xl p-5">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="hud-label">Ranking público // projetos em alta</span>
+              <span className="text-xs text-amber-300">curtidas + alcance</span>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {ranking.map((item, index) => (
+                <div key={item.project_id} className="flex items-center gap-3 rounded-lg bg-white/[0.03] px-3 py-2">
+                  <span className="font-display text-lg font-bold text-reactor-gold">0{index + 1}</span>
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-semibold text-white">{item.project.title}</div>
+                    <div className="text-[11px] text-slate-500">{Number(item.project_clicks || 0).toLocaleString('pt-BR')} acessos</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mb-10 flex flex-wrap items-center justify-center gap-3">
           {categories.map((c) => (
@@ -159,6 +208,7 @@ export default function Portfolio() {
                 href={p.repo || site.social.github}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => recordPortfolioEvent({ event: 'project_click', projectId: `proj-${p.id}` }).catch(() => {})}
                 aria-label={`Ver ${p.title} no GitHub`}
                 className="flex flex-1 flex-col focus-visible:outline-none"
               >

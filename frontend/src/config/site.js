@@ -11,9 +11,7 @@ export const site = {
   availability: 'Presencial & Remoto (BR / EUA / Canadá)',
   profileName: 'MirandaDeveloper',
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
-  cvUrl: 'Allan-Miranda-CV.html',
-  /** E-mails com acesso ao painel de moderação de comentários */
-  adminEmails: ['zeusmiranda63@gmail.com', 'allan.miranda.dev@protonmail.com'],
+  cvUrl: 'Allan-Miranda-CV.pdf',
   supabase: {
     url: 'https://zvtcjyujcdlbviqrjnwx.supabase.co',
     anonKey: 'sb_publishable_BAR0saBEocMbykt6Y0jwiw_RczCdxRS',

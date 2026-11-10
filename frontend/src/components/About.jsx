@@ -1,4 +1,5 @@
 import { site } from '../config/site.js'
+import { recordPortfolioEvent } from '../lib/supabase.js'
 
 export default function About() {
   const pillars = [
@@ -89,9 +90,10 @@ export default function About() {
               <a
                 href={site.cvUrl}
                 download
+                onClick={() => recordPortfolioEvent({ event: 'cv_download' }).catch(() => {})}
                 className="inline-flex items-center gap-2 rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 px-4 py-2 text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/20"
               >
-                Baixar CV (HTML)
+                Baixar CV (PDF)
               </a>
               <a
                 href={`https://wa.me/${site.whatsapp}`}

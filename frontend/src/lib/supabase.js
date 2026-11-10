@@ -19,12 +19,6 @@ export function getSiteOrigin() {
   return `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
 }
 
-export function isAdminEmail(email) {
-  if (!email) return false
-  const list = (site.adminEmails || []).map((e) => e.toLowerCase().trim())
-  return list.includes(String(email).toLowerCase().trim())
-}
-
 export async function signUp({ name, email, password }) {
   const res = await fetch(`${url}/auth/v1/signup`, {
     method: 'POST',
@@ -157,7 +151,10 @@ const SESSION_KEY = 'md-auth-session'
 
 export function saveSession(session) {
   try {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+      ...session,
+      refresh_token: undefined,
+    }))
   } catch {
     /* ignore */
   }
@@ -165,7 +162,7 @@ export function saveSession(session) {
 
 export function loadSession() {
   try {
-    const raw = localStorage.getItem(SESSION_KEY)
+    const raw = sessionStorage.getItem(SESSION_KEY)
     if (!raw) return null
     return JSON.parse(raw)
   } catch {
@@ -175,7 +172,7 @@ export function loadSession() {
 
 export function clearSession() {
   try {
-    localStorage.removeItem(SESSION_KEY)
+    sessionStorage.removeItem(SESSION_KEY)
   } catch {
     /* ignore */
   }
@@ -194,11 +191,73 @@ export function sessionFromAuth(data) {
     'user'
   return {
     access_token: data.access_token,
-    refresh_token: data.refresh_token,
+    refresh_token: undefined,
     user,
     name,
     username: String(username).toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 24) || 'user',
     email,
-    isAdmin: isAdminEmail(email),
+    isAdmin: false,
   }
+}
+
+const METRICS_KEY = 'md-metrics-visitor'
+
+function visitorKey() {
+  try {
+    let key = sessionStorage.getItem(METRICS_KEY)
+    if (!key) {
+      key = `${crypto.randomUUID()}-${Date.now()}`
+      sessionStorage.setItem(METRICS_KEY, key)
+    }
+    return key
+  } catch {
+    return `anonymous-${Date.now()}-${Math.random().toString(36).slice(2)}`
+  }
+}
+
+export async function recordPortfolioEvent({ event, projectId = null }) {
+  const res = await fetch(`${url}/rest/v1/rpc/record_portfolio_event`, {
+    method: 'POST',
+    headers: { ...headers(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      p_event: event,
+      p_project_id: projectId,
+      p_visitor_key: visitorKey(),
+    }),
+  })
+  if (!res.ok) throw new Error('Não foi possível registrar a métrica.')
+  return res.json()
+}
+
+export async function fetchPublicPortfolioStats() {
+  const res = await fetch(`${url}/rest/v1/rpc/get_public_portfolio_stats`, {
+    method: 'POST',
+    headers: headers(),
+  })
+  if (!res.ok) throw new Error('Não foi possível carregar as métricas.')
+  return res.json()
+}
+
+export async function fetchAdminStatus(accessToken) {
+  const res = await fetch(`${url}/rest/v1/rpc/is_admin_user`, {
+    method: 'POST',
+    headers: authHeaders(accessToken),
+  })
+  if (!res.ok) return false
+  return res.json() === true
+}
+
+export async function changePortfolioVote({ id, previousVote, nextVote }) {
+  const res = await fetch(`${url}/rest/v1/rpc/change_portfolio_vote`, {
+    method: 'POST',
+    headers: { ...headers(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      p_vote_id: id,
+      p_previous_vote: previousVote,
+      p_next_vote: nextVote,
+      p_visitor_key: visitorKey(),
+    }),
+  })
+  if (!res.ok) throw new Error('Não foi possível salvar a curtida.')
+  return res.json()
 }

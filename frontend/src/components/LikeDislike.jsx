@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { site } from '../config/site.js'
+import { changePortfolioVote } from '../lib/supabase.js'
 
 const PREFIX = 'am-vote-'
 const supabase = site.supabase
@@ -54,13 +55,13 @@ export default function LikeDislike({ id, initialLikes = 0, initialDislikes = 0,
     let cancelled = false
 
     try {
-      const raw = localStorage.getItem(PREFIX + id)
+      const raw = sessionStorage.getItem(PREFIX + id)
       if (raw) {
         const data = JSON.parse(raw)
         if (!cancelled) setVote(data.vote || null)
       }
     } catch {
-      /* localStorage indisponível */
+      /* sessionStorage indisponível */
     }
 
     const loadGlobalVotes = async () => {
@@ -95,7 +96,7 @@ export default function LikeDislike({ id, initialLikes = 0, initialDislikes = 0,
 
   const persistVote = (nextVote) => {
     try {
-      localStorage.setItem(PREFIX + id, JSON.stringify({ vote: nextVote }))
+      sessionStorage.setItem(PREFIX + id, JSON.stringify({ vote: nextVote }))
     } catch {
       /* ignore */
     }
@@ -111,22 +112,11 @@ export default function LikeDislike({ id, initialLikes = 0, initialDislikes = 0,
     setTimeout(() => setPop(null), 350)
 
     try {
-      const response = await fetch(`${supabase.url}/rest/v1/rpc/change_portfolio_vote`, {
-        method: 'POST',
-        headers: {
-          apikey: supabase.anonKey,
-          Authorization: `Bearer ${supabase.anonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          p_vote_id: id,
-          p_previous_vote: vote,
-          p_next_vote: nextVote,
-        }),
+      const result = await changePortfolioVote({
+        id,
+        previousVote: vote,
+        nextVote,
       })
-
-      if (!response.ok) throw new Error('Não foi possível salvar a curtida')
-      const result = await response.json()
       const row = Array.isArray(result) ? result[0] : result
       if (!row) throw new Error('Resposta inválida')
 

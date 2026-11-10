@@ -11,7 +11,7 @@ import {
   loadSession,
   clearSession,
   sessionFromAuth,
-  isAdminEmail,
+  fetchAdminStatus,
 } from '../lib/supabase.js'
 import AdminModeration from './AdminModeration.jsx'
 
@@ -55,7 +55,7 @@ export default function Feedback() {
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
 
-  const admin = !!(session && (session.isAdmin || isAdminEmail(session.email)))
+  const admin = Boolean(session?.isAdmin)
 
   useEffect(() => {
     const boot = async () => {
@@ -64,6 +64,7 @@ export default function Feedback() {
         try {
           const user = await fetchUser(oauth.access_token)
           const sess = sessionFromAuth({ ...oauth, user })
+          sess.isAdmin = await fetchAdminStatus(sess.access_token)
           saveSession(sess)
           setSession(sess)
           setMode('comment')
@@ -80,7 +81,8 @@ export default function Feedback() {
       } else {
         const s = loadSession()
         if (s?.access_token) {
-          setSession({ ...s, isAdmin: s.isAdmin || isAdminEmail(s.email) })
+          const verified = await fetchAdminStatus(s.access_token)
+          setSession({ ...s, isAdmin: verified })
         }
       }
       loadComments()
@@ -118,6 +120,7 @@ export default function Feedback() {
 
       if (data.access_token) {
         const sess = sessionFromAuth(data)
+        sess.isAdmin = await fetchAdminStatus(sess.access_token)
         saveSession(sess)
         setSession(sess)
         setMode('comment')

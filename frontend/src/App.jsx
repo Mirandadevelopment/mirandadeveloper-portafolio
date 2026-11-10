@@ -26,10 +26,23 @@ import Feedback from './components/Feedback.jsx'
 import CodeDivider from './components/CodeDivider.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import { recordPortfolioEvent } from './lib/supabase.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem('md-site-view-recorded')) return
+      sessionStorage.setItem('md-site-view-recorded', '1')
+      recordPortfolioEvent({ event: 'view' }).catch(() => {
+        sessionStorage.removeItem('md-site-view-recorded')
+      })
+    } catch {
+      recordPortfolioEvent({ event: 'view' }).catch(() => {})
+    }
+  }, [])
+
   useEffect(() => {
     if (prefersReducedMotion()) return undefined
 
