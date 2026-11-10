@@ -15,8 +15,7 @@ const authHeaders = (accessToken) => ({
 })
 
 export function getSiteOrigin() {
-  if (typeof window === 'undefined') return ''
-  return `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
+  return site.publicUrl
 }
 
 export async function signUp({ name, email, password }) {

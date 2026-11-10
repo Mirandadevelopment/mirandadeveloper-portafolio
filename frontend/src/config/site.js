@@ -12,6 +12,7 @@ export const site = {
   profileName: 'MirandaDeveloper',
   avatar: 'https://github.com/Mirandadevelopment.png?size=512',
   cvUrl: 'Allan-Miranda-CV.pdf',
+  publicUrl: 'https://mirandadevelopment.github.io/mirandadeveloper-portafolio/',
   supabase: {
     url: 'https://zvtcjyujcdlbviqrjnwx.supabase.co',
     anonKey: 'sb_publishable_BAR0saBEocMbykt6Y0jwiw_RczCdxRS',
