@@ -150,6 +150,7 @@ export default function Feedback() {
         password: form.password,
       })
       const sess = sessionFromAuth(data)
+      sess.isAdmin = await fetchAdminStatus(sess.access_token)
       saveSession(sess)
       setSession(sess)
       setMode('comment')
@@ -168,22 +169,22 @@ export default function Feedback() {
     } finally {
       setBusy(false)
     }
+  }
 
-    const handleMagicLink = async (e) => {
-      e.preventDefault()
-      setBusy(true)
-      setMessage({ type: '', text: '' })
-      try {
-        await sendMagicLink(form.email)
-        setMessage({
-          type: 'ok',
-          text: 'Link seguro enviado. Confira seu e-mail para entrar. Nenhuma senha é solicitada.',
-        })
-      } catch (err) {
-        setMessage({ type: 'err', text: err.message || 'Não foi possível enviar o link de acesso.' })
-      } finally {
-        setBusy(false)
-      }
+  const handleMagicLink = async (e) => {
+    e.preventDefault()
+    setBusy(true)
+    setMessage({ type: '', text: '' })
+    try {
+      await sendMagicLink(form.email.trim().toLowerCase())
+      setMessage({
+        type: 'ok',
+        text: 'Link seguro enviado. Confira seu e-mail para entrar. Nenhuma senha é solicitada.',
+      })
+    } catch (err) {
+      setMessage({ type: 'err', text: err.message || 'Não foi possível enviar o link de acesso.' })
+    } finally {
+      setBusy(false)
     }
   }
 
