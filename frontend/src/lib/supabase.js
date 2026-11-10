@@ -52,9 +52,21 @@ export async function signIn({ email, password }) {
   return data
 }
 
-export function signInWithGoogle() {
-  const redirectTo = encodeURIComponent(getSiteOrigin())
-  window.location.href = `${url}/auth/v1/authorize?provider=google&redirect_to=${redirectTo}`
+export async function sendMagicLink(email) {
+  const res = await fetch(`${url}/auth/v1/otp`, {
+    method: 'POST',
+    headers: { ...headers(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: email.trim().toLowerCase(),
+      create_user: true,
+      options: { email_redirect_to: getSiteOrigin() },
+    }),
+  })
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) {
+    throw new Error(data?.msg || data?.error_description || 'Não foi possível enviar o link de acesso.')
+  }
+  return data
 }
 
 export function parseOAuthHash() {

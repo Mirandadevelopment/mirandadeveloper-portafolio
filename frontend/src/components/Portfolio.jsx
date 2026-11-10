@@ -41,12 +41,13 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Gestão de Bases · RJ v6 & Capital SP',
-    category: 'FiveM',
+    title: 'NEXUS Optimizer',
+    category: 'Full Stack',
+    repo: 'https://github.com/Mirandadevelopment/NEXUS-Optimizer',
     gradient: 'from-neon-blue to-neon-cyan',
     description:
-      'Administração técnica e otimização de bases de grande porte, garantindo estabilidade, segurança e performance para comunidades ativas.',
-    tags: ['Lua', 'Infra', 'Anti-cheat', 'SQL'],
+      'Otimizador profissional para Windows com foco em performance, manutenção e suporte multilíngue.',
+    tags: ['PowerShell', 'Windows', 'Performance', 'Automação'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18" />
@@ -57,12 +58,13 @@ const projects = [
   },
   {
     id: 4,
-    title: 'Mu Mobile Server (Lab)',
+    title: 'Portfolio Miranda',
     category: 'Full Stack',
+    repo: 'https://github.com/Mirandadevelopment/portfolio-miranda',
     gradient: 'from-emerald-400 to-neon-cyan',
     description:
-      'Ambiente local de testes complexo com SQL Server, gerenciamento de rede e virtualização — simulando uma infraestrutura de produção real.',
-    tags: ['SQL Server', 'Windows Server', 'VirtualBox', 'Redes'],
+      'Projeto de portfólio web para apresentar soluções, experiência e identidade visual do desenvolvedor.',
+    tags: ['React', 'Vite', 'UI', 'Web'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <rect x="3" y="4" width="18" height="12" rx="2" />
@@ -73,12 +75,13 @@ const projects = [
   },
   {
     id: 5,
-    title: 'Sistema de Gestão Integrado',
-    category: 'Full Stack',
+    title: 'Discord IA',
+    category: 'Bots/Automação',
+    repo: 'https://github.com/Mirandadevelopment/Discord-IA',
     gradient: 'from-neon-cyan to-emerald-400',
     description:
-      'Plataformas de gestão com autenticação, dashboards em tempo real, relatórios e integração com APIs externas.',
-    tags: ['React', 'Node.js', 'PostgreSQL', 'REST'],
+      'Experimento de automação e inteligência aplicada a comunidades Discord.',
+    tags: ['Node.js', 'Discord', 'IA', 'APIs'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <rect x="3" y="3" width="7" height="7" rx="1.5" />
@@ -90,13 +93,13 @@ const projects = [
   },
   {
     id: 6,
-    title: 'Automação & Comunidade Discord',
+    title: 'Discord Bot Professional',
     category: 'Bots/Automação',
-    repo: 'https://github.com/Mirandadevelopment',
+    repo: 'https://github.com/Mirandadevelopment/bot-discord-jarvis',
     gradient: 'from-neon-purple to-fuchsia-500',
     description:
-      'Bots de alta complexidade com verificação automática, sistema de níveis, integração com APIs de jogos e moderação eficiente.',
-    tags: ['discord.js', 'Node.js', 'APIs', 'Moderação'],
+      'Sistema profissional de gerenciamento Discord com whitelist, tickets, FiveM e gestão de staff.',
+    tags: ['discord.js', 'Node.js', 'FiveM', 'Tickets'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10">
         <path strokeLinecap="round" strokeLinejoin="round" d="M7 9l-2 3 2 3" />

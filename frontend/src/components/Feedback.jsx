@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   signUp,
   signIn,
-  signInWithGoogle,
+  sendMagicLink,
   parseOAuthHash,
   fetchUser,
   fetchApprovedComments,
@@ -71,12 +71,12 @@ export default function Feedback() {
           setMessage({
             type: 'ok',
             text: sess.isAdmin
-              ? 'Login admin com Google. Painel de moderação liberado.'
-              : 'Login com Google concluído com segurança.',
+              ? 'Login admin concluído. Painel de moderação liberado.'
+              : 'Login por link de e-mail concluído com segurança.',
           })
           window.history.replaceState(null, '', window.location.pathname + window.location.search)
         } catch {
-          setMessage({ type: 'err', text: 'Não foi possível concluir o login com Google.' })
+          setMessage({ type: 'err', text: 'Não foi possível concluir o login por e-mail.' })
         }
       } else {
         const s = loadSession()
@@ -168,6 +168,23 @@ export default function Feedback() {
     } finally {
       setBusy(false)
     }
+
+    const handleMagicLink = async (e) => {
+      e.preventDefault()
+      setBusy(true)
+      setMessage({ type: '', text: '' })
+      try {
+        await sendMagicLink(form.email)
+        setMessage({
+          type: 'ok',
+          text: 'Link seguro enviado. Confira seu e-mail para entrar. Nenhuma senha é solicitada.',
+        })
+      } catch (err) {
+        setMessage({ type: 'err', text: err.message || 'Não foi possível enviar o link de acesso.' })
+      } finally {
+        setBusy(false)
+      }
+    }
   }
 
   const handleComment = async (e) => {
@@ -226,7 +243,7 @@ export default function Feedback() {
             Deixe seu <span className="text-gradient">feedback</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Acesso com Google ou e-mail verificado. Comentários passam por aprovação antes de
+            Acesso por link seguro enviado ao seu e-mail. Comentários passam por aprovação antes de
             aparecerem no site.
           </p>
         </div>
@@ -257,10 +274,10 @@ export default function Feedback() {
             <div className="mb-5 space-y-3">
               <button
                 type="button"
-                onClick={() => signInWithGoogle()}
+                onClick={() => setMode('magic')}
                 className="flex w-full items-center justify-center gap-3 rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
               >
-                <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="hidden h-5 w-5" aria-hidden="true">
                   <path
                     fill="#EA4335"
                     d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.9-5.5 3.9-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.7 3.4 14.6 2.5 12 2.5 6.8 2.5 2.5 6.8 2.5 12S6.8 21.5 12 21.5c5.5 0 9.1-3.9 9.1-9.3 0-.6-.1-1.1-.2-1.6H12z"
@@ -278,12 +295,12 @@ export default function Feedback() {
                     d="M5.4 13c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9L2.2 6.8C1.6 8.3 1.3 10 1.3 11.8c0 1.8.3 3.5.9 5l3.2-2.5c-.2-.5-.3-1-.3-1.3z"
                   />
                 </svg>
-                Continuar com Google
+                Entrar com link seguro
               </button>
 
               <div className="flex items-center gap-3 text-xs text-slate-500">
                 <span className="h-px flex-1 bg-white/10" />
-                ou e-mail verificado
+                ou use senha
                 <span className="h-px flex-1 bg-white/10" />
               </div>
 
@@ -321,6 +338,21 @@ export default function Feedback() {
             >
               {message.text}
             </div>
+          )}
+
+          {!session && mode === 'magic' && (
+            <form onSubmit={handleMagicLink} className="space-y-4" autoComplete="on">
+              <div>
+                <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  E-mail
+                </label>
+                <input name="email" type="email" required value={form.email} onChange={onChange} placeholder="voce@email.com" className={inputClass} autoComplete="email" />
+              </div>
+              <button type="submit" disabled={busy} className="w-full rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue px-6 py-3 font-semibold text-night-950 transition hover:scale-[1.01] disabled:opacity-60">
+                {busy ? 'Enviando link…' : 'Receber link seguro'}
+              </button>
+              <p className="text-center text-[11px] text-slate-500">Não pedimos senha. O link expira e só funciona no seu e-mail.</p>
+            </form>
           )}
 
           {!session && mode === 'register' && (
@@ -388,7 +420,7 @@ export default function Feedback() {
 
           {!session && mode === 'comment' && (
             <p className="text-center text-sm text-slate-400">
-              Use <strong className="text-white">Google</strong> ou e-mail verificado para enviar um feedback.
+              Use um <strong className="text-white">link seguro enviado por e-mail</strong> para enviar um feedback.
             </p>
           )}
 
