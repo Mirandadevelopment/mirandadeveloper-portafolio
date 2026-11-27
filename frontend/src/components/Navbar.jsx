@@ -60,17 +60,17 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`site-header fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled ? 'glass shadow-lg shadow-black/40' : 'bg-transparent'
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#inicio" className="flex items-center gap-2 font-display text-sm font-bold tracking-wide text-white sm:text-base" aria-label={`${site.name} — início`}>
+      <nav className="site-navigation mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#inicio" className="site-brand flex items-center gap-2 font-display text-sm font-bold tracking-wide text-white sm:text-base" aria-label={`${site.name} — início`}>
           <span className="reactor-core scale-75" aria-hidden="true" />
           miranda<span className="text-gradient">developer</span>
         </a>
 
-        <ul className="hidden items-center gap-4 xl:flex">
+        <ul className="site-nav-links hidden items-center gap-4 xl:flex">
           {desktopLinks.map((l) => {
             const isActive = active === l.href
             return (

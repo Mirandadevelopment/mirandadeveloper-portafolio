@@ -111,7 +111,7 @@ export async function submitComment({ accessToken, authorName, username, content
     method: 'POST',
     headers: {
       ...authHeaders(accessToken),
-      Prefer: 'return=representation',
+      Prefer: 'return=minimal',
     },
     body: JSON.stringify({
       author_name: authorName,
@@ -120,12 +120,12 @@ export async function submitComment({ accessToken, authorName, username, content
       approved: false,
     }),
   })
-  const data = await res.json().catch(() => ({}))
   if (!res.ok) {
+    const data = await res.json().catch(() => ({}))
     const msg = Array.isArray(data) ? data[0]?.message : data?.message || data?.hint
     throw new Error(msg || 'Não foi possível enviar o comentário.')
   }
-  return data
+  return true
 }
 
 export async function setCommentApproved({ accessToken, id, approved }) {

@@ -57,10 +57,10 @@ export default function CodeRain({ className = '', speed = 1, opacity = 0.55, gl
           if (t === 0) {
             // Cabeça brilhante (branco-verde Matrix)
             ctx.fillStyle = `rgba(220, 255, 230, ${0.95 * opacity})`
-            ctx.shadowColor = 'rgba(57, 255, 20, 0.8)'
+            ctx.shadowColor = 'rgba(120, 229, 255, 0.8)'
             ctx.shadowBlur = 8
           } else if (t < 3) {
-            ctx.fillStyle = `rgba(57, 255, 20, ${0.85 * fade * opacity})`
+            ctx.fillStyle = `rgba(120, 229, 255, ${0.85 * fade * opacity})`
             ctx.shadowBlur = 0
           } else {
             ctx.fillStyle = `rgba(0, 180, 80, ${0.55 * fade * opacity})`
@@ -90,8 +90,8 @@ export default function CodeRain({ className = '', speed = 1, opacity = 0.55, gl
           const char = GLYPHS[Math.floor(Math.random() * GLYPHS.length)]
           ctx.fillStyle =
             Math.random() > 0.9
-              ? `rgba(180, 255, 200, ${0.35 * opacity})`
-              : `rgba(0, 180, 80, ${0.12 * opacity})`
+              ? `rgba(205, 235, 255, ${0.35 * opacity})`
+              : `rgba(72, 143, 224, ${0.12 * opacity})`
           ctx.fillText(char, i * fontSize, j * fontSize + fontSize)
         }
       }
