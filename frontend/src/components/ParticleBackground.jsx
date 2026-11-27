@@ -13,8 +13,7 @@ export default function ParticleBackground({ density = 0.0001 }) {
     let particles = []
     let raf = null
 
-    // Matrix green + teal + soft indigo
-    const colors = ['57,255,20', '45,212,191', '56,189,248']
+    const colors = ['120,229,255', '90,168,255', '156,131,255']
     const reduced = prefersReducedMotion()
     const isCoarse = window.matchMedia('(pointer: coarse)').matches
 

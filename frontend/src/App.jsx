@@ -153,7 +153,7 @@ export default function App() {
       <div className="scanlines" aria-hidden="true" />
       <CustomCursor />
       <ParticleBackground />
-      <CodeRain global opacity={0.22} speed={0.85} />
+      <CodeRain global opacity={0.1} speed={0.85} />
       <Navbar />
       <main id="conteudo" className="relative z-10">
         <Hero />

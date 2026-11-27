@@ -85,127 +85,110 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-28 pb-20"
+      className="hero-section relative flex min-h-screen items-center overflow-hidden"
     >
-      <div className="bg-aurora absolute inset-0 -z-10" />
-      <div className="profile-stage absolute top-24 left-1/2 z-0 -translate-x-1/2 md:top-28" aria-label={`Foto de perfil de ${site.profileName}`}>
-        <div className="profile-halo" aria-hidden="true" />
-        <div className="profile-avatar-wrap">
-          <img
-            src={site.avatar}
-            alt={site.profileName}
-            className="profile-avatar"
-            width="144"
-            height="144"
-            loading="eager"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <span className="profile-label">@{site.profileName}</span>
-      </div>
+      <div className="hero-atmosphere absolute inset-0 -z-10" />
       <div className="grid-overlay absolute inset-0 -z-10" />
-      <div className="absolute top-1/4 left-10 h-64 w-64 -z-10 bg-neon-cyan/10 blur-3xl" />
-      <div className="absolute right-10 bottom-1/4 h-64 w-64 -z-10 bg-neon-purple/10 blur-3xl" />
+      <div className="hero-shell relative z-10 mx-auto w-full max-w-7xl px-6">
+        <div className="hero-topline">
+          <span><span className="hero-status-dot" /> MIRANDA.DEV <span className="hero-topline-muted">/ INTERFACE 01</span></span>
+          <span className="hero-location">MAGÉ, RJ <span>—</span> BRASIL</span>
+          <span className="hero-availability"><span /> DISPONÍVEL PARA PROJETOS</span>
+        </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-44 text-center md:pt-48">
-        <div className="mx-auto mb-7 flex max-w-3xl items-center justify-between gap-4 text-left hud-panel px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-3">
-            <span className="reactor-core" aria-hidden="true" />
-            <div>
-              <div className="hud-label">Arc interface // online</div>
-              <div className="mt-1 text-[11px] text-slate-400">Sistema operacional: MIRANDA OS 3.0</div>
+        <div className="hero-layout">
+          <div className="hero-copy">
+            <p className="hero-kicker">Engenharia digital <span>—</span> do conceito ao código</p>
+            <h1 className="hero-name">
+              <span className="sr-only">Allan </span>
+              <GlitchText text="Allan" />
+              <span>Miranda<span className="hero-name-period">.</span></span>
+            </h1>
+            <p className="hero-role"><span className="text-gradient">Full Stack</span> <span>/</span> Sistemas <span>/</span> FiveM</p>
+            <p
+              className={`hero-type ${prefersReducedMotion() ? '' : 'typing-caret'}`}
+              aria-label={`Cargos: ${phrases.join(', ')}`}
+            >
+              {text}
+            </p>
+            <p className="hero-intro">
+              Transformo processos complexos em sistemas simples, rápidos e feitos para o mundo real.
+              Desenvolvimento, automação e tecnologia com propósito.
+            </p>
+
+            <div className="hero-actions">
+              <Magnetic>
+                <a href="#servicos" className="hero-primary-action">
+                  Vamos construir <span aria-hidden="true">↗</span>
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a
+                  href={site.cvUrl}
+                  download
+                  onClick={() => recordPortfolioEvent({ event: 'cv_download' }).catch(() => {})}
+                  className="hero-secondary-action"
+                >
+                  Explorar currículo <span aria-hidden="true">↓</span>
+                </a>
+              </Magnetic>
             </div>
           </div>
-          <div className="hidden text-right sm:block">
-            <div className="hud-label">Core load</div>
-            <div className="mt-1 font-mono text-xs text-emerald-300">98.7% stable</div>
+
+          <div className="hero-visual" aria-label={`Foto de perfil de ${site.profileName}`}>
+            <div className="hero-visual-orbit hero-visual-orbit-outer" aria-hidden="true" />
+            <div className="hero-visual-orbit hero-visual-orbit-inner" aria-hidden="true" />
+            <div className="hero-visual-crosshair hero-visual-crosshair-top" aria-hidden="true" />
+            <div className="hero-visual-crosshair hero-visual-crosshair-bottom" aria-hidden="true" />
+            <div className="hero-visual-glow" aria-hidden="true" />
+            <div className="hero-portrait-frame">
+              <img
+                src={site.avatar}
+                alt={site.profileName}
+                width="512"
+                height="512"
+                loading="eager"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <span className="hero-visual-index">FIG. 01 <span>—</span> HUMAN / MACHINE</span>
+            <div className="hero-code-chip" aria-hidden="true">
+              <span className="hero-code-dot" />
+              <span>const <b>future</b> = await build();</span>
+            </div>
+            <div className="hero-stack-chip" aria-hidden="true">
+              <span>STACK / 2026</span>
+              <b>JS&nbsp; · &nbsp;LUA&nbsp; · &nbsp;PY</b>
+            </div>
+          </div>
+
+          <div className="hero-aside">
+            <span className="hero-aside-index">01 — 03</span>
+            <span className="hero-aside-line" />
+            <p>Ideias que<br />funcionam <span>além da tela.</span></p>
+            <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
+              Conectar <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-cyan uppercase">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-reactor-red shadow-[0_0_12px_rgba(255,59,48,0.8)]" />
-            Disponível para projetos
-          </span>
-          <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-widest text-neon-purple uppercase">
-            <span className="h-2 w-2 rounded-full bg-neon-purple glow-purple" />
-            ADS · Unicesumar
-          </span>
-        </div>
-
-        <h1 className="font-display mt-8 text-4xl leading-tight font-extrabold text-white sm:text-6xl md:text-7xl">
-          <GlitchText text="Allan Miranda" />
-          <span className="mt-2 block text-2xl font-bold sm:text-3xl md:text-4xl">
-            <span className="text-gradient text-glow">Full Stack · Sistemas · FiveM</span>
-          </span>
-        </h1>
-
-        <p
-          className={`mt-8 h-8 text-lg font-medium text-slate-200 sm:text-2xl ${
-            prefersReducedMotion() ? '' : 'typing-caret'
-          }`}
-          aria-label={`Cargos: ${phrases.join(', ')}`}
-        >
-          {text}
-        </p>
-
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
-          Profissional versátil com trajetória em Análise de Sistemas, Desenvolvimento Full Stack e
-          Controle de Materiais/Logística. Automatizo processos com Node.js, Python e Lua — e entrego
-          soluções reais para inventário, servidores e operações de alto desempenho.
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Magnetic>
-            <a
-              href="#servicos"
-              className="group relative block overflow-hidden rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple px-8 py-3.5 font-semibold text-night-950 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-night-950"
-            >
-              <span className="relative z-10">Ativar projeto</span>
-              <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
-            </a>
-          </Magnetic>
-          <Magnetic>
-            <a
-              href={site.cvUrl}
-              download
-              onClick={() => recordPortfolioEvent({ event: 'cv_download' }).catch(() => {})}
-              className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-neon-cyan transition-all duration-200 hover:scale-105 hover:bg-neon-cyan/10 focus-visible:ring-2 focus-visible:ring-neon-cyan"
-            >
-              Acessar currículo
-            </a>
-          </Magnetic>
-          <Magnetic>
-            <a
-              href={`https://wa.me/${site.whatsapp}`}
-              target="_blank"
-              rel="noreferrer"
-              className="neon-border group block rounded-lg px-8 py-3.5 font-semibold text-emerald-400 transition-all duration-200 hover:scale-105 hover:bg-emerald-400/10 focus-visible:ring-2 focus-visible:ring-emerald-400"
-            >
-              WhatsApp
-            </a>
-          </Magnetic>
-        </div>
-
-        <div data-reveal-group className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
-          {stats.map((s) => (
-            <div key={s.label} data-reveal-child className="glass neon-border rounded-xl px-3 py-5">
-              <Counter value={s.value} suffix={s.suffix} />
-              <div className="mt-1 text-xs text-slate-400 sm:text-sm">{s.label}</div>
-            </div>
-          ))}
+        <div className="hero-bottomline">
+          <div data-reveal-group className="hero-stats">
+            {stats.map((s, index) => (
+              <div key={s.label} data-reveal-child className="hero-stat">
+                <span className="hero-stat-index">0{index + 1}</span>
+                <Counter value={s.value} suffix={s.suffix} />
+                <span className="hero-stat-label">{s.label}</span>
+              </div>
+            ))}
+          </div>
+          <a href="#sobre" className="hero-scroll">
+            <span>SCROLL PARA EXPLORAR</span>
+            <span className="hero-scroll-icon" aria-hidden="true">↓</span>
+          </a>
+          <span className="hero-edition">PORTFÓLIO DIGITAL <span>© 2026</span></span>
         </div>
       </div>
-
-      <a
-        href="#sobre"
-        aria-label="Rolar para a seção Sobre"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-neon-cyan/70 transition-colors hover:text-neon-cyan md:block"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-7 w-7 animate-bounce">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12l7 7 7-7" />
-        </svg>
-      </a>
     </section>
   )
 }
